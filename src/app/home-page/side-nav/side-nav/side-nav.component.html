@@ -1,0 +1,129 @@
+<div class="btn" (click)="toggleSidebar()">
+  <span class="fas fa-bars"></span>
+</div>
+
+<nav class="sidebar" [ngClass]="{'show': isSidebarOpen}">
+  <div class="text">
+    GuardianVape.co.uk
+  </div>
+  <ul class="main_side">
+    <li [class.active]="isActiveItem('home')">
+      <a class="bi-house" [routerLink]="'/home'" (click)="setActiveItem('home')"> Home</a>
+    </li>
+    <li>
+      <a class="bi bi-bag-check" (click)="toggleSubMenu('orders') " id="1"> Orders
+        <span class="fas fa-caret-down"></span>
+      </a>
+      <ul class="item-show-1" [ngClass]="{'show': isSubMenuOpen('orders')}">
+        <li [class.active]="isActiveSubMenu('orders')">
+          <a [routerLink]="'/orders'" (click)="setActiveSubMenu('orders')">Orders</a>
+        </li>
+        <li [class.active]="isActiveSubMenu('drafts')">
+          <a [routerLink]="'/drafts'" (click)="setActiveSubMenu('drafts')">Drafts</a>
+        </li>
+        <li [class.active]="isActiveSubMenu('shipping-labels')">
+          <a [routerLink]="'/shipping-labels'" (click)="setActiveSubMenu('shipping-labels')">Shipping labels</a>
+        </li>
+        <li [class.active]="isActiveSubMenu('abandoned-checkouts')">
+          <a [routerLink]="'/abandoned-checkouts'" (click)="setActiveSubMenu('abandoned-checkouts')">Abandoned
+            Checkouts</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a class="bi bi-list" (click)="toggleSubMenu('products')" id="2"> Products
+        <span class="fas fa-caret-down"></span>
+      </a>
+      <ul class="item-show-2" [ngClass]="{'show': isSubMenuOpen('products')}">
+        <li [class.active]="isActiveSubMenu('products')">
+          <a [routerLink]="'/products'" (click)="setActiveSubMenu('products')">Products</a>
+        </li>
+        <li [class.active]="isActiveSubMenu('collections')">
+          <a [routerLink]="'/collections'" (click)="setActiveSubMenu('collections')">Collections</a>
+        </li>
+        <li [class.active]="isActiveSubMenu('inventory')">
+          <a [routerLink]="'/inventory'" (click)="setActiveSubMenu('inventory')">Inventory</a>
+        </li>
+        <li [class.active]="isActiveSubMenu('purchase-orders')">
+          <a [routerLink]="'/purchase-orders'" (click)="setActiveSubMenu('purchase-orders')">Purchase orders</a>
+        </li>
+        <li [class.active]="isActiveSubMenu('transfers')">
+          <a [routerLink]="'/transfers'" (click)="setActiveSubMenu('transfers')">Transfers</a>
+        </li>
+        <li [class.active]="isActiveSubMenu('gift-cards')">
+          <a [routerLink]="'/gift-cards'" (click)="setActiveSubMenu('gift-cards')">Gift cards</a>
+        </li>
+      </ul>
+    </li>
+    <li [class.active]="isActiveItem('customers')">
+      <a class="bi bi-file-earmark-person" [routerLink]="'/customers'" (click)="setActiveItem('customers')">
+        Customers</a>
+    </li>
+
+
+
+    <li>
+      <a class="bi bi-bookmark" (click)="toggleSubMenu('content')" id="2"> Content
+        <span class="fas fa-caret-down"></span>
+      </a>
+      <ul class="item-show-2" [ngClass]="{'show': isSubMenuOpen('content')}">
+        <li [class.active]="isActiveSubMenu('metaobjects')">
+          <a [routerLink]="'/metaobjects'" (click)="setActiveSubMenu('metaobjects')">Metaobjects</a>
+        </li>
+        <li [class.active]="isActiveSubMenu('files')">
+          <a [routerLink]="'/files'" (click)="setActiveSubMenu('files')">Files</a>
+        </li>
+      </ul>
+    </li>
+
+
+
+
+    <li>
+      <a class="bi bi-graph-up-arrow" (click)="toggleSubMenu('analytics')" id="2"> Analytics
+        <span class="fas fa-caret-down"></span>
+      </a>
+      <ul class="item-show-2" [ngClass]="{'show': isSubMenuOpen('analytics')}">
+        <li [class.active]="isActiveSubMenu('analytics')">
+          <a [routerLink]="'/analytics'" (click)="setActiveSubMenu('analytics')">Analytics</a>
+        </li>
+        <li [class.active]="isActiveItem('reports')">
+          <a [routerLink]="'/reports'" (click)="setActiveItem('reports')">Reports</a>
+        </li>
+        <li [class.active]="isActiveItem('list-view')">
+          <a [routerLink]="'/list-view'" (click)="setActiveItem('list-view')">List View</a>
+        </li>
+      </ul>
+    </li>
+
+
+    <li>
+      <a class="bi bi-cart" (click)="toggleSubMenu('marketing')" id="2"> Marketing
+        <span class="fas fa-caret-down"></span>
+      </a>
+      <ul class="item-show-2" [ngClass]="{'show': isSubMenuOpen('marketing')}">
+        <li [class.active]="isActiveSubMenu('marketing')">
+          <a [routerLink]="'/marketing'" (click)="setActiveSubMenu('marketing')">Marketing</a>
+        </li>
+        <li [class.active]="isActiveItem('campaigns')">
+          <a [routerLink]="'/campaigns'" (click)="setActiveItem('campaigns')">Campaigns</a>
+        </li>
+        <li [class.active]="isActiveItem('automations')">
+          <a [routerLink]="'/automations'" (click)="setActiveItem('automations')">Automations</a>
+        </li>
+      </ul>
+    </li>
+
+
+    <li [class.active]="isActiveItem('discounts')">
+      <a class="bi bi-bell" [routerLink]="'/discounts'" (click)="setActiveItem('discounts')"> Discounts</a>
+    </li>
+
+    <!-- <li [class.active]="isActiveItem('files')">
+      <a [routerLink]="'/files'" (click)="setActiveItem('files')">Files</a>
+    </li> -->
+  </ul>
+</nav>
+
+
+<router-outlet></router-outlet>
