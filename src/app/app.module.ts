@@ -16,6 +16,8 @@ import { CollectionComponent } from './collection/collection.component';
 import { ProductComponent } from './product/product.component';
 import { TagComponent } from './tag/tag.component';
 import { NavbarComponent } from './home-page/navbar/navbar.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 
 
@@ -28,7 +30,9 @@ import { NavbarComponent } from './home-page/navbar/navbar.component';
     CollectionComponent,
     ProductComponent,
     TagComponent,
-    NavbarComponent
+    NavbarComponent,
+    LoginComponent,
+    SignupComponent
     ],
 
   imports: [
