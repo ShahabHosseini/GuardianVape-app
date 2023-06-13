@@ -16,9 +16,10 @@ import { CollectionComponent } from './collection/collection.component';
 import { ProductComponent } from './product/product.component';
 import { TagComponent } from './tag/tag.component';
 import { NavbarComponent } from './home-page/navbar/navbar.component';
-import { SignupComponent } from './signup/signup.component';
+import { SignupComponent } from './User/signup/signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './User/login/login.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { LoginComponent } from './login/login.component';
     TooltipModule.forRoot(),
     AccordionModule.forRoot(),
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

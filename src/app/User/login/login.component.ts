@@ -5,7 +5,10 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { BaseFormComponent } from '../base/base-form.component';
+import { BaseFormComponent } from '../../base/base-form.component';
+import { UserService } from '../user.service';
+import { UserDto } from '../../Model/userDto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +20,12 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
   isText: boolean = false;
   eyeIcon: string = 'fa-eye-slash';
   loginForm!: FormGroup;
-  constructor(private fb: FormBuilder) {
+
+  constructor(
+    private fb: FormBuilder,
+    private service: UserService,
+    private router: Router
+  ) {
     super();
   }
 
@@ -27,10 +35,22 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
       password: ['', Validators.required],
     });
   }
-  onSubmit() {
+  onLogin() {
     if (this.loginForm.valid) {
       //send object
-      console.log(this.loginForm.value);
+      let userDto: UserDto = new UserDto();
+
+      userDto.UserName = this.loginForm.value['username'];
+      userDto.Password = this.loginForm.value['password'];
+      this.service.login(userDto).subscribe({
+        next: (res) => {
+          alert('success');
+          // this.router.navigate(['signup']); TODO
+        },
+        error: (err) => {
+          alert(err?.error.message);
+        },
+      });
     } else {
       this.validateAllformFileds(this.loginForm);
       alert('your Form is Invalid');
