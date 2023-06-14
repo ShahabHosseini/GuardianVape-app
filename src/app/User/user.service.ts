@@ -16,7 +16,7 @@ export class UserService extends BaseService {
   signUp(userDto: UserDto): Observable<UserDto> {
     return this.http.post<UserDto>(`${this.userUrl}register`, userDto);
   }
-  login(userDto: UserDto) {
+  login(userDto: UserDto): Observable<UserDto> {
     return this.http.post<UserDto>(`${this.userUrl}authenticate`, userDto);
   }
 }

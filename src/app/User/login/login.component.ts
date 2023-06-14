@@ -9,6 +9,7 @@ import { BaseFormComponent } from '../../base/base-form.component';
 import { UserService } from '../user.service';
 import { UserDto } from '../../Model/userDto';
 import { Router } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -36,6 +37,7 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
     });
   }
   onLogin() {
+    debugger;
     if (this.loginForm.valid) {
       //send object
       let userDto: UserDto = new UserDto();
@@ -44,11 +46,12 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
       userDto.Password = this.loginForm.value['password'];
       this.service.login(userDto).subscribe({
         next: (res) => {
-          alert('success');
-          // this.router.navigate(['signup']); TODO
+          alert('Login Succes!');
+          this.router.navigate(['/']);
         },
         error: (err) => {
-          alert(err?.error.message);
+          debugger;
+          alert('User Not Found!       ' + err?.message);
         },
       });
     } else {
