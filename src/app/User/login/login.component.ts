@@ -44,13 +44,13 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
 
       userDto.UserName = this.loginForm.value['username'];
       userDto.Password = this.loginForm.value['password'];
+
       this.service.login(userDto).subscribe({
         next: (res) => {
           alert('Login Succes!');
           this.router.navigate(['/']);
         },
         error: (err) => {
-          debugger;
           alert('User Not Found!       ' + err?.message);
         },
       });

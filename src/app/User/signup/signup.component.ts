@@ -42,16 +42,17 @@ export class SignupComponent extends BaseFormComponent implements OnInit {
       userDto.Email = this.signupForm.value['email'];
       this.service.signUp(userDto).subscribe({
         next: (res) => {
-          alert(res.FristName);
-        },
-        error: (err) => {
-          alert(err?.error.message);
+          alert('User Registered!');
           this.signupForm.reset();
           this.router.navigate(['login']);
         },
+        error: (err) => {
+          alert(err?.error.message);
+          console.log(err?.error.message);
+          // this.router.navigate(['login']);
+        },
       });
       //send object
-      console.log(userDto);
     } else {
       this.validateAllformFileds(this.signupForm);
       alert('your Form is Invalid');
