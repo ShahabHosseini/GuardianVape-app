@@ -20,6 +20,8 @@ import { SignupComponent } from './User/signup/signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './User/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,6 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarComponent,
     SignupComponent,
     LoginComponent,
-    SignupComponent,
   ],
 
   imports: [
@@ -48,6 +49,12 @@ import { HttpClientModule } from '@angular/common/http';
     AccordionModule.forRoot(),
     ReactiveFormsModule,
     HttpClientModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      progressBar: true,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -10,6 +10,7 @@ import { UserService } from '../user.service';
 import { UserDto } from '../../Model/userDto';
 import { Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,8 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private service: UserService,
-    private router: Router
+    private router: Router,
+    private toast: ToastrService
   ) {
     super();
   }
@@ -37,7 +39,6 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
     });
   }
   onLogin() {
-    debugger;
     if (this.loginForm.valid) {
       //send object
       let userDto: UserDto = new UserDto();
@@ -47,16 +48,16 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
 
       this.service.login(userDto).subscribe({
         next: (res) => {
-          alert('Login Succes!');
+          this.toast.success('Login Succes!');
           this.router.navigate(['/']);
         },
         error: (err) => {
-          alert('User Not Found!       ' + err?.message);
+          this.toast.error(err?.console.error(), 'User Not Found!');
         },
       });
     } else {
       this.validateAllformFileds(this.loginForm);
-      alert('your Form is Invalid');
+      this.toast.error('your Form is Invalid', 'Error');
     }
   }
 

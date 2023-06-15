@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
 import { UserDto } from 'src/app/Model/userDto';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +16,8 @@ export class SignupComponent extends BaseFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private service: UserService,
-    private router: Router
+    private router: Router,
+    private toast: ToastrService
   ) {
     super();
   }
@@ -42,20 +44,19 @@ export class SignupComponent extends BaseFormComponent implements OnInit {
       userDto.Email = this.signupForm.value['email'];
       this.service.signUp(userDto).subscribe({
         next: (res) => {
-          alert('User Registered!');
+          this.toast.success('User Registered!', 'Success');
           this.signupForm.reset();
           this.router.navigate(['login']);
         },
         error: (err) => {
-          alert(err?.error.message);
-          console.log(err?.error.message);
+          this.toast.error(err?.error.message, 'Something Is wrong!');
           // this.router.navigate(['login']);
         },
       });
       //send object
     } else {
       this.validateAllformFileds(this.signupForm);
-      alert('your Form is Invalid');
+      this.toast.error('your Form is Invalid', 'Error');
     }
   }
   hideShowPass() {
