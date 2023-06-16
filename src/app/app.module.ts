@@ -19,9 +19,11 @@ import { NavbarComponent } from './home-page/navbar/navbar.component';
 import { SignupComponent } from './User/signup/signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './User/login/login.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { TokenInterceptor } from './api/interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { ToastrModule } from 'ngx-toastr';
     NavbarComponent,
     SignupComponent,
     LoginComponent,
+    DashboardComponent,
   ],
 
   imports: [
@@ -54,9 +57,17 @@ import { ToastrModule } from 'ngx-toastr';
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
       progressBar: true,
+      easing: 'ease-in',
+      easeTime: 1000,
     }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

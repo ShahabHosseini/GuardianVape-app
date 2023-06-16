@@ -48,6 +48,7 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
 
       this.service.login(userDto).subscribe({
         next: (res) => {
+          this.service.storeToken(res.token);
           this.toast.success('Login Succes!');
           this.router.navigate(['/']);
         },
