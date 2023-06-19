@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BaseService } from '../base/base.service';
 import { HttpClient } from '@angular/common/http';
 import { UserDto } from '../Model/userDto';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class UserService extends BaseService {
   userUrl: string = this.baseUrl + 'Auth/';
+
   constructor(private http: HttpClient, private router: Router) {
     super();
   }

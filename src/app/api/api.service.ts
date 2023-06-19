@@ -7,7 +7,7 @@ import { BaseService } from '../base/base.service';
   providedIn: 'root',
 })
 export class ApiService extends BaseService {
-  userUrl: string = this.baseUrl + 'Auth/';
+  userUrl: string = this.baseUrl + 'Auth';
   constructor(private http: HttpClient, private router: Router) {
     super();
   }

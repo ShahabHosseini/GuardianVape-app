@@ -24,6 +24,7 @@ import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TokenInterceptor } from './api/interceptors/token.interceptor';
+import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { TokenInterceptor } from './api/interceptors/token.interceptor';
     SignupComponent,
     LoginComponent,
     DashboardComponent,
+    LayoutComponent,
   ],
 
   imports: [

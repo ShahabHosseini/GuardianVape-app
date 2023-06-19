@@ -1,0 +1,13 @@
+<div class="header">
+  <app-navbar *ngIf="service.isLogin()"></app-navbar>
+</div>
+<div class="body">
+  <app-sidebar *ngIf="service.isLogin()"></app-sidebar>
+  <!-- <div class="content">
+    Main content goes here
+  </div> -->
+  <div class="content">
+    <ng-content></ng-content>
+  </div>
+
+</div>
