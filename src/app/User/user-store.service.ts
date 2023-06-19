@@ -9,18 +9,18 @@ export class UserStoreService {
   private role$ = new BehaviorSubject<string>('');
   constructor() {}
 
-  public getRoleFromStone() {
+  public getRoleFromStore() {
     return this.role$.asObservable();
   }
 
-  public setRoleForStone(role: string) {
+  public setRoleForStore(role: string) {
     this.role$.next(role);
   }
-  public getFullNameFromStone() {
-    return this.role$.asObservable();
+  public getFullNameFromStore() {
+    return this.fullName$.asObservable();
   }
 
-  public setFullNameForStone(fullName: string) {
-    this.role$.next(fullName);
+  public setFullNameForStore(fullName: string) {
+    this.fullName$.next(fullName);
   }
 }

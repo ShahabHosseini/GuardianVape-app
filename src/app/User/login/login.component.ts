@@ -11,6 +11,7 @@ import { UserDto } from '../../Model/userDto';
 import { Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { UserStoreService } from '../user-store.service';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +28,8 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
     private fb: FormBuilder,
     private service: UserService,
     private router: Router,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private userStore: UserStoreService
   ) {
     super();
   }
@@ -49,6 +51,9 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
       this.service.login(userDto).subscribe({
         next: (res) => {
           this.service.storeToken(res.token);
+          const tokenPayLoad = this.service.decodedToken();
+          this.userStore.setFullNameForStore(tokenPayLoad.unique_name);
+          this.userStore.setRoleForStore(tokenPayLoad.role);
           this.toast.success('Login Succes!');
           this.router.navigate(['/']);
         },

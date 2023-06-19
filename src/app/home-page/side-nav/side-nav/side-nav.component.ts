@@ -1,29 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserStoreService } from 'src/app/User/user-store.service';
+import { UserService } from 'src/app/User/user.service';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './side-nav.component.html',
-  styleUrls: ['./side-nav.component.scss']
+  styleUrls: ['./side-nav.component.scss'],
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
   isSidebarOpen: boolean = false;
   openSubMenus: string[] = [];
   isMobileMode: boolean = false;
   activeItem: string = '';
   activeSubMenu: string = '';
+  public fullName: string = '';
 
+  constructor(
+    private storreService: UserStoreService,
+    private service: UserService
+  ) {}
   toggleSidebar(): void {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
 
   ngOnInit(): void {
     this.checkMobileMode();
+    this.storreService.getFullNameFromStore().subscribe((x) => {
+      let fullNameFromToken = this.service.getFullNameFromToken();
+      this.fullName = x || fullNameFromToken;
+    });
   }
 
   toggleSubMenu(submenu: string): void {
-   // this.setActiveItem(submenu);
+    // this.setActiveItem(submenu);
     if (this.openSubMenus.includes(submenu)) {
-      this.openSubMenus = this.openSubMenus.filter(item => item !== submenu);
+      this.openSubMenus = this.openSubMenus.filter((item) => item !== submenu);
     } else {
       this.openSubMenus.push(submenu);
     }
@@ -34,14 +45,13 @@ export class SidebarComponent {
   }
 
   setActiveItem(item: string): void {
-    this.activeItem='';
+    this.activeItem = '';
     if (this.activeItem === item) {
       this.activeItem = ''; // Clear the active item if it's clicked again
     } else {
       this.activeItem = item;
     }
     this.activeSubMenu = ''; // Clear the active sub-menu as well
-
   }
 
   setActiveSubMenu(submenu: string): void {

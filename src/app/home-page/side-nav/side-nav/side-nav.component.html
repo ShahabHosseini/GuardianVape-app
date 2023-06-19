@@ -3,8 +3,11 @@
 </div>
 <div class="main">
   <nav class="sidebar" [ngClass]="{'show': isSidebarOpen}">
-    <div class="text">
-      GuardianVape.co.uk
+    <div class="hello">
+      Hello
+      <h3 class="text">
+        {{fullName}}
+      </h3>
     </div>
     <ul class="main_side">
       <li [class.active]="isActiveItem('home')">

@@ -39,15 +39,17 @@
 }
 
 .sidebar .text {
-  color: white;
   font-size: 19px;
   font-weight: 600;
-  line-height: 65px;
-  text-align: center;
+  line-height: 40px;
   background: #1e1e1e;
   letter-spacing: 1px;
+  color: gold;
 }
-
+.sidebar .hello {
+  color: gold;
+  margin-left: 16pt;
+}
 .sidebar ul {
   background: #1b1b1b;
   height: 100%;
