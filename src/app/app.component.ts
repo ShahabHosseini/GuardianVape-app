@@ -8,8 +8,8 @@ import { BreakpointObserver } from '@angular/cdk/layout';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  @ViewChild(MatSidenav)
-  sidenav!: MatSidenav;
+  // @ViewChild(MatSidenav)
+  // sidenav!: MatSidenav;
 
   constructor(private observer: BreakpointObserver) {}
 

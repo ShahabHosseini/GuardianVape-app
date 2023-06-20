@@ -9,7 +9,6 @@ import { BaseFormComponent } from '../../base/base-form.component';
 import { UserService } from '../user.service';
 import { UserDto } from '../../Model/userDto';
 import { Router } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { UserStoreService } from '../user-store.service';
 
@@ -50,12 +49,14 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
 
       this.service.login(userDto).subscribe({
         next: (res) => {
-          this.service.storeToken(res.token);
+          console.log(res);
+          this.service.storeToken(res.accessToken);
+          this.router.navigate(['/']);
+
           const tokenPayLoad = this.service.decodedToken();
           this.userStore.setFullNameForStore(tokenPayLoad.unique_name);
           this.userStore.setRoleForStore(tokenPayLoad.role);
           this.toast.success('Login Succes!');
-          this.router.navigate(['/']);
         },
         error: (err) => {
           this.toast.error(err?.console.error(), 'User Not Found!');

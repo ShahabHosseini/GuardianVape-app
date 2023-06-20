@@ -44,12 +44,14 @@ export class UserService extends BaseService {
   decodedToken() {
     const jwtHelper = new JwtHelperService();
     const token = this.getToken()!;
+    console.log(jwtHelper.decodeToken(token));
     return jwtHelper.decodeToken(token);
   }
 
-  getFullNameFromToken() {
+  getfullNameFromToken() {
     if (this.userPayload) return this.userPayload.unique_name;
   }
+
   getRoleFromToken() {
     if (this.userPayload) return this.userPayload.role;
   }

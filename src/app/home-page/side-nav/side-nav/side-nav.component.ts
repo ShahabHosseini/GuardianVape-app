@@ -26,7 +26,7 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.checkMobileMode();
     this.storreService.getFullNameFromStore().subscribe((x) => {
-      let fullNameFromToken = this.service.getFullNameFromToken();
+      let fullNameFromToken = this.service.getfullNameFromToken();
       this.fullName = x || fullNameFromToken;
     });
   }
