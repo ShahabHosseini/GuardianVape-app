@@ -5,6 +5,7 @@ import { UserDto } from '../Model/userDto';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { TokenApiDto } from '../Model/token-api.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -29,8 +30,16 @@ export class UserService extends BaseService {
     localStorage.setItem('token', tokenValue);
   }
 
+  storeRefreshToken(tokenValue: string) {
+    localStorage.setItem('refreshToken', tokenValue);
+  }
+
   getToken() {
     return localStorage.getItem('token');
+  }
+
+  getRefreshToken() {
+    return localStorage.getItem('refreshToken');
   }
 
   isLogin(): boolean {
@@ -54,5 +63,9 @@ export class UserService extends BaseService {
 
   getRoleFromToken() {
     if (this.userPayload) return this.userPayload.role;
+  }
+
+  renewToken(tokenApi: TokenApiDto) {
+    return this.http.post<any>(`${this.userUrl}refresh`, tokenApi);
   }
 }

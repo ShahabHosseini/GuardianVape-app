@@ -11,6 +11,7 @@ import { UserDto } from '../../Model/userDto';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserStoreService } from '../user-store.service';
+import ValidateForm from 'src/app/helpers/validationform';
 
 @Component({
   selector: 'app-login',
@@ -41,30 +42,26 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
   }
   onLogin() {
     if (this.loginForm.valid) {
-      //send object
-      let userDto: UserDto = new UserDto();
-
-      userDto.UserName = this.loginForm.value['username'];
-      userDto.Password = this.loginForm.value['password'];
-
-      this.service.login(userDto).subscribe({
+      console.log(this.loginForm.value);
+      this.service.login(this.loginForm.value).subscribe({
         next: (res) => {
-          console.log(res);
+          console.log(res.message);
+          this.loginForm.reset();
           this.service.storeToken(res.accessToken);
+          this.service.storeRefreshToken(res.refreshToken);
+          const tokenPayload = this.service.decodedToken();
+          this.userStore.setFullNameForStore(tokenPayload.name);
+          this.userStore.setRoleForStore(tokenPayload.role);
+          this.toast.success('SUCCESS', res.message);
           this.router.navigate(['/']);
-
-          const tokenPayLoad = this.service.decodedToken();
-          this.userStore.setFullNameForStore(tokenPayLoad.unique_name);
-          this.userStore.setRoleForStore(tokenPayLoad.role);
-          this.toast.success('Login Succes!');
         },
         error: (err) => {
-          this.toast.error(err?.console.error(), 'User Not Found!');
+          this.toast.error('ERROR', 'Something when wrong!');
+          console.log(err);
         },
       });
     } else {
-      this.validateAllformFileds(this.loginForm);
-      this.toast.error('your Form is Invalid', 'Error');
+      ValidateForm.validateAllFormFields(this.loginForm);
     }
   }
 

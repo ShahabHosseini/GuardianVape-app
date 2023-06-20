@@ -1,20 +1,21 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpHeaderResponse,
+  HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+import { catchError, Observable, switchMap, throwError } from 'rxjs';
 import { UserService } from 'src/app/User/user.service';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { TokenApiDto } from 'src/app/Model/token-api.dto';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   constructor(
-    private userService: UserService,
+    private auth: UserService,
     private toast: ToastrService,
     private router: Router
   ) {}
@@ -23,26 +24,47 @@ export class TokenInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    const myToken = this.userService.getToken();
+    const myToken = this.auth.getToken();
+
+    // this.start.load();
     if (myToken) {
       request = request.clone({
-        // setHeaders: { Autorization: `Bearer ${myToken}` },
         setHeaders: { Authorization: `Bearer ${myToken}` }, // "Bearer "+myToken
       });
     }
 
     return next.handle(request).pipe(
       catchError((err: any) => {
-        if (err instanceof HttpHeaderResponse) {
+        if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
-            this.toast.warning(
-              'Token Is Expire',
-              'Token is expire please login again'
-            );
-            this.router.navigate(['login']);
+            //this.toast.warning({detail:"Warning", summary:"Token is expired, Please Login again"});
+            //this.router.navigate(['login'])
+            //handle
+            return this.handleUnAuthorizedError(request, next);
           }
         }
-        throw throwError(() => new Error('Other Error'));
+        return throwError(() => err);
+      })
+    );
+  }
+  handleUnAuthorizedError(req: HttpRequest<any>, next: HttpHandler) {
+    let tokeApiModel = new TokenApiDto();
+    tokeApiModel.accessToken = this.auth.getToken()!;
+    tokeApiModel.refreshToken = this.auth.getRefreshToken()!;
+    return this.auth.renewToken(tokeApiModel).pipe(
+      switchMap((data: TokenApiDto) => {
+        this.auth.storeRefreshToken(data.refreshToken);
+        this.auth.storeToken(data.accessToken);
+        req = req.clone({
+          setHeaders: { Authorization: `Bearer ${data.accessToken}` }, // "Bearer "+myToken
+        });
+        return next.handle(req);
+      }),
+      catchError((err) => {
+        return throwError(() => {
+          this.toast.warning('Warning', 'Token is expired, Please Login again');
+          this.router.navigate(['login']);
+        });
       })
     );
   }
