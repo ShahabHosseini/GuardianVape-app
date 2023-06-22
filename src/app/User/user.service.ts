@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TokenApiDto } from '../Model/token-api.dto';
+import { ResetPasswordDto } from '../Model/reset-password-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -67,5 +68,15 @@ export class UserService extends BaseService {
 
   renewToken(tokenApi: TokenApiDto) {
     return this.http.post<any>(`${this.userUrl}refresh`, tokenApi);
+  }
+
+  sendResetPasswordLink(email: string) {
+    return this.http.post<any>(`${this.userUrl}send-reset-email/${email}`, {});
+  }
+  resetPassord(resetPasswordDto: ResetPasswordDto) {
+    return this.http.post<any>(
+      `${this.userUrl}reset-password`,
+      resetPasswordDto
+    );
   }
 }

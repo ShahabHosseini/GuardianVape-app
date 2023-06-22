@@ -17,7 +17,7 @@ import { ProductComponent } from './product/product.component';
 import { TagComponent } from './tag/tag.component';
 import { NavbarComponent } from './home-page/navbar/navbar.component';
 import { SignupComponent } from './User/signup/signup.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './User/login/login.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -25,6 +25,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TokenInterceptor } from './api/interceptors/token.interceptor';
 import { LayoutComponent } from './layout/layout.component';
+import { ResetPasswordComponent } from './User/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -39,10 +40,12 @@ import { LayoutComponent } from './layout/layout.component';
     LoginComponent,
     DashboardComponent,
     LayoutComponent,
+    ResetPasswordComponent,
   ],
 
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,

@@ -23,7 +23,8 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
   isText: boolean = false;
   eyeIcon: string = 'fa-eye-slash';
   loginForm!: FormGroup;
-
+  public resetPasswordEmail!: string;
+  public isValidEmail!: boolean;
   constructor(
     private fb: FormBuilder,
     private service: UserService,
@@ -69,5 +70,31 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
     this.isText = !this.isText;
     this.isText ? (this.eyeIcon = 'fa-eye') : (this.eyeIcon = 'fa-eye-slash');
     this.isText ? (this.type = 'text') : (this.type = 'password');
+  }
+  checkValidEmail(event: string) {
+    const value = event;
+    const pattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
+
+    this.isValidEmail = pattern.test(value);
+    return this.isValidEmail;
+  }
+  confirmToSend() {
+    if (this.checkValidEmail(this.resetPasswordEmail)) {
+      console.log(this.resetPasswordEmail);
+
+      //Api call to be done
+      this.service.sendResetPasswordLink(this.resetPasswordEmail).subscribe({
+        next: (res) => {
+          0;
+          this.resetPasswordEmail = '';
+          const buttonRef = document.getElementById('closeBtn');
+          buttonRef?.click();
+          this.toast.success('Guardian Vape', 'Reset Success');
+        },
+        error: (err) => {
+          this.toast.error('Erroe', 'somthing went wrong!');
+        },
+      });
+    }
   }
 }
