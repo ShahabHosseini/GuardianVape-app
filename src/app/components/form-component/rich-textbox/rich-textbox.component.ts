@@ -1,9 +1,6 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { ContentEditableDirective } from '../../helper/content-editable.directive';
-import { ViewChild } from '@angular/core';
-import { NgModule } from '@angular/core';
-import { FormControl, FormGroup, FormsModule } from '@angular/forms';
-import { Editor, Toolbar, Validators } from 'ngx-editor';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Editor, Toolbar } from 'ngx-editor';
 
 @Component({
   selector: 'app-rich-textbox',
@@ -12,6 +9,7 @@ import { Editor, Toolbar, Validators } from 'ngx-editor';
 })
 export class RichTextboxComponent implements OnInit {
   editor!: Editor;
+  form: FormGroup;
   toolbar: Toolbar = [
     ['bold', 'italic'],
     ['underline', 'strike'],
@@ -22,17 +20,23 @@ export class RichTextboxComponent implements OnInit {
     ['text_color', 'background_color'],
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
+  editorVisible = false;
 
-  form = new FormGroup({
-    editorContent: new FormControl('', Validators.required()),
-  });
+  constructor() {
+    this.form = new FormGroup({
+      editorContent: new FormControl('', Validators.required),
+    });
+  }
 
   ngOnInit(): void {
     this.editor = new Editor();
   }
 
-  // make sure to destory the editor
   ngOnDestroy(): void {
     this.editor.destroy();
+  }
+
+  toggleEditorVisibility(): void {
+    this.editorVisible = !this.editorVisible;
   }
 }

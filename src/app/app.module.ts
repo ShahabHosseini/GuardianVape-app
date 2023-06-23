@@ -31,6 +31,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxEditorModule } from 'ngx-editor';
 import { CollectionTypeComponent } from './collection/collection-type/collection-type.component';
+import { DropdownListModule } from 'ngx-dropdown-list';
+import { SearchEngineComponent } from './components/search-engine/search-engine.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { CollectionTypeComponent } from './collection/collection-type/collection
     ContentEditableDirective,
     RichTextboxComponent,
     CollectionTypeComponent,
+    SearchEngineComponent,
   ],
 
   imports: [
@@ -61,6 +64,7 @@ import { CollectionTypeComponent } from './collection/collection-type/collection
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
+    DropdownListModule,
     MatDividerModule,
     TooltipModule.forRoot(),
     AccordionModule.forRoot(),

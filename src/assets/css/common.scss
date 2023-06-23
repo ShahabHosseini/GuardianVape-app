@@ -88,7 +88,7 @@ input[type="password"] {
 }
 .form-group {
   margin-bottom: 20px;
-
+  text-align: left;
   label {
     display: flex;
     font-weight: bold;
@@ -116,7 +116,7 @@ input[type="password"] {
 .editor-container {
   text-align: left;
 }
-.row {
+.rows {
   margin: 40pt;
   border: 0.2pt;
   border-radius: 0.2;
@@ -129,4 +129,5 @@ input[type="password"] {
 }
 .header {
   text-align: left;
+  margin-top: 10pt;
 }

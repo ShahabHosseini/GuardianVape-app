@@ -1,6 +1,6 @@
 <form [formGroup]="form">
-  <div class="NgxEditor__Wrapper">
-    <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
-    <ngx-editor class="editor-container" [editor]="editor" formControlName="editorContent"> </ngx-editor>
+  <div class="editor">
+    <ngx-editor-menu class="col-md-12" [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
+    <ngx-editor class="editor-container col-md-12" [editor]="editor" formControlName="editorContent"></ngx-editor>
   </div>
 </form>

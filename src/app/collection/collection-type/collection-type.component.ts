@@ -8,7 +8,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CollectionTypeComponent implements OnInit {
   @Input() parentForm!: FormGroup;
-
+  selectedCollectionType: string = 'manual';
+  productTags!: string[];
+  productTag!: string;
   form: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
@@ -19,6 +21,13 @@ export class CollectionTypeComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.parentForm.addControl('collectionType', this.form);
+    // this.parentForm.addControl('collectionType', this.form);
+    this.form = this.formBuilder.group({
+      collectionType: ['manual'], // Default value for radio button selection
+    });
   }
+  isAutomated(): boolean {
+    return this.form.get('collectionType')?.value === 'automated';
+  }
+  onProductTagChange(event: any) {}
 }

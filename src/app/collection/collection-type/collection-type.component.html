@@ -1,1 +1,59 @@
-<p>collection-type works!</p>
+<form [formGroup]="form">
+  <div class="form-group">
+    <h6>Collection type</h6>
+    <label>
+      <input type="radio" value="manual" formControlName="collectionType">
+      <span>Manual</span>
+    </label>
+    <p class="des"> Add products to this collection one by one. Learn more about</p>
+    <label>
+      <input type="radio" value="automated" formControlName="collectionType">
+      <span>Automated</span>
+    </label>
+    <p class="des"> Existing and future products that match the conditions you set will automatically be added to this
+      collection. Learn more about</p>
+    <hr>
+    <ng-container *ngIf="isAutomated()">
+      <h6>Conditions</h6>
+      <p>
+        Products must match:
+        <span>
+          <label>
+            <input type="radio" value="all" formControlName="conditionType">
+            <span>All conditions</span>
+          </label>
+        </span>
+        <span>
+          <label>
+            <input type="radio" value="any" formControlName="conditionType">
+            <span>Any conditions</span>
+          </label>
+        </span>
+      </p>
+      <div class="row md-12 ;">
+        <div class="col-md-3 combo">
+          <ngx-dropdown-list class="col-md-3" (selectionChange)="onProductTagChange($event)" [items]="productTags"
+            [multiSelection]="false" [placeHolder]="'Product tag'" [(selectedValue)]="productTag"
+            [suffixText]="' suffix text'" [filterBox]="false" [formatNumber]="true" [disabled]="false"> list
+          </ngx-dropdown-list>
+        </div>
+        <div class="col-md-3 combo">
+          <ngx-dropdown-list class="col-md-" (selectionChange)="onProductTagChange($event)" [items]="productTags"
+            [multiSelection]="false" [placeHolder]="'Is equal to '" [(selectedValue)]="productTag"
+            [suffixText]="' suffix text'" [filterBox]="false" [formatNumber]="true" [disabled]="false"> list
+          </ngx-dropdown-list>
+        </div>
+        <div class="col-md-3 combo">
+          <ngx-dropdown-list class="col-md-3" (selectionChange)="onProductTagChange($event)" [items]="productTags"
+            [multiSelection]="false" [placeHolder]="'Result'" [(selectedValue)]="productTag"
+            [suffixText]="' suffix text'" [filterBox]="false" [formatNumber]="true" [disabled]="false"> list
+          </ngx-dropdown-list>
+        </div>
+        <button class="col-md-1 btn bi bi-arrow-down-up"></button>
+        <button class="col-md-1 btn bi bi-trash"></button>
+      </div>
+      <button class="col-md-3 btn btn-secondary">Add another condition</button>
+    </ng-container>
+
+  </div>
+</form>
