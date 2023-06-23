@@ -51,13 +51,13 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
           this.service.storeToken(res.accessToken);
           this.service.storeRefreshToken(res.refreshToken);
           const tokenPayload = this.service.decodedToken();
-          this.userStore.setFullNameForStore(tokenPayload.name);
+          this.userStore.setFullNameForStore(tokenPayload.unique_name);
           this.userStore.setRoleForStore(tokenPayload.role);
           this.toast.success('SUCCESS', res.message);
           this.router.navigate(['/']);
         },
         error: (err) => {
-          this.toast.error('ERROR', 'Something when wrong!');
+          this.toast.error('ERROR', 'User or password is incorect!');
           console.log(err);
         },
       });

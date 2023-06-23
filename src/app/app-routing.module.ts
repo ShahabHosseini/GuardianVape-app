@@ -7,12 +7,18 @@ import { OrderComponent } from './order/order.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ResetPasswordComponent } from './User/reset-password/reset-password.component';
+import { CollectionComponent } from './collection/collection.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'orders', component: OrderComponent, canActivate: [AuthGuard] },
   { path: 'reset', component: ResetPasswordComponent },
+  {
+    path: 'collection',
+    component: CollectionComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'dashboard',
     component: DashboardComponent,

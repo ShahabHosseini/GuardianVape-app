@@ -26,6 +26,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TokenInterceptor } from './api/interceptors/token.interceptor';
 import { LayoutComponent } from './layout/layout.component';
 import { ResetPasswordComponent } from './User/reset-password/reset-password.component';
+import { TitleDescriptionComponent } from './components/form-component/title-description/title-description.component';
+import { ContentEditableDirective } from './components/helper/content-editable.directive';
+import { RichTextboxComponent } from './components/form-component/rich-textbox/rich-textbox.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +44,9 @@ import { ResetPasswordComponent } from './User/reset-password/reset-password.com
     DashboardComponent,
     LayoutComponent,
     ResetPasswordComponent,
+    TitleDescriptionComponent,
+    ContentEditableDirective,
+    RichTextboxComponent,
   ],
 
   imports: [
@@ -56,6 +62,7 @@ import { ResetPasswordComponent } from './User/reset-password/reset-password.com
     TooltipModule.forRoot(),
     AccordionModule.forRoot(),
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     ToastrModule.forRoot({
       timeOut: 5000,
