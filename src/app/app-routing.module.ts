@@ -7,7 +7,7 @@ import { OrderComponent } from './order/order.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ResetPasswordComponent } from './User/reset-password/reset-password.component';
-import { CollectionComponent } from './collection/collection.component';
+import { CollectionComponent } from './collection/form/collection.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },

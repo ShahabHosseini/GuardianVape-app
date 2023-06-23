@@ -10,7 +10,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { SidebarComponent } from './home-page/side-nav/side-nav/side-nav.component';
 import { OrderComponent } from './order/order.component';
-import { CollectionComponent } from './collection/collection.component';
+import { CollectionComponent } from './collection/form/collection.component';
 import { ProductComponent } from './product/product.component';
 import { TagComponent } from './tag/tag.component';
 import { NavbarComponent } from './home-page/navbar/navbar.component';
@@ -29,6 +29,8 @@ import { ContentEditableDirective } from './components/helper/content-editable.d
 import { RichTextboxComponent } from './components/form-component/rich-textbox/rich-textbox.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxEditorModule } from 'ngx-editor';
+import { CollectionTypeComponent } from './collection/collection-type/collection-type.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TitleDescriptionComponent,
     ContentEditableDirective,
     RichTextboxComponent,
+    CollectionTypeComponent,
   ],
 
   imports: [
@@ -61,6 +64,41 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatDividerModule,
     TooltipModule.forRoot(),
     AccordionModule.forRoot(),
+    NgxEditorModule.forRoot({
+      locals: {
+        // menu
+        bold: 'Bold',
+        italic: 'Italic',
+        code: 'Code',
+        blockquote: 'Blockquote',
+        underline: 'Underline',
+        strike: 'Strike',
+        bullet_list: 'Bullet List',
+        ordered_list: 'Ordered List',
+        heading: 'Heading',
+        h1: 'Header 1',
+        h2: 'Header 2',
+        h3: 'Header 3',
+        h4: 'Header 4',
+        h5: 'Header 5',
+        h6: 'Header 6',
+        align_left: 'Left Align',
+        align_center: 'Center Align',
+        align_right: 'Right Align',
+        align_justify: 'Justify',
+        text_color: 'Text Color',
+        background_color: 'Background Color',
+
+        // popups, forms, others...
+        url: 'URL',
+        text: 'Text',
+        openInNewTab: 'Open in new tab',
+        insert: 'Insert',
+        altText: 'Alt Text',
+        title: 'Title',
+        remove: 'Remove',
+      },
+    }),
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,

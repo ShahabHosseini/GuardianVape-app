@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   templateUrl: './title-description.component.html',
   styleUrls: ['./title-description.component.scss'],
 })
-export class TitleDescriptionComponent {
+export class TitleDescriptionComponent implements OnInit {
   @Input() parentForm!: FormGroup;
 
   form: FormGroup;

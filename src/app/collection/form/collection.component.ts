@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TitleDescriptionComponent } from '../components/form-component/title-description/title-description.component';
+import { TitleDescriptionComponent } from '../../components/form-component/title-description/title-description.component';
 
 @Component({
   selector: 'app-collection',

@@ -3,8 +3,12 @@
   border: 0.2pt;
   border-radius: 0.2;
   border-color: rgb(239, 241, 248);
-  background-color: rgb(244, 244, 247);
+  background-color: rgb(242, 242, 243);
+  box-shadow: 20px 20px 80px rgb(218, 218, 218);
   border-radius: 5pt;
   width: 50%;
   padding: 5pt;
+}
+.header {
+  text-align: left;
 }

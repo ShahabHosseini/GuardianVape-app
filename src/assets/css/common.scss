@@ -86,3 +86,47 @@ input[type="password"] {
   margin: 10pt;
   text-align: center;
 }
+.form-group {
+  margin-bottom: 20px;
+
+  label {
+    display: flex;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  input[type="text"],
+  textarea {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: #ffffff;
+    box-shadow: none;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+    &:focus {
+      outline: none;
+      border-color: #80bdff;
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+  }
+}
+.editor-container {
+  text-align: left;
+}
+.row {
+  margin: 40pt;
+  border: 0.2pt;
+  border-radius: 0.2;
+  border-color: rgb(239, 241, 248);
+  background-color: rgb(242, 242, 243);
+  box-shadow: 20px 20px 80px rgb(218, 218, 218);
+  border-radius: 5pt;
+  width: 50%;
+  padding: 5pt;
+}
+.header {
+  text-align: left;
+}
