@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Editor, Toolbar } from 'ngx-editor';
 
 @Component({
@@ -7,7 +7,7 @@ import { Editor, Toolbar } from 'ngx-editor';
   templateUrl: './rich-textbox.component.html',
   styleUrls: ['./rich-textbox.component.scss'],
 })
-export class RichTextboxComponent implements OnInit {
+export class RichTextboxComponent implements OnInit, OnDestroy {
   editor!: Editor;
   form: FormGroup;
   toolbar: Toolbar = [
@@ -20,11 +20,10 @@ export class RichTextboxComponent implements OnInit {
     ['text_color', 'background_color'],
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
-  editorVisible = false;
 
-  constructor() {
-    this.form = new FormGroup({
-      editorContent: new FormControl('', Validators.required),
+  constructor(private formBuilder: FormBuilder) {
+    this.form = this.formBuilder.group({
+      editorContent: ['', Validators.required],
     });
   }
 
@@ -34,9 +33,5 @@ export class RichTextboxComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.editor.destroy();
-  }
-
-  toggleEditorVisibility(): void {
-    this.editorVisible = !this.editorVisible;
   }
 }

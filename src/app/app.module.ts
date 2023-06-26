@@ -33,6 +33,7 @@ import { NgxEditorModule } from 'ngx-editor';
 import { CollectionTypeComponent } from './collection/collection-type/collection-type.component';
 import { DropdownListModule } from 'ngx-dropdown-list';
 import { SearchEngineComponent } from './components/search-engine/search-engine.component';
+import { ImageComponent } from './components/form-component/image/image.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { SearchEngineComponent } from './components/search-engine/search-engine.
     RichTextboxComponent,
     CollectionTypeComponent,
     SearchEngineComponent,
+    ImageComponent,
   ],
 
   imports: [

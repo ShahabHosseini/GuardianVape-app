@@ -1,12 +1,49 @@
-<main class="row-md-12 ms-sm-auto col-lg-10 px-md-4">
-  <h4 class="col-lg-9 header">Create collection</h4>
-  <div class="rows">
-    <app-title-description [parentForm]="collectionForm"></app-title-description>
-  </div>
-  <div class="rows">
-    <app-collection-type></app-collection-type>
-  </div>
-  <div class="rows">
-    <app-search-engine></app-search-engine>
+<main class="row-md-12 ms-sm-auto col-lg-10 px-md-12">
+  <h4 class="row-lg-9 header">Create collection</h4>
+  <div class="row lg-12 md-12 background-color:red;">
+    <div class="col-8">
+      <div class="rows">
+        <app-title-description [parentForm]="collectionForm"></app-title-description>
+      </div>
+      <div class="rows">
+        <app-collection-type></app-collection-type>
+      </div>
+      <div class="rows">
+        <app-search-engine></app-search-engine>
+      </div>
+    </div>
+    <div class="col-4 ">
+      <div class="rows ">
+        <h6>Publishing</h6>
+        <p>Will be included in 3 sales channels</p>
+        <br>
+        <a href="">Deselect all</a>
+        <hr>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" checked="true" value="true" id="onlineStore">
+          <label class="form-check-label" for="onlineStore">
+            Online Store
+          </label>
+        </div>
+        <br>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" checked="true" value="true" id="clickAndDrop">
+          <label class="form-check-label" for="clickAndDrop">
+            Click & Drop
+          </label>
+        </div>
+        <br>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" checked="true" value="true" id="inbox">
+          <label class="form-check-label" for="inbox">
+            Inbox
+          </label>
+        </div>
+        <div class="rows">
+          <app-image></app-image>
+        </div>
+        <br>
+      </div>
+    </div>
   </div>
 </main>
