@@ -29,6 +29,7 @@ export class RichTextboxComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.editor = new Editor();
+    this.editor.commands.focus().exec();
   }
 
   ngOnDestroy(): void {

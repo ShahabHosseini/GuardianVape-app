@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-collection-type',
@@ -7,27 +8,50 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./collection-type.component.scss'],
 })
 export class CollectionTypeComponent implements OnInit {
-  @Input() parentForm!: FormGroup;
-  selectedCollectionType: string = 'manual';
-  productTags!: string[];
-  productTag!: string;
   form: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private toast: ToastrService) {
     this.form = this.formBuilder.group({
-      collectionType: ['', Validators.required],
-      conditionType: ['', Validators.required],
-      condition: [''],
+      collectionType: ['automated'], // Default value for radio button selection
+      conditions: this.formBuilder.array([]), // Empty form array for conditions
     });
   }
+
   ngOnInit() {
-    // this.parentForm.addControl('collectionType', this.form);
-    this.form = this.formBuilder.group({
-      collectionType: ['manual'], // Default value for radio button selection
-    });
+    this.addCondition();
   }
+
   isAutomated(): boolean {
     return this.form.get('collectionType')?.value === 'automated';
   }
-  onProductTagChange(event: any) {}
+
+  get conditions(): FormArray {
+    return this.form.get('conditions') as FormArray;
+  }
+
+  getConditionFormGroup(index: number): FormGroup {
+    return this.conditions.at(index) as FormGroup;
+  }
+
+  addCondition(): void {
+    console.log(this.conditions);
+    if (this.conditions.length === 0) {
+      const initialConditionFormGroup = this.formBuilder.group({
+        conditionType: ['', Validators.required],
+        condition: [''],
+      });
+      this.conditions.push(initialConditionFormGroup);
+    } else {
+      const conditionFormGroup = this.formBuilder.group({
+        conditionType: ['', Validators.required],
+        condition: [''],
+      });
+      this.conditions.push(conditionFormGroup);
+    }
+  }
+
+  removeCondition(index: number): void {
+    if (this.conditions.length > 1) this.conditions.removeAt(index);
+    else this.toast.error('Access control', 'You can`t remove last condition!');
+  }
 }

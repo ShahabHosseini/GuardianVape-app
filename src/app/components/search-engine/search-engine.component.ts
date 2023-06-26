@@ -17,7 +17,5 @@ export class SearchEngineComponent implements OnInit {
       condition: [''],
     });
   }
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+  ngOnInit(): void {}
 }

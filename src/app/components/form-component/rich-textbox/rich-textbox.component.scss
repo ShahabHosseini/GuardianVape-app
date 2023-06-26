@@ -71,4 +71,7 @@
       white-space: pre !important;
     }
   }
+  label {
+    user-select: none;
+  }
 }

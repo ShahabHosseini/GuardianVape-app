@@ -34,6 +34,7 @@ import { CollectionTypeComponent } from './collection/collection-type/collection
 import { DropdownListModule } from 'ngx-dropdown-list';
 import { SearchEngineComponent } from './components/search-engine/search-engine.component';
 import { ImageComponent } from './components/form-component/image/image.component';
+import { ConditionComponent } from './collection/condition/condition.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ImageComponent } from './components/form-component/image/image.componen
     CollectionTypeComponent,
     SearchEngineComponent,
     ImageComponent,
+    ConditionComponent,
   ],
 
   imports: [
