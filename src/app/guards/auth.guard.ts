@@ -31,7 +31,6 @@ export class AuthGuard implements CanActivate {
     const token = this.service.isLogin(); // Assuming you have a method to retrieve the token from your AuthService
 
     if (token) {
-      console.log(this.service.getToken());
       // Token is present, allow navigation
       return true;
     } else {

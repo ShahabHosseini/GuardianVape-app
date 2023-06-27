@@ -12,8 +12,6 @@ export class SearchEngineComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
-      collectionType: ['', Validators.required],
-      conditionType: ['', Validators.required],
       condition: [''],
     });
   }

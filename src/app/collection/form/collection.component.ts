@@ -14,9 +14,9 @@ export class CollectionComponent {
     this.collectionForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      onlineStore: [true, Validators.required],
-      clickAndDrop: [true, Validators.required],
-      inbox: [true, Validators.required],
+      onlineStore: ['true', Validators.required],
+      clickAndDrop: ['true', Validators.required],
+      inbox: ['true', Validators.required],
       conditionType: ['', Validators.required], // Add the 'conditionType' form control
     });
   }

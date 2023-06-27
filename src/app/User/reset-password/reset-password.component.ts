@@ -42,8 +42,6 @@ export class ResetPasswordComponent implements OnInit {
 
       let urlToken = val['code'];
       this.emailToken = urlToken.replace(/ /g, '+');
-      console.log(this.emailToken);
-      console.log(this.emailToReset);
     });
   }
   onChange() {

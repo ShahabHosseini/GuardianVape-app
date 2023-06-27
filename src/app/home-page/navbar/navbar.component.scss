@@ -1,39 +1,45 @@
 .navbar {
-  border-right: none;
   background: linear-gradient(to top, #292828 50%, #000000 90%) no-repeat;
   color: white;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
 }
-button {
-  margin: 0 force;
-  background-color: #ffffff;
-  border-style: none;
+
+.userName {
+  font-size: larger;
+  margin-right: auto;
 }
-nav {
-  img {
-    width: 3pc;
-    height: 3pc;
-  }
-}
+
 .img {
   background-color: #ffffff;
   color: #ffffff;
 }
+
+.navbar img {
+  width: 50px;
+  height: 50px;
+}
+
+.navbar .btn-primary,
+.navbar .btn-secondary {
+  margin-right: 8px;
+}
+
 .content {
   height: calc(100vh - 98px);
   border-radius: 10px;
   margin: 16px;
   margin-left: 32px;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   font-size: 2rem;
   color: lightgray;
 }
 
-mat-sidenav-container {
+.mat-sidenav-container {
   height: calc(100vh - 65px);
   margin: 0%;
 }
@@ -54,9 +60,4 @@ mat-sidenav-container {
   margin-top: 2px;
   font-size: 0.7rem;
   color: lightgrey;
-}
-.userName {
-  color: rgb(243, 231, 231);
-  font-size: larger;
-  margin: 8pt;
 }

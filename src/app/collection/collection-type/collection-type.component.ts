@@ -13,6 +13,7 @@ export class CollectionTypeComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private toast: ToastrService) {
     this.form = this.formBuilder.group({
       collectionType: ['automated'], // Default value for radio button selection
+      conditionType: ['', Validators.required],
       conditions: this.formBuilder.array([]), // Empty form array for conditions
     });
   }
@@ -34,16 +35,17 @@ export class CollectionTypeComponent implements OnInit {
   }
 
   addCondition(): void {
-    console.log(this.conditions);
     if (this.conditions.length === 0) {
       const initialConditionFormGroup = this.formBuilder.group({
         conditionType: ['', Validators.required],
+        collectionType: ['', Validators.required],
         condition: [''],
       });
       this.conditions.push(initialConditionFormGroup);
     } else {
       const conditionFormGroup = this.formBuilder.group({
         conditionType: ['', Validators.required],
+        collectionType: ['', Validators.required],
         condition: [''],
       });
       this.conditions.push(conditionFormGroup);

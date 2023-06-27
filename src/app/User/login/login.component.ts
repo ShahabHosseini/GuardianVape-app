@@ -43,10 +43,8 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
   }
   onLogin() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
       this.service.login(this.loginForm.value).subscribe({
         next: (res) => {
-          console.log(res.message);
           this.loginForm.reset();
           this.service.storeToken(res.accessToken);
           this.service.storeRefreshToken(res.refreshToken);
@@ -58,7 +56,6 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
         },
         error: (err) => {
           this.toast.error('ERROR', 'User or password is incorect!');
-          console.log(err);
         },
       });
     } else {
@@ -80,8 +77,6 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
   }
   confirmToSend() {
     if (this.checkValidEmail(this.resetPasswordEmail)) {
-      console.log(this.resetPasswordEmail);
-
       //Api call to be done
       this.service.sendResetPasswordLink(this.resetPasswordEmail).subscribe({
         next: (res) => {
