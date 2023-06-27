@@ -1,25 +1,41 @@
-import { Component, OnInit } from '@angular/core';
-import { UserStoreService } from 'src/app/User/user-store.service';
+import { Component, AfterViewInit } from '@angular/core';
 import { UserService } from 'src/app/User/user.service';
 import { TransactionService } from 'src/app/base/transaction.service';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent implements OnInit {
-  public formIsDirty: boolean = false;
+export class NavbarComponent implements AfterViewInit {
+  public showButtons = false;
+
   constructor(
     private service: UserService,
-    private tService: TransactionService
+    private tService: TransactionService,
+    private router: Router
   ) {}
-  ngOnInit(): void {
-    this.formIsDirty = this.tService.formIsDirty;
+
+  ngAfterViewInit() {
+    //#endregio
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        const routeUrl = event.urlAfterRedirects;
+        console.log(routeUrl);
+        this.showButtons = !(
+          routeUrl === '/' ||
+          routeUrl.endsWith('list') ||
+          routeUrl === '/dashboard'
+        );
+      }
+    });
   }
+
   signOut() {
     this.service.signOut();
   }
+
   saveChanges() {
     this.tService.triggerSaveClicked();
   }

@@ -1,16 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { TransactionService } from 'src/app/base/transaction.service';
 
 @Component({
   selector: 'app-collection',
   templateUrl: './collection.component.html',
   styleUrls: ['./collection.component.scss'],
 })
-export class CollectionComponent {
+export class CollectionComponent implements OnInit {
   collectionForm: FormGroup;
   selectAll: string = 'Deselect all';
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private transactionService: TransactionService,
+    private router: Router,
+    private toast: ToastrService
+  ) {
     this.collectionForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
@@ -21,11 +29,28 @@ export class CollectionComponent {
     });
   }
 
+  ngOnInit() {
+    this.transactionService.saveClicked$.subscribe(() => {
+      this.saveCollection();
+    });
+
+    this.transactionService.discardClicked$.subscribe(() => {
+      this.resetForm();
+    });
+  }
+
   saveCollection() {
     if (this.collectionForm.valid) {
       // Perform save logic
       console.log(this.collectionForm.value);
+    } else {
+      this.toast.error('Not Complite Error', 'You should fill form frist!');
     }
+  }
+
+  resetForm() {
+    this.collectionForm.reset();
+    this.router.navigate(['/']);
   }
 
   selectAllChange() {

@@ -4,8 +4,8 @@
     <span class="userName">Guardian Vape</span>
     <div class="col-4 d-flex justify-content-between align-items-left">
       <div>
-        <button class="btn btn-primary" *ngIf="formIsDirty" (click)="saveChanges()">Save</button>
-        <button class="btn btn-secondary" *ngIf="formIsDirty" (click)="discardChanges()">Discard</button>
+        <button class="btn btn-primary" *ngIf="showButtons" (click)="saveChanges()">Save</button>
+        <button class="btn btn-secondary" *ngIf="showButtons" (click)="discardChanges()">Discard</button>
       </div>
       <button (click)="signOut()" class="btn btn-outline-danger" type="submit">Sign Out</button>
     </div>
