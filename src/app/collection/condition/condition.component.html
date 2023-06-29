@@ -1,20 +1,15 @@
-<!-- <form [formGroup]="form"> -->
-<div class="row md-12;">
-  <div class="col-md-3 combo">
-    <ngx-dropdown-list class="col-md-3" [items]="productTags" [multiSelection]="false" [placeHolder]="'Product tag'"
-      [suffixText]="' suffix text'" [filterBox]="false" [formatNumber]="true" [disabled]="false"> list
-    </ngx-dropdown-list>
+<form [formGroup]="conditionForm">
+  <div class="row md-12;">
+    <div class="col-md-3">
+      <app-gv-dropdown [options]="conditionTypes" [search]="true">
+      </app-gv-dropdown>
+    </div>
+    <div class="col-md-3 combo">
+      <app-gv-dropdown [options]="equals"></app-gv-dropdown>
+    </div>
+    <div class="col-md-3 combo">
+      <app-gv-dropdown [options]="results"></app-gv-dropdown>
+    </div>
+    <button class="col-md-1 btn bi bi-trash" (click)="onRemoveCondition()"></button>
   </div>
-  <div class="col-md-3 combo">
-    <ngx-dropdown-list class="col-md-" [items]="productTags" [multiSelection]="false" [placeHolder]="'Is equal to '"
-      [suffixText]="' suffix text'" [filterBox]="false" [formatNumber]="true" [disabled]="false"> list
-    </ngx-dropdown-list>
-  </div>
-  <div class="col-md-3 combo">
-    <ngx-dropdown-list class="col-md-3" [items]="productTags" [multiSelection]="false" [placeHolder]="'Result'"
-      [suffixText]="' suffix text'" [filterBox]="false" [formatNumber]="true" [disabled]="false"> list
-    </ngx-dropdown-list>
-  </div>
-  <button class="col-md-1 btn bi bi-trash" (click)="onRemoveCondition()"></button>
-</div>
-<!-- </form> -->
+</form>

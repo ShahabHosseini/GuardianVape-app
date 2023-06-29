@@ -1,0 +1,3 @@
+<ngx-select-dropdown [config]="config" [options]="options" (change)="selectionChange.emit($event)">
+  <input *ngIf="search" ngxSelectSearch>
+</ngx-select-dropdown>

@@ -35,6 +35,8 @@ import { DropdownListModule } from 'ngx-dropdown-list';
 import { SearchEngineComponent } from './components/search-engine/search-engine.component';
 import { ImageComponent } from './components/form-component/image/image.component';
 import { ConditionComponent } from './collection/condition/condition.component';
+import { SelectDropDownModule } from 'ngx-select-dropdown';
+import { GvDropdownComponent } from './components/form-component/gv-dropdown/gv-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,7 @@ import { ConditionComponent } from './collection/condition/condition.component';
     SearchEngineComponent,
     ImageComponent,
     ConditionComponent,
+    GvDropdownComponent,
   ],
 
   imports: [
@@ -70,6 +73,7 @@ import { ConditionComponent } from './collection/condition/condition.component';
     MatIconModule,
     DropdownListModule,
     MatDividerModule,
+    SelectDropDownModule,
     TooltipModule.forRoot(),
     AccordionModule.forRoot(),
     NgxEditorModule.forRoot({

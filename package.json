@@ -26,6 +26,7 @@
     "ngx-bootstrap": "^10.2.0",
     "ngx-dropdown-list": "^1.2.0",
     "ngx-editor": "^15.3.0",
+    "ngx-select-dropdown": "^3.3.0",
     "ngx-toastr": "^17.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

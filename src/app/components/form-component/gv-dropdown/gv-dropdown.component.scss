@@ -1,0 +1,68 @@
+/* Styling the dropdown container */
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+}
+
+/* Styling the dropdown button */
+.dropdown-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Styling the dropdown button text */
+.dropdown-button .selected-item-text {
+  font-size: 14px;
+  color: #333;
+}
+
+/* Styling the dropdown arrow icon */
+.dropdown-button .dropdown-arrow {
+  margin-left: 8px;
+  font-size: 12px;
+  color: #999;
+}
+
+/* Styling the dropdown options */
+.dropdown-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+}
+
+/* Styling the dropdown option */
+.dropdown-option {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+/* Styling the dropdown option on hover */
+.dropdown-option:hover {
+  background-color: #f2f2f2;
+}
+
+/* Styling the selected dropdown option */
+.dropdown-option.selected {
+  background-color: #e0e0e0;
+}
+
+/* Styling the no results message */
+.no-results-message {
+  padding: 8px 12px;
+  color: #999;
+}
