@@ -2,5 +2,17 @@
   <div class="form-group">
     <h6>Search engine listing</h6>
     <p>Add a title and description to see how this collection might appear in a search engine listing</p>
+    <hr>
+    <div class="section" *ngIf="sections['searchEngineListing']">
+      <label class="label">Page title</label>
+      <input type="text" class="form-control">
+
+      <label class="label">Meta description</label>
+      <textarea class="form-control" rows="4" cols="50"></textarea>
+
+      <label class="label">URL handle</label>
+      <input type="text" class="form-control" placeholder="https://www.guardianvape.co.uk/Collections/">
+    </div>
   </div>
+  <button class="btn" (click)="toggleSection('searchEngineListing')">Show/Hide content</button>
 </form>

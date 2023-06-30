@@ -1,13 +1,29 @@
 import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 import { Editor, Toolbar } from 'ngx-editor';
+import { forwardRef } from '@angular/core';
 
 @Component({
   selector: 'app-rich-textbox',
   templateUrl: './rich-textbox.component.html',
   styleUrls: ['./rich-textbox.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => RichTextboxComponent),
+      multi: true,
+    },
+  ],
 })
-export class RichTextboxComponent implements OnInit, OnDestroy {
+export class RichTextboxComponent
+  implements OnInit, OnDestroy, ControlValueAccessor
+{
   editor!: Editor;
   form: FormGroup;
   toolbar: Toolbar = [
@@ -34,5 +50,32 @@ export class RichTextboxComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.editor.destroy();
+  }
+
+  // ControlValueAccessor implementation
+  writeValue(obj: any): void {
+    // Implement this function to set the value of the editor
+    if (obj !== undefined) {
+      this.form.get('editorContent')?.setValue(obj);
+    }
+  }
+
+  registerOnChange(fn: any): void {
+    // Implement this function to notify the form about value changes
+    this.form.valueChanges.subscribe(fn);
+  }
+
+  registerOnTouched(fn: any): void {
+    // Implement this function to register the touch event
+    this.form.get('editorContent')?.valueChanges.subscribe(fn);
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    // Implement this function to enable/disable the editor based on the disabled state
+    if (isDisabled) {
+      this.form.get('editorContent')?.disable();
+    } else {
+      this.form.get('editorContent')?.enable();
+    }
   }
 }

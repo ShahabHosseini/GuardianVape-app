@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./collection-type.component.scss'],
 })
 export class CollectionTypeComponent implements OnInit {
+  @Input() conditionForm!: FormGroup;
   form: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private toast: ToastrService) {

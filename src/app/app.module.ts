@@ -62,6 +62,11 @@ import { SimbolTextboxComponent } from './components/form-component/simbol-textb
     ConditionComponent,
     GvDropdownComponent,
     SimbolTextboxComponent,
+    CollectionTypeComponent,
+    ConditionComponent,
+    AppComponent,
+    CollectionTypeComponent,
+    ConditionComponent,
   ],
 
   imports: [
@@ -76,6 +81,7 @@ import { SimbolTextboxComponent } from './components/form-component/simbol-textb
     DropdownListModule,
     MatDividerModule,
     SelectDropDownModule,
+    CommonModule,
     TooltipModule.forRoot(),
     AccordionModule.forRoot(),
     NgxEditorModule.forRoot({
