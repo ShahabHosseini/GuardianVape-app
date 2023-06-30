@@ -1,12 +1,12 @@
 /* Styling the dropdown container */
-.dropdown-container {
+.gv-dropdown-container {
   position: relative;
   display: inline-block;
   width: 200px;
 }
 
 /* Styling the dropdown button */
-.dropdown-button {
+.gv-dropdown-button {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -18,20 +18,20 @@
 }
 
 /* Styling the dropdown button text */
-.dropdown-button .selected-item-text {
+.gv-dropdown-button .selected-item-text {
   font-size: 14px;
   color: #333;
 }
 
 /* Styling the dropdown arrow icon */
-.dropdown-button .dropdown-arrow {
+.gv-dropdown-button .dropdown-arrow {
   margin-left: 8px;
   font-size: 12px;
   color: #999;
 }
 
 /* Styling the dropdown options */
-.dropdown-options {
+.gv-dropdown-options {
   position: absolute;
   top: 100%;
   left: 0;
@@ -46,23 +46,23 @@
 }
 
 /* Styling the dropdown option */
-.dropdown-option {
+.gv-dropdown-option {
   padding: 8px 12px;
   cursor: pointer;
 }
 
 /* Styling the dropdown option on hover */
-.dropdown-option:hover {
+.gv-dropdown-option:hover {
   background-color: #f2f2f2;
 }
 
 /* Styling the selected dropdown option */
-.dropdown-option.selected {
+.gv-dropdown-option.selected {
   background-color: #e0e0e0;
 }
 
 /* Styling the no results message */
-.no-results-message {
+.gv-no-results-message {
   padding: 8px 12px;
   color: #999;
 }

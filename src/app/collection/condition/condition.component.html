@@ -1,14 +1,14 @@
 <form [formGroup]="conditionForm">
   <div class="row md-12;">
     <div class="col-md-3">
-      <app-gv-dropdown [options]="conditionTypes" [search]="true">
+      <app-gv-dropdown [options]="conditionTypes" [search]="false">
       </app-gv-dropdown>
     </div>
     <div class="col-md-3 combo">
       <app-gv-dropdown [options]="equals"></app-gv-dropdown>
     </div>
     <div class="col-md-3 combo">
-      <app-gv-dropdown [options]="results"></app-gv-dropdown>
+      <app-simbol-textbox simbol="£"></app-simbol-textbox>
     </div>
     <button class="col-md-1 btn bi bi-trash" (click)="onRemoveCondition()"></button>
   </div>

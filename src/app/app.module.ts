@@ -37,6 +37,7 @@ import { ImageComponent } from './components/form-component/image/image.componen
 import { ConditionComponent } from './collection/condition/condition.component';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { GvDropdownComponent } from './components/form-component/gv-dropdown/gv-dropdown.component';
+import { SimbolTextboxComponent } from './components/form-component/simbol-textbox/simbol-textbox.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { GvDropdownComponent } from './components/form-component/gv-dropdown/gv-
     ImageComponent,
     ConditionComponent,
     GvDropdownComponent,
+    SimbolTextboxComponent,
   ],
 
   imports: [

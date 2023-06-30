@@ -20,7 +20,7 @@ export class GvDropdownComponent implements OnChanges {
 
   config: NgxDropdownConfig = {
     displayKey: 'title',
-    search: false, // Initial value, will be updated in ngOnChanges
+    search: false,
     height: 'auto',
     placeholder: 'Select',
     customComparator: (option1: any, option2: any): any => {
