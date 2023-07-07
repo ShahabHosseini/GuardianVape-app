@@ -8,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./collection-type.component.scss'],
 })
 export class CollectionTypeComponent implements OnInit {
-  @Input() conditionForm!: FormGroup;
+  @Input() parentForm!: FormGroup;
   form: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private toast: ToastrService) {
