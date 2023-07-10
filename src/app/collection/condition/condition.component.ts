@@ -52,7 +52,6 @@ export class ConditionComponent implements OnInit {
   ngOnInit() {
     this.service.getAllConditionType().subscribe((res: IdTitleDto[]) => {
       this.conditionTypes = res;
-      console.log(this.conditionTypes);
     });
 
     this.equals = ['Equal 1', 'Equal 2', 'Equal 3']; // Sample equals options

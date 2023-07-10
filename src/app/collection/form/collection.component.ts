@@ -55,7 +55,6 @@ export class CollectionComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit() {
     // Accessing the child components after view initialization
-    console.log(this.titleDescriptionComponent);
     this.titleDescriptionFormGroup = this.titleDescriptionComponent.parentForm;
     this.collectionTypeFormGroup = this.collectionTypeComponent.parentForm;
     this.searchEngineFormGroup = this.searchEngineComponent.parentForm;

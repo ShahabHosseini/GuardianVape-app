@@ -22,7 +22,6 @@ export class NavbarComponent implements AfterViewInit {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const routeUrl = event.urlAfterRedirects;
-        console.log(routeUrl);
         this.showButtons = !(
           routeUrl === '/' ||
           routeUrl.endsWith('list') ||
