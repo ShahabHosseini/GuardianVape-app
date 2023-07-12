@@ -1,15 +1,27 @@
 <form [formGroup]="conditionForm">
   <div class="row md-12;">
     <div class="col-md-3">
-      <app-gv-dropdown [options]="conditionTypes" [search]="false">
-      </app-gv-dropdown>
+      <ng-container *ngIf="selectedConditionType">
+        <p-dropdown [options]="conditionTypes" [(ngModel)]="selectedConditionType" optionLabel="title"
+          [style]="{ width: '100%' }"></p-dropdown>
+      </ng-container>
     </div>
     <div class="col-md-3 combo">
-      <app-gv-dropdown [options]="equals"></app-gv-dropdown>
+      <p-dropdown [options]="equals" formControlName="equal"></p-dropdown>
     </div>
     <div class="col-md-3 combo">
-      <app-simbol-textbox simbol="£"></app-simbol-textbox>
+      <div class="form-group">
+        <label for="inputField" class="sr-only">£</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="inputField" formControlName="result">
+          <div class="input-group-prepend">
+            <div class="input-group-text">£</div>
+          </div>
+        </div>
+      </div>
     </div>
     <button class="col-md-1 btn bi bi-trash" (click)="onRemoveCondition()"></button>
   </div>
+  <input type="hidden" formControlName="selectedItem">
+  <p>{{ 'result: ' + getConditionTypeValue() }}</p>
 </form>

@@ -38,16 +38,18 @@ export class CollectionTypeComponent implements OnInit {
   addCondition(): void {
     if (this.conditions.length === 0) {
       const initialConditionFormGroup = this.formBuilder.group({
-        conditionType: ['', Validators.required],
-        collectionType: ['', Validators.required],
-        condition: [''],
+        conditionType: [null, Validators.required],
+        equal: [null, Validators.required],
+        result: [null],
+        selectedItem: [],
       });
       this.conditions.push(initialConditionFormGroup);
     } else {
       const conditionFormGroup = this.formBuilder.group({
-        conditionType: ['', Validators.required],
-        collectionType: ['', Validators.required],
-        condition: [''],
+        conditionType: [null, Validators.required],
+        equal: [null, Validators.required],
+        result: [null],
+        selectedItem: [],
       });
       this.conditions.push(conditionFormGroup);
     }

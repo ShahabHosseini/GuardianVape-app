@@ -2,3 +2,6 @@ button {
   width: fit-content;
   height: fit-content;
 }
+.custom-dropdown ::ng-deep .p-dropdown-panel .p-dropdown-item {
+  background-color: #ffffff; /* Set the desired background color */
+}
