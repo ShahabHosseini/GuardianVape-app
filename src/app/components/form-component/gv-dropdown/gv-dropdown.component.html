@@ -1,3 +1,2 @@
-<ngx-select-dropdown [config]="config" [options]="options" (selectionChange)="selectionChange.emit($event)">
-  <input *ngIf="search" ngxSelectSearch>
-</ngx-select-dropdown>
+<p-dropdown [style]="{ width: '100%' }" [options]="options" (onChange)="onSelectionChange($event)"
+  [filter]="search"></p-dropdown>

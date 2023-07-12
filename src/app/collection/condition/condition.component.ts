@@ -72,7 +72,16 @@ export class ConditionComponent implements OnInit, AfterViewInit {
       }));
     });
 
-    this.equals = ['Equal 1', 'Equal 2', 'Equal 3'].map((item) => ({
+    this.equals = [
+      'contains',
+      'is equal to',
+      'is not equal to',
+      'start with',
+      'end with',
+      'does not contain',
+      'is greater than',
+      'is less than',
+    ].map((item) => ({
       label: item,
       value: item,
     }));
