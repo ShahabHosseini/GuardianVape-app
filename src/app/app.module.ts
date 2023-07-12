@@ -39,6 +39,7 @@ import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { GvDropdownComponent } from './components/form-component/gv-dropdown/gv-dropdown.component';
 import { SimbolTextboxComponent } from './components/form-component/simbol-textbox/simbol-textbox.component';
 import { DropdownModule } from 'primeng/dropdown';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,17 +64,14 @@ import { DropdownModule } from 'primeng/dropdown';
     SimbolTextboxComponent,
     CollectionTypeComponent,
     ConditionComponent,
-    AppComponent,
-    CollectionTypeComponent,
-    ConditionComponent,
     GvDropdownComponent,
   ],
-
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    DropdownModule,
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
@@ -120,7 +118,6 @@ import { DropdownModule } from 'primeng/dropdown';
       },
     }),
     ReactiveFormsModule,
-    FormsModule,
     HttpClientModule,
     ToastrModule.forRoot({
       timeOut: 5000,

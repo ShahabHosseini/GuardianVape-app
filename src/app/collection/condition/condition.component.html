@@ -1,13 +1,12 @@
 <form [formGroup]="conditionForm">
   <div class="row md-12;">
     <div class="col-md-3">
-      <ng-container *ngIf="selectedConditionType">
-        <p-dropdown [options]="conditionTypes" [(ngModel)]="selectedConditionType" optionLabel="title"
-          [style]="{ width: '100%' }"></p-dropdown>
-      </ng-container>
+      <p-dropdown [style]="{ width: '100%' }" [options]="conditionTypes" formControlName="conditionType"
+        [(ngModel)]="selectedConditionType" (onChange)="onConditionTypeSelectionChange($event)" class="custom-dropdown">
+      </p-dropdown>
     </div>
     <div class="col-md-3 combo">
-      <p-dropdown [options]="equals" formControlName="equal"></p-dropdown>
+      <p-dropdown [style]="{ width: '100%' }" [options]="equals" formControlName="equal"></p-dropdown>
     </div>
     <div class="col-md-3 combo">
       <div class="form-group">
@@ -22,6 +21,4 @@
     </div>
     <button class="col-md-1 btn bi bi-trash" (click)="onRemoveCondition()"></button>
   </div>
-  <input type="hidden" formControlName="selectedItem">
-  <p>{{ 'result: ' + getConditionTypeValue() }}</p>
 </form>

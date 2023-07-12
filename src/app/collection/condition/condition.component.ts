@@ -9,7 +9,6 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CollectionService } from '../collection.service';
 import { IdTitleDto } from 'src/app/Model/id-title-dto';
-import { NgxDropdownConfig } from 'ngx-select-dropdown';
 import { ConditionDto } from 'src/app/Model/conditionDto';
 import { startWith, pairwise } from 'rxjs';
 import { SelectItem } from 'primeng/api';
@@ -28,26 +27,6 @@ export class ConditionComponent implements OnInit, AfterViewInit {
   conditionTypes: SelectItem[] = [];
   equals: SelectItem[] = [];
   results: string[] = [];
-
-  config: NgxDropdownConfig = {
-    displayKey: 'title',
-    search: false,
-    height: 'auto',
-    placeholder: 'Select',
-    customComparator: (option1: any, option2: any): any => {
-      // Implement your custom comparison logic here
-      // Return a number indicating the comparison result
-      // Example: return option1.id - option2.id;
-    },
-    limitTo: 0,
-    moreText: 'More',
-    noResultsFound: 'No results found',
-    searchPlaceholder: 'Search',
-    searchOnKey: '',
-    clearOnSelection: false,
-    inputDirection: 'ltr',
-    // Add other required properties here
-  };
 
   constructor(
     private formBuilder: FormBuilder,
@@ -127,9 +106,5 @@ export class ConditionComponent implements OnInit, AfterViewInit {
   onConditionTypeSelectionChange(event: any) {
     this.selectedConditionType = event.value;
     console.log('metod 1 ', this.selectedConditionType);
-  }
-
-  getConditionTypeValue(): string {
-    return this.selectedConditionType?.title ?? '';
   }
 }
