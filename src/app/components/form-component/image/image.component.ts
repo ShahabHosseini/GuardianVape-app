@@ -67,4 +67,17 @@ export class ImageComponent {
       fileInput.click();
     }
   }
+  onImageDrop(event: DragEvent): void {
+    event.preventDefault();
+    const file = event.dataTransfer?.files[0];
+    if (file) {
+      this.displayImage(file);
+      this.imageForm.get('imageFile')?.setValue('');
+      this.isImageSelected = true;
+    }
+  }
+
+  onDragOver(event: DragEvent): void {
+    event.preventDefault();
+  }
 }

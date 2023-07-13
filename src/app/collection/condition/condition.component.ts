@@ -116,4 +116,15 @@ export class ConditionComponent implements OnInit, AfterViewInit {
     }, 0);
     console.log('metod 1 ', this.selectedConditionType);
   }
+  public getData(): ConditionDto {
+    const conditionType = this.conditionForm.get('conditionType')?.value;
+    const equal = this.conditionForm.get('equal')?.value;
+    const result = this.conditionForm.get('result')?.value;
+    const selectedItem: ConditionDto = {
+      conditionType: conditionType,
+      equal: equal,
+      result: result,
+    };
+    return conditionType;
+  }
 }

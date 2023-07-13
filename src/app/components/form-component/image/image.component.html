@@ -2,15 +2,17 @@
   <div class="mb-3" *ngIf="!imageUrl && !isImageSelected">
     <input type="file" (change)="onFileChange($event)" formControlName="imageFile" class="form-control" id="imageFile"
       style="display: none;">
+    <!-- <label for="imageFile" class="centered-link">Select Image</label> -->
   </div>
 </div>
 
 <div class="mt-4">
   <h4>Image</h4>
-  <div class="image-frame" [ngClass]="{'responsive-frame': imageUrl}">
+  <div class="image-frame" [ngClass]="{'responsive-frame': imageUrl}" (drop)="onImageDrop($event)"
+    (dragover)="onDragOver($event)">
     <img *ngIf="imageUrl" [src]="imageUrl" alt="Uploaded Image Preview" class="img-fluid">
     <div *ngIf="!imageUrl && !isImageSelected" class="no-image-placeholder">
-      <label for="imageFile" class="centered-link">Add image</label>
+      <label for="imageFile" class="centered-link">Select Image</label>
     </div>
     <button *ngIf="imageUrl" type="button" class="btn btn-danger remove-button" (click)="removeImage()">
       <i class="bi bi-trash-fill"></i>
