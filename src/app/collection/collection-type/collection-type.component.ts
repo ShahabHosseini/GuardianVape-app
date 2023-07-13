@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { ConditionDto } from 'src/app/Model/conditionDto';
 
 @Component({
   selector: 'app-collection-type',
@@ -58,5 +59,20 @@ export class CollectionTypeComponent implements OnInit {
   removeCondition(index: number): void {
     if (this.conditions.length > 1) this.conditions.removeAt(index);
     else this.toast.error('Access control', 'You can`t remove last condition!');
+  }
+
+  public getData() {
+    const conditions: ConditionDto[] = this.conditions.value.map(
+      (condition: any) => {
+        const conditionDto: ConditionDto = {
+          conditionType: condition.conditionType,
+          equal: condition.equal,
+          result: condition.result,
+        };
+        return conditionDto;
+      }
+    );
+
+    console.log('value is:', conditions);
   }
 }
