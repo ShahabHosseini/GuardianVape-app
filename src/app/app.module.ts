@@ -75,6 +75,8 @@ import { DropdownModule } from 'primeng/dropdown';
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     MatIconModule,
     DropdownListModule,
     MatDividerModule,
@@ -117,8 +119,7 @@ import { DropdownModule } from 'primeng/dropdown';
         remove: 'Remove',
       },
     }),
-    ReactiveFormsModule,
-    HttpClientModule,
+
     ToastrModule.forRoot({
       timeOut: 5000,
       positionClass: 'toast-bottom-right',

@@ -1,14 +1,17 @@
-<form [formGroup]="imageForm" class="mt-4">
-  <div class="mb-3">
-    <label for="imageFile" class="form-label">Select an image:</label>
-    <input type="file" (change)="onFileChange($event)" formControlName="imageFile" class="form-control">
+<div [formGroup]="imageForm" class="mt-4">
+  <div class="mb-3" *ngIf="!imageUrl && !isImageSelected">
+    <input type="file" (change)="onFileChange($event)" formControlName="imageFile" class="form-control" id="imageFile"
+      style="display: none;">
   </div>
-</form>
+</div>
 
-<div *ngIf="imageUrl" class="mt-4">
+<div class="mt-4">
   <h4>Image</h4>
-  <div class="image-frame" [ngStyle]="{'width.px': imageUrl ? 'auto' : 300}">
+  <div class="image-frame" [ngClass]="{'responsive-frame': imageUrl}">
     <img *ngIf="imageUrl" [src]="imageUrl" alt="Uploaded Image Preview" class="img-fluid">
+    <div *ngIf="!imageUrl && !isImageSelected" class="no-image-placeholder">
+      <label for="imageFile" class="centered-link">Add image</label>
+    </div>
     <button *ngIf="imageUrl" type="button" class="btn btn-danger remove-button" (click)="removeImage()">
       <i class="bi bi-trash-fill"></i>
     </button>

@@ -49,8 +49,8 @@ export class GvDropdownComponent implements ControlValueAccessor {
   }
 
   onSelectionChange(event: any): void {
-    // Emit the selectionChange event with the selected value
-    this.selectionChange.emit(event.value);
+    // Emit the selectionChange event with the entire event object
+    this.selectionChange.emit(event);
   }
 
   // Other component logic and event handlers

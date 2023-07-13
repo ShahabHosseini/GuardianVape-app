@@ -1,21 +1,45 @@
-/* Custom styles for responsiveness and image frame */
 .image-frame {
-  border: 4px solid #ddd;
+  position: relative;
+  border: 4px dotted #ddd;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 10px;
-  width: 400px;
-  height: 300px;
-  justify-content: center;
+  max-width: 100%;
+  width: 100%;
+  height: 0;
+  padding-bottom: 75%; /* Adjust this value based on the aspect ratio of the image */
+  max-height: 500px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
   align-items: center;
-  position: relative;
-  display: inline-block;
+  justify-content: center;
+}
+
+.image-frame.responsive-frame {
+  width: 100%;
 }
 
 .image-frame img {
-  max-width: 100%;
-  max-height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  align-items: center;
+}
+@media (max-width: 768px) {
+  .image-frame {
+    max-height: 300px;
+    max-height: 300px;
+  }
+}
+.no-image-placeholder {
+  background-image: url("/assets/img/download.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  width: 100%;
+  height: 100%;
 }
 .remove-button {
   position: absolute;
@@ -23,4 +47,26 @@
   right: 10px;
   border-radius: 50%;
   padding: 5px;
+}
+.select-image-link {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
+
+.select-image-link:hover {
+  color: red;
+}
+.centered-link {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.centered-link:hover {
+  color: red;
 }

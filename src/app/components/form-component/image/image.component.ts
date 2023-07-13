@@ -12,6 +12,7 @@ export class ImageComponent {
 
   imageForm: FormGroup;
   imageUrl: string | null = null;
+  isImageSelected: boolean = false;
 
   constructor(private formBuilder: FormBuilder) {
     this.imageForm = this.formBuilder.group({
@@ -28,13 +29,18 @@ export class ImageComponent {
       // Emit the selected image to the parent component
       this.imageSelected.emit(file);
 
+      // Set the value of the form control to an empty string
+      this.imageForm.get('imageFile')?.setValue('');
+
       // Create a new instance of FormGroup
       const newForm = this.formBuilder.group({
-        imageFile: [file],
+        imageFile: [''],
       });
 
       // Replace the existing form group
       this.imageForm = newForm;
+
+      this.isImageSelected = true;
     }
   }
 
@@ -50,5 +56,15 @@ export class ImageComponent {
     // Clear the image URL and emit the remove event to the parent component
     this.imageUrl = null;
     this.imageRemoved.emit();
+    this.isImageSelected = false;
+  }
+
+  showInputFile(): void {
+    const fileInput = document.getElementById(
+      'imageFile'
+    ) as HTMLInputElement | null;
+    if (fileInput) {
+      fileInput.click();
+    }
   }
 }

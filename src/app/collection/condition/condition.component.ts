@@ -43,16 +43,15 @@ export class ConditionComponent implements OnInit, AfterViewInit {
     this.conditionForm
       .get('conditionType')
       ?.valueChanges.pipe(startWith(null), pairwise())
-      .subscribe(([prev]: [any, any]) => {
-        console.log('x barabar ast ba:', prev);
-        this.updateSelectedItem('');
+      .subscribe(() => {
+        this.updateSelectedItem();
       });
 
     this.conditionForm
       .get('equal')
       ?.valueChanges.pipe(startWith(null))
       .subscribe(() => {
-        this.updateSelectedItem('');
+        this.updateSelectedItem();
       });
 
     this.conditionForm
@@ -60,7 +59,7 @@ export class ConditionComponent implements OnInit, AfterViewInit {
       ?.valueChanges.pipe(pairwise())
       .subscribe(([prev]: [any, any]) => {
         console.log('x barabar ast ba:', prev);
-        this.updateSelectedItem('');
+        this.updateSelectedItem();
       });
   }
 
@@ -87,16 +86,15 @@ export class ConditionComponent implements OnInit, AfterViewInit {
     }));
     this.results = ['Result 1', 'Result 2', 'Result 3']; // Sample results options
 
-    this.conditionForm.get('conditionType')?.valueChanges.subscribe((value) => {
-      this.selectedConditionType = value; // Update the selectedConditionType variable
-    });
+    // this.conditionForm.get('conditionType')?.valueChanges.subscribe((value) => {
+    //   this.selectedConditionType = value; // Update the selectedConditionType variable
+    // });
   }
   onRemoveCondition(): void {
     this.removeCondition.emit(this.index);
   }
 
-  updateSelectedItem(event: any) {
-    console.log(event);
+  updateSelectedItem() {
     const conditionType = this.conditionForm.get('conditionType')?.value;
     const equal = this.conditionForm.get('equal')?.value;
     const result = this.conditionForm.get('result')?.value;
@@ -107,13 +105,15 @@ export class ConditionComponent implements OnInit, AfterViewInit {
       equal: equal,
       result: result,
     };
-    console.log('lkasjlkdjalksdja ', selectedItem.conditionType);
+    console.log('updateSelectedItem ', conditionType);
     this.conditionForm.patchValue({
       selectedItem: selectedItem,
     });
   }
   onConditionTypeSelectionChange(event: any) {
-    this.selectedConditionType = event.value;
+    setTimeout(() => {
+      this.selectedConditionType = event.value;
+    }, 0);
     console.log('metod 1 ', this.selectedConditionType);
   }
 }
