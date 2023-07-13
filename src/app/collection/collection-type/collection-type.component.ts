@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { CollectionTypeDto } from 'src/app/Model/collection-type-dto';
 import { ConditionDto } from 'src/app/Model/conditionDto';
 
 @Component({
@@ -61,7 +62,7 @@ export class CollectionTypeComponent implements OnInit {
     else this.toast.error('Access control', 'You can`t remove last condition!');
   }
 
-  public getData() {
+  public getData(): CollectionTypeDto {
     const conditions: ConditionDto[] = this.conditions.value.map(
       (condition: any) => {
         const conditionDto: ConditionDto = {
@@ -69,10 +70,22 @@ export class CollectionTypeComponent implements OnInit {
           equal: condition.equal,
           result: condition.result,
         };
-        return conditionDto;
+        return conditionDto; // Add this line to return the conditionDto object
       }
     );
 
-    console.log('value is:', conditions);
+    console.log('aval', this.conditions.value);
+    console.log('dovom', conditions);
+
+    const conditionType = this.form.get('collectionType')?.value;
+    const collectionType = this.form.get('conditionType')?.value;
+
+    const selectedItem: CollectionTypeDto = {
+      collectionType: collectionType,
+      conditionType: conditionType,
+      conditions: conditions,
+    };
+
+    return selectedItem;
   }
 }

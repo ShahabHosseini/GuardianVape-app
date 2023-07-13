@@ -29,9 +29,10 @@
   position: fixed;
   width: 250px;
   height: 100%;
-  left: -250px;
+  left: 0;
   background: #1b1b1b;
   transition: left 0.4s ease;
+  z-index: 3;
 }
 
 .sidebar.show {
@@ -148,5 +149,13 @@ nav ul ul li a:hover {
   }
   .sidebar {
     display: block;
+  }
+  .main {
+    margin-left: 250px; /* Adjust this value based on the width of the sidebar */
+    z-index: 997; /* Ensure the main content is below the sidebar */
+  }
+  .page-container {
+    position: relative;
+    z-index: 1;
   }
 }

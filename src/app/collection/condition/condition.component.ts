@@ -125,6 +125,7 @@ export class ConditionComponent implements OnInit, AfterViewInit {
       equal: equal,
       result: result,
     };
-    return conditionType;
+    console.log('condition : ', selectedItem);
+    return selectedItem;
   }
 }

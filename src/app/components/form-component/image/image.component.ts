@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -9,9 +9,9 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 export class ImageComponent {
   @Output() imageSelected: EventEmitter<File> = new EventEmitter<File>();
   @Output() imageRemoved: EventEmitter<void> = new EventEmitter<void>();
-
+  @Input() showImageEdge: boolean = true;
+  @Input() imageUrl: string | null = null;
   imageForm: FormGroup;
-  imageUrl: string | null = null;
   isImageSelected: boolean = false;
 
   constructor(private formBuilder: FormBuilder) {

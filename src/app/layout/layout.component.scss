@@ -2,20 +2,20 @@
   position: absolute;
   display: contents;
   margin: 16pt;
-  // top: 50%;
-  // left: 50%;
   transform: translate(-50%, -50%);
   color: #202020;
-  z-index: -1;
   text-align: center;
   align-content: center;
 }
 .header {
   position: sticky;
   top: 0;
+  z-index: 100;
+  padding-bottom: 45pt;
 }
-.sidbar {
+.sidebar {
   position: sticky;
   left: 0;
   top: 0;
+  z-index: 100;
 }

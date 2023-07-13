@@ -73,11 +73,13 @@ export class CollectionComponent implements OnInit, AfterViewInit {
     // }
     //console.log(this.titleDescriptionComponent);
     const titleDescriptionValue = this.titleDescriptionComponent.getData();
+    const collectionTypeValue = this.collectionTypeComponent.getData();
     // const formData = this.titleDescriptionFormGroup.value.titleDescription;
     // console.log(this.titleDescriptionFormGroup.value.titleDescription);
     // Access the form data
     console.log('Title:', titleDescriptionValue.title);
     console.log('Description:', titleDescriptionValue.description);
+    console.log('data:', collectionTypeValue);
   }
 
   resetForm() {

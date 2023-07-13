@@ -33,9 +33,7 @@ export class TitleDescriptionComponent
     });
   }
 
-  ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
-  }
+  ngOnDestroy(): void {}
 
   ngOnInit() {
     this.parentForm.addControl('titleDescription', this.form);

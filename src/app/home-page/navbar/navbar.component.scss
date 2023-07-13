@@ -1,10 +1,15 @@
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   background: linear-gradient(to top, #292828 50%, #000000 90%) no-repeat;
   color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 8px;
+  z-index: 2;
 }
 
 .userName {
@@ -60,4 +65,8 @@
   margin-top: 2px;
   font-size: 0.7rem;
   color: lightgrey;
+}
+.page-container {
+  position: relative;
+  z-index: 1;
 }
