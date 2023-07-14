@@ -6,7 +6,13 @@ import { TransactionService } from 'src/app/base/transaction.service';
 import { TitleDescriptionComponent } from 'src/app/components/form-component/title-description/title-description.component';
 import { CollectionTypeComponent } from '../collection-type/collection-type.component';
 import { SearchEngineComponent } from 'src/app/components/search-engine/search-engine.component';
-import { ImageComponent } from 'ngx-editor/lib/modules/menu/image/image.component';
+import {
+  ImageComponent,
+  ImageDto,
+} from 'src/app/components/form-component/image/image.component';
+import { HttpClient } from '@angular/common/http';
+import { FileService } from 'src/app/api/Common/file.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-collection',
@@ -32,7 +38,9 @@ export class CollectionComponent implements OnInit, AfterViewInit {
     private formBuilder: FormBuilder,
     private transactionService: TransactionService,
     private router: Router,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private http: HttpClient,
+    private fileService: FileService
   ) {
     this.collectionForm = this.formBuilder.group({
       title: ['', Validators.required],
@@ -58,7 +66,7 @@ export class CollectionComponent implements OnInit, AfterViewInit {
     this.titleDescriptionFormGroup = this.titleDescriptionComponent.parentForm;
     this.collectionTypeFormGroup = this.collectionTypeComponent.parentForm;
     this.searchEngineFormGroup = this.searchEngineComponent.parentForm;
-    this.imageFormGroup = this.imageComponent.form;
+    this.imageFormGroup = this.imageComponent.imageForm;
   }
 
   saveCollection() {
@@ -81,6 +89,28 @@ export class CollectionComponent implements OnInit, AfterViewInit {
     console.log('Title:', titleDescriptionValue.title);
     console.log('Description:', titleDescriptionValue.description);
     console.log('data:', collectionTypeValue);
+    console.log('Image : ', this.imageComponent.getData());
+    this.saveImage();
+  }
+  saveImage() {
+    const imageInfo: ImageDto = this.imageComponent.getData();
+    console.log('Image : ', imageInfo.image);
+    if (imageInfo.image) {
+      const fileName = imageInfo.fileName || 'default.jpg';
+
+      this.fileService
+        .uploadFile(imageInfo.image, fileName)
+        .then((response) => {
+          this.toast.success('Image saved successfully');
+          // You can perform additional logic here, such as updating the collection with the saved image URL
+        })
+        .catch((error) => {
+          console.log('Error saving image:', error);
+          // Handle the error appropriately
+        });
+    } else {
+      this.toast.error('No image selected');
+    }
   }
 
   resetForm() {

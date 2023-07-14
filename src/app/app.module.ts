@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER, InjectionToken } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,7 +18,7 @@ import { SignupComponent } from './User/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './User/login/login.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+import { CommonModule, APP_BASE_HREF } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TokenInterceptor } from './api/interceptors/token.interceptor';
@@ -62,8 +62,6 @@ import { DropdownModule } from 'primeng/dropdown';
     ImageComponent,
     ConditionComponent,
     SimbolTextboxComponent,
-    CollectionTypeComponent,
-    ConditionComponent,
     GvDropdownComponent,
   ],
   imports: [
@@ -134,6 +132,10 @@ import { DropdownModule } from 'primeng/dropdown';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true,
+    },
+    {
+      provide: APP_BASE_HREF,
+      useValue: '/',
     },
   ],
   bootstrap: [AppComponent],

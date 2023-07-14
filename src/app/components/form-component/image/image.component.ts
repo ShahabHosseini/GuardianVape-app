@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { Component, EventEmitter, Output, Input, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { APP_BASE_HREF } from '@angular/common';
 
 @Component({
   selector: 'app-image',
@@ -13,10 +14,15 @@ export class ImageComponent {
   @Input() imageUrl: string | null = null;
   imageForm: FormGroup;
   isImageSelected: boolean = false;
-
-  constructor(private formBuilder: FormBuilder) {
+  fileName: string = '';
+  image: File | null = null; // Update the type to allow null values
+  constructor(
+    private formBuilder: FormBuilder,
+    @Inject(APP_BASE_HREF) private baseHref: string
+  ) {
     this.imageForm = this.formBuilder.group({
       imageFile: [''],
+      url: [''],
     });
   }
 
@@ -24,6 +30,8 @@ export class ImageComponent {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files && inputElement.files.length) {
       const file = inputElement.files[0];
+      this.image = file; // Store the selected image
+
       this.displayImage(file);
 
       // Emit the selected image to the parent component
@@ -33,12 +41,13 @@ export class ImageComponent {
       this.imageForm.get('imageFile')?.setValue('');
 
       // Create a new instance of FormGroup
-      const newForm = this.formBuilder.group({
+      const form = this.formBuilder.group({
         imageFile: [''],
+        url: [''],
       });
 
       // Replace the existing form group
-      this.imageForm = newForm;
+      this.imageForm = form;
 
       this.isImageSelected = true;
     }
@@ -48,7 +57,9 @@ export class ImageComponent {
     const reader = new FileReader();
     reader.onload = (event: ProgressEvent<FileReader>) => {
       this.imageUrl = event.target?.result as string;
+      console.log(event.target);
     };
+    this.fileName = file.name;
     reader.readAsDataURL(file);
   }
 
@@ -57,6 +68,7 @@ export class ImageComponent {
     this.imageUrl = null;
     this.imageRemoved.emit();
     this.isImageSelected = false;
+    this.image = null;
   }
 
   showInputFile(): void {
@@ -70,6 +82,8 @@ export class ImageComponent {
   onImageDrop(event: DragEvent): void {
     event.preventDefault();
     const file = event.dataTransfer?.files[0];
+    this.image = file as File; // Store the selected image
+
     if (file) {
       this.displayImage(file);
       this.imageForm.get('imageFile')?.setValue('');
@@ -80,4 +94,17 @@ export class ImageComponent {
   onDragOver(event: DragEvent): void {
     event.preventDefault();
   }
+  getData(): ImageDto {
+    const imagedto: ImageDto = {
+      image: this.image || null, // Use the stored image directly
+      fileName: this.fileName,
+      url: '', // You can remove this line as it's not needed
+    };
+    return imagedto;
+  }
+}
+export interface ImageDto {
+  image: File | null;
+  fileName: string | null;
+  url: string;
 }
