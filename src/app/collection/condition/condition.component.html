@@ -1,9 +1,9 @@
 <form [formGroup]="conditionForm">
   <div class="row md-12;">
     <div class="col-md-3">
-      <p-dropdown [style]="{ width: '100%' }" [options]="conditionTypes" formControlName="conditionType"
+      <app-gv-dropdown [style]="{ width: '100%' }" [options]="conditionTypes" formControlName="conditionType"
         [(ngModel)]="selectedConditionType" (onChange)="onConditionTypeSelectionChange($event)" class="custom-dropdown">
-      </p-dropdown>
+      </app-gv-dropdown>
     </div>
     <div class="col-md-3 combo">
       <p-dropdown [style]="{ width: '100%' }" [options]="equals" formControlName="equal"></p-dropdown>

@@ -23,26 +23,26 @@ export class GvDropdownComponent implements ControlValueAccessor {
   @Input() options: any[] = [];
   @Output() selectionChange = new EventEmitter<any>();
   @Input() search: boolean = false;
-
+  @Input() disabled = false;
+  value: any = null;
+  hoveredRating = 2;
+  isMouseOver = false;
   // Value accessor methods
   private onChange: any = () => {};
   private onTouch: any = () => {};
 
-  writeValue(value: any): void {
+  writeValue(angularProvidedValue: any): void {
     // Update the value of the dropdown component
-    this.onChange(value);
+    this.value = angularProvidedValue;
   }
 
-  registerOnChange(fn: any): void {
+  registerOnChange(angularProvidedFunction: any): void {
     // Register the callback function to propagate changes
-    this.onChange = fn;
+    this.onChange = angularProvidedFunction;
   }
-
-  registerOnTouched(fn: any): void {
-    // Register the callback function for touch events
-    this.onTouch = fn;
+  registerOnTouched(angularProvidedFunction: any) {
+    this.onTouch = angularProvidedFunction;
   }
-
   setDisabledState(isDisabled: boolean): void {
     // Set the disabled state of the dropdown component
     // You can modify the implementation based on the requirements
@@ -50,7 +50,8 @@ export class GvDropdownComponent implements ControlValueAccessor {
 
   onSelectionChange(event: any): void {
     // Emit the selectionChange event with the entire event object
-    this.selectionChange.emit(event);
+    this.value = event;
+    this.onChange(this.value);
   }
 
   // Other component logic and event handlers
