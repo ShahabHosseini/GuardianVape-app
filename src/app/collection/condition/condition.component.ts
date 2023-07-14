@@ -42,14 +42,14 @@ export class ConditionComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.conditionForm
       .get('conditionType')
-      ?.valueChanges.pipe(startWith(null), pairwise())
+      ?.valueChanges.pipe(pairwise())
       .subscribe(() => {
         this.updateSelectedItem();
       });
 
     this.conditionForm
       .get('equal')
-      ?.valueChanges.pipe(startWith(null))
+      ?.valueChanges.pipe()
       .subscribe(() => {
         this.updateSelectedItem();
       });
@@ -57,8 +57,7 @@ export class ConditionComponent implements OnInit, AfterViewInit {
     this.conditionForm
       .get('result')
       ?.valueChanges.pipe(pairwise())
-      .subscribe(([prev]: [any, any]) => {
-        console.log('x barabar ast ba:', prev);
+      .subscribe(() => {
         this.updateSelectedItem();
       });
   }

@@ -22,7 +22,7 @@ export class CollectionComponent implements OnInit, AfterViewInit {
   collectionTypeComponent!: CollectionTypeComponent;
   @ViewChild(SearchEngineComponent)
   searchEngineComponent!: SearchEngineComponent;
-  //@ViewChild(ImageComponent) imageComponent!: ImageComponent;
+  @ViewChild(ImageComponent) imageComponent!: ImageComponent;
   titleDescriptionFormGroup!: FormGroup;
   collectionTypeFormGroup!: FormGroup;
   searchEngineFormGroup!: FormGroup;
@@ -58,7 +58,7 @@ export class CollectionComponent implements OnInit, AfterViewInit {
     this.titleDescriptionFormGroup = this.titleDescriptionComponent.parentForm;
     this.collectionTypeFormGroup = this.collectionTypeComponent.parentForm;
     this.searchEngineFormGroup = this.searchEngineComponent.parentForm;
-    // this.imageFormGroup = this.imageComponent.form;
+    this.imageFormGroup = this.imageComponent.form;
   }
 
   saveCollection() {
@@ -74,6 +74,7 @@ export class CollectionComponent implements OnInit, AfterViewInit {
     //console.log(this.titleDescriptionComponent);
     const titleDescriptionValue = this.titleDescriptionComponent.getData();
     const collectionTypeValue = this.collectionTypeComponent.getData();
+
     // const formData = this.titleDescriptionFormGroup.value.titleDescription;
     // console.log(this.titleDescriptionFormGroup.value.titleDescription);
     // Access the form data
