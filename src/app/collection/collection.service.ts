@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { IdTitleDto } from '../Model/id-title-dto';
 import { Observable } from 'rxjs';
+import { CollectionDto } from '../Model/collection-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -17,5 +18,12 @@ export class CollectionService extends BaseService {
 
   getAllConditionType(): Observable<IdTitleDto[]> {
     return this.http.get<IdTitleDto[]>(`${this.collectionUrl}condition-type/`);
+  }
+
+  save(data: CollectionDto): Observable<any> {
+    return this.http.post<CollectionDto>(
+      `${this.collectionUrl}save-collection`,
+      data
+    );
   }
 }

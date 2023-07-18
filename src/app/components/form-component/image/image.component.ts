@@ -94,8 +94,8 @@ export class ImageComponent {
   onDragOver(event: DragEvent): void {
     event.preventDefault();
   }
-  getData(): ImageDto {
-    const imagedto: ImageDto = {
+  getData(): imageDto {
+    const imagedto: imageDto = {
       image: this.image || null, // Use the stored image directly
       fileName: this.fileName,
       url: '', // You can remove this line as it's not needed
@@ -103,7 +103,7 @@ export class ImageComponent {
     return imagedto;
   }
 }
-export interface ImageDto {
+export interface imageDto {
   image: File | null;
   fileName: string | null;
   url: string;

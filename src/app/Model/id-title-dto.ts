@@ -1,4 +1,5 @@
-export class IdTitleDto {
-  public id: number = 0;
-  public title: string = '';
+export interface IdTitleDto {
+  id: number;
+  guid: string;
+  title: string;
 }

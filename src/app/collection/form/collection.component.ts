@@ -8,11 +8,13 @@ import { CollectionTypeComponent } from '../collection-type/collection-type.comp
 import { SearchEngineComponent } from 'src/app/components/search-engine/search-engine.component';
 import {
   ImageComponent,
-  ImageDto,
+  imageDto,
 } from 'src/app/components/form-component/image/image.component';
 import { HttpClient } from '@angular/common/http';
 import { FileService } from 'src/app/api/Common/file.service';
 import { firstValueFrom } from 'rxjs';
+import { CollectionDto } from 'src/app/Model/collection-dto';
+import { CollectionService } from '../collection.service';
 
 @Component({
   selector: 'app-collection',
@@ -40,7 +42,8 @@ export class CollectionComponent implements OnInit, AfterViewInit {
     private router: Router,
     private toast: ToastrService,
     private http: HttpClient,
-    private fileService: FileService
+    private fileService: FileService,
+    private service: CollectionService
   ) {
     this.collectionForm = this.formBuilder.group({
       title: ['', Validators.required],
@@ -65,35 +68,42 @@ export class CollectionComponent implements OnInit, AfterViewInit {
     // Accessing the child components after view initialization
     this.titleDescriptionFormGroup = this.titleDescriptionComponent.parentForm;
     this.collectionTypeFormGroup = this.collectionTypeComponent.parentForm;
-    this.searchEngineFormGroup = this.searchEngineComponent.parentForm;
+    this.searchEngineFormGroup = this.searchEngineComponent.form;
     this.imageFormGroup = this.imageComponent.imageForm;
   }
 
   saveCollection() {
-    // if (this.collectionForm.valid) {
-    //Perform save logic
-    // console.log(this.titleDescriptionFormGroup);
-    // console.log(this.collectionTypeFormGroup);
-    // console.log(this.searchEngineFormGroup);
-    //console.log(this.imageFormGroup);
-    // } else {
-    //   this.toast.error('Not Complite Error', 'You should fill form frist!');
-    // }
-    //console.log(this.titleDescriptionComponent);
-    const titleDescriptionValue = this.titleDescriptionComponent.getData();
-    const collectionTypeValue = this.collectionTypeComponent.getData();
-
-    // const formData = this.titleDescriptionFormGroup.value.titleDescription;
-    // console.log(this.titleDescriptionFormGroup.value.titleDescription);
-    // Access the form data
-    console.log('Title:', titleDescriptionValue.title);
-    console.log('Description:', titleDescriptionValue.description);
-    console.log('data:', collectionTypeValue);
-    console.log('Image : ', this.imageComponent.getData());
-    this.saveImage();
+    try {
+      // if (this.collectionForm.valid) {
+      const titleDescriptionValue = this.titleDescriptionComponent.getData();
+      const collectionTypeValue = this.collectionTypeComponent.getData();
+      let image = this.imageComponent.getData();
+      let collection: CollectionDto = {
+        titleDescription: titleDescriptionValue,
+        collectionType: collectionTypeValue,
+      };
+      console.log('Data:', collection);
+      this.service.save(collection).subscribe({
+        next: (res) => {
+          this.collectionForm.reset();
+          this.toast.success('SUCCESS', res.message);
+          this.router.navigate(['/']);
+        },
+        error: (err) => {
+          this.toast.error('ERROR', 'User or password is incorect!');
+        },
+      });
+      // } else {
+      //   this.toast.error('Not Complite Error', 'You should fill form frist!');
+      // }
+      this.saveImage();
+    } catch {
+      this.toast.error('Error', 'Somthing wrong happend!');
+    }
   }
+
   saveImage() {
-    const imageInfo: ImageDto = this.imageComponent.getData();
+    const imageInfo: imageDto = this.imageComponent.getData();
     console.log('Image : ', imageInfo.image);
     if (imageInfo.image) {
       const fileName = imageInfo.fileName || 'default.jpg';

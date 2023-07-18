@@ -1,5 +1,7 @@
+import { IdTitleDto } from './id-title-dto';
+
 export interface ConditionDto {
-  conditionType: string;
-  equal: string;
+  conditionType: IdTitleDto;
+  equalType: string;
   result: string;
 }

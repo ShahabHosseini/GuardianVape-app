@@ -45,6 +45,7 @@ import { DropdownModule } from 'primeng/dropdown';
     AppComponent,
     SidebarComponent,
     OrderComponent,
+    SimbolTextboxComponent,
     CollectionComponent,
     ProductComponent,
     TagComponent,

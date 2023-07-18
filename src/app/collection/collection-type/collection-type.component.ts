@@ -16,7 +16,7 @@ export class CollectionTypeComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private toast: ToastrService) {
     this.form = this.formBuilder.group({
       collectionType: ['automated'], // Default value for radio button selection
-      conditionType: ['', Validators.required],
+      conditionType: ['all', Validators.required],
       conditions: this.formBuilder.array([]), // Empty form array for conditions
     });
   }
@@ -66,24 +66,21 @@ export class CollectionTypeComponent implements OnInit {
     const conditions: ConditionDto[] = this.conditions.value.map(
       (condition: any) => {
         const conditionDto: ConditionDto = {
-          conditionType: condition.conditionType,
-          equal: condition.equal,
+          conditionType: condition.conditionType.value,
+          equalType: condition.equalType,
           result: condition.result,
         };
-        return conditionDto; // Add this line to return the conditionDto object
+        return conditionDto;
       }
     );
 
-    console.log('aval', this.conditions.value);
-    console.log('dovom', conditions);
-
-    const conditionType = this.form.get('collectionType')?.value;
-    const collectionType = this.form.get('conditionType')?.value;
+    const conditionType = this.form.get('conditionType')?.value;
+    const collectionType = this.form.get('collectionType')?.value;
 
     const selectedItem: CollectionTypeDto = {
-      collectionType: collectionType,
-      conditionType: conditionType,
       conditions: conditions,
+      // collectionType: collectionType,
+      // conditionType: conditionType,
     };
 
     return selectedItem;

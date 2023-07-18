@@ -1,4 +1,4 @@
-export class TitleDescriptionDto {
-  title: string = '';
-  description: string = '';
+export interface TitleDescriptionDto {
+  title: string;
+  description: string;
 }

@@ -19,7 +19,9 @@ export class SearchEngineComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
-      condition: [''],
+      pageTitle: [''],
+      metaDescription: [''],
+      urlHandle: [''],
     });
   }
 

@@ -5,13 +5,14 @@
     <hr>
     <div class="section" *ngIf="sections['searchEngineListing']">
       <label class="label">Page title</label>
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" formControlName="pageTitle">
 
       <label class="label">Meta description</label>
-      <textarea class="form-control" rows="4" cols="50"></textarea>
+      <textarea class="form-control" rows="4" cols="50" formControlName="metaDescription"></textarea>
 
       <label class="label">URL handle</label>
-      <input type="text" class="form-control" placeholder="https://www.guardianvape.co.uk/Collections/">
+      <input type="text" class="form-control" placeholder="https://www.guardianvape.co.uk/Collections/"
+        formControlName="urlHandle">
     </div>
   </div>
   <button class="btn" (click)="toggleSection('searchEngineListing')">Show/Hide content</button>

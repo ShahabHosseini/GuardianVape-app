@@ -51,12 +51,17 @@ export class TitleDescriptionComponent
 
   // Example function to access the description value
   getData(): TitleDescriptionDto {
-    let data: TitleDescriptionDto = new TitleDescriptionDto();
+    let data: TitleDescriptionDto = {
+      description: '',
+      title: '',
+    };
+
     if (this.richTextbox && this.richTextbox.form) {
       data.description =
         this.richTextbox.form.get('editorContent')?.value || '';
     }
     data.title = this.form.get('title')?.value || '';
+
     return data;
   }
 }

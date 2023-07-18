@@ -83,7 +83,6 @@ export class ConditionComponent implements OnInit, AfterViewInit {
       label: item,
       value: item,
     }));
-    this.results = ['Result 1', 'Result 2', 'Result 3']; // Sample results options
 
     // this.conditionForm.get('conditionType')?.valueChanges.subscribe((value) => {
     //   this.selectedConditionType = value; // Update the selectedConditionType variable
@@ -101,7 +100,7 @@ export class ConditionComponent implements OnInit, AfterViewInit {
     // Create the selected item object
     const selectedItem: ConditionDto = {
       conditionType: conditionType,
-      equal: equal,
+      equalType: equal,
       result: result,
     };
     console.log('updateSelectedItem ', conditionType);
@@ -121,7 +120,7 @@ export class ConditionComponent implements OnInit, AfterViewInit {
     const result = this.conditionForm.get('result')?.value;
     const selectedItem: ConditionDto = {
       conditionType: conditionType,
-      equal: equal,
+      equalType: equal,
       result: result,
     };
     console.log('condition : ', selectedItem);
