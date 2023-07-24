@@ -1,0 +1,73 @@
+/* src/app/image-upload/image-upload.component.scss */
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+/* Create a grid for the images */
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Style for each image card */
+.image-card {
+  position: relative; /* Set the position to relative for the image card */
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column; /* Stack image and name vertically */
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  height: 200px;
+  width: 200px; /* Set a fixed width for the image cards */
+  cursor: pointer;
+}
+
+/* Style for the images inside the cards */
+.image-card img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Scale the image to fit within the card without cropping */
+  border-radius: 6px;
+}
+
+/* Style for the image names */
+.image-name {
+  font-size: 14px;
+  margin-top: 8px;
+  text-align: center;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Show ellipsis (...) for long names */
+  white-space: nowrap; /* Prevent names from wrapping */
+  transition: color 0.2s ease-in-out; /* Add a smooth transition for the color change */
+}
+
+/* Change the color of the image name on hover */
+.image-card:hover .image-name {
+  color: #ff6600; /* Change the color to your desired hover color */
+}
+
+/* Add hover effect for the image cards */
+.image-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Center the upload button */
+button {
+  display: block;
+  margin: 1rem auto;
+}
+
+/* Add some margin between the image grid and the upload button */
+.image-grid {
+  margin-bottom: 2rem;
+}

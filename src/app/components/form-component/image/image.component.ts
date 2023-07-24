@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Output, Input, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { APP_BASE_HREF } from '@angular/common';
+import { ImageDto } from 'src/app/Model/image-dto';
+import { CommonService } from 'src/app/api/Common/common.service';
 
 @Component({
   selector: 'app-image',
@@ -16,8 +18,10 @@ export class ImageComponent {
   isImageSelected: boolean = false;
   fileName: string = '';
   image: File | null = null; // Update the type to allow null values
+  textFile?: string;
   constructor(
     private formBuilder: FormBuilder,
+    private common: CommonService,
     @Inject(APP_BASE_HREF) private baseHref: string
   ) {
     this.imageForm = this.formBuilder.group({
@@ -94,17 +98,16 @@ export class ImageComponent {
   onDragOver(event: DragEvent): void {
     event.preventDefault();
   }
-  getData(): imageDto {
-    const imagedto: imageDto = {
-      image: this.image || null, // Use the stored image directly
-      fileName: this.fileName,
+  getData(): ImageDto {
+    const imagedto: ImageDto = {
+      file: this.image, // Use the stored image directly
+      name: this.fileName,
       url: '', // You can remove this line as it's not needed
+      caption: '',
+      description: '',
+      alt: '',
+      guid: '',
     };
     return imagedto;
   }
-}
-export interface imageDto {
-  image: File | null;
-  fileName: string | null;
-  url: string;
 }

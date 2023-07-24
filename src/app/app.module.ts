@@ -39,6 +39,8 @@ import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { GvDropdownComponent } from './components/form-component/gv-dropdown/gv-dropdown.component';
 import { SimbolTextboxComponent } from './components/form-component/simbol-textbox/simbol-textbox.component';
 import { DropdownModule } from 'primeng/dropdown';
+import { ImageLibraryComponent } from './components/form-component/image/image-library/image-library.component';
+import { EditImageComponent } from './components/form-component/image/edit-image/edit-image.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,8 @@ import { DropdownModule } from 'primeng/dropdown';
     ConditionComponent,
     SimbolTextboxComponent,
     GvDropdownComponent,
+    ImageLibraryComponent,
+    EditImageComponent,
   ],
   imports: [
     BrowserModule,

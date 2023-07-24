@@ -9,11 +9,13 @@ import { AuthGuard } from './guards/auth.guard';
 import { ResetPasswordComponent } from './User/reset-password/reset-password.component';
 import { CollectionComponent } from './collection/form/collection.component';
 import { LayoutComponent } from './layout/layout.component';
+import { ImageLibraryComponent } from './components/form-component/image/image-library/image-library.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'orders', component: OrderComponent, canActivate: [AuthGuard] },
+  { path: 'files', component: ImageLibraryComponent, canActivate: [AuthGuard] },
   { path: 'reset', component: ResetPasswordComponent },
   {
     path: 'collection',

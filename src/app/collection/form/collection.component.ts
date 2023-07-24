@@ -6,15 +6,14 @@ import { TransactionService } from 'src/app/base/transaction.service';
 import { TitleDescriptionComponent } from 'src/app/components/form-component/title-description/title-description.component';
 import { CollectionTypeComponent } from '../collection-type/collection-type.component';
 import { SearchEngineComponent } from 'src/app/components/search-engine/search-engine.component';
-import {
-  ImageComponent,
-  imageDto,
-} from 'src/app/components/form-component/image/image.component';
+import { ImageComponent } from 'src/app/components/form-component/image/image.component';
 import { HttpClient } from '@angular/common/http';
 import { FileService } from 'src/app/api/Common/file.service';
 import { firstValueFrom } from 'rxjs';
 import { CollectionDto } from 'src/app/Model/collection-dto';
 import { CollectionService } from '../collection.service';
+import { ImageDto } from 'src/app/Model/image-dto';
+import { CommonService } from 'src/app/api/Common/common.service';
 
 @Component({
   selector: 'app-collection',
@@ -43,7 +42,8 @@ export class CollectionComponent implements OnInit, AfterViewInit {
     private toast: ToastrService,
     private http: HttpClient,
     private fileService: FileService,
-    private service: CollectionService
+    private service: CollectionService,
+    private common: CommonService
   ) {
     this.collectionForm = this.formBuilder.group({
       title: ['', Validators.required],
@@ -90,7 +90,7 @@ export class CollectionComponent implements OnInit, AfterViewInit {
           this.router.navigate(['/']);
         },
         error: (err) => {
-          this.toast.error('ERROR', 'User or password is incorect!');
+          this.toast.error('ERROR', err.error);
         },
       });
       // } else {
@@ -103,13 +103,21 @@ export class CollectionComponent implements OnInit, AfterViewInit {
   }
 
   saveImage() {
-    const imageInfo: imageDto = this.imageComponent.getData();
-    console.log('Image : ', imageInfo.image);
-    if (imageInfo.image) {
-      const fileName = imageInfo.fileName || 'default.jpg';
-
+    const imageInfo: ImageDto = this.imageComponent.getData();
+    console.log('Image : ', imageInfo.file);
+    if (imageInfo.file) {
+      const fileName = imageInfo.name || 'default.jpg';
+      const newImage: ImageDto = {
+        name: fileName,
+        guid: this.common.newGuid(),
+        alt: '',
+        url: '',
+        caption: '',
+        description: '',
+        file: imageInfo.file,
+      };
       this.fileService
-        .uploadFile(imageInfo.image, fileName)
+        .uploadFile(newImage)
         .then((response) => {
           this.toast.success('Image saved successfully');
           // You can perform additional logic here, such as updating the collection with the saved image URL

@@ -1,0 +1,15 @@
+<main class="row-md-12 ms-sm-auto col-lg-10 px-md-12">
+  <h2>Image Upload</h2>
+  <input type="file" multiple (change)="onSelect($event)" />
+  <button (click)="onUpload()" [disabled]="selectedFiles.length === 0">Upload</button>
+  <hr />
+
+  <div class="image-grid">
+    <div class="col col-md-3" *ngFor="let image of images">
+      <div class="image-card" (mouseenter)="onMouseEnter(image)" (mouseleave)="onMouseLeave()">
+        <img [src]="image.url" alt="Image" />
+        <p [style.color]="image.isHovered ? '#ff6600' : '#333'">{{ image.name }}</p>
+      </div>
+    </div>
+  </div>
+</main>

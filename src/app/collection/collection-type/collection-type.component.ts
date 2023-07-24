@@ -14,6 +14,7 @@ export class CollectionTypeComponent implements OnInit {
   form: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private toast: ToastrService) {
+    // Initialize the form with default values
     this.form = this.formBuilder.group({
       collectionType: ['automated'], // Default value for radio button selection
       conditionType: ['all', Validators.required],
@@ -26,19 +27,24 @@ export class CollectionTypeComponent implements OnInit {
   }
 
   isAutomated(): boolean {
+    // Check if the collection type is automated
     return this.form.get('collectionType')?.value === 'automated';
   }
 
   get conditions(): FormArray {
+    // Get the form array of conditions
     return this.form.get('conditions') as FormArray;
   }
 
   getConditionFormGroup(index: number): FormGroup {
+    // Get the form group of a specific condition at the given index
     return this.conditions.at(index) as FormGroup;
   }
 
   addCondition(): void {
+    // Add a new condition to the form array
     if (this.conditions.length === 0) {
+      // If there are no existing conditions, add an initial condition form group
       const initialConditionFormGroup = this.formBuilder.group({
         conditionType: [null, Validators.required],
         equal: [null, Validators.required],
@@ -47,6 +53,7 @@ export class CollectionTypeComponent implements OnInit {
       });
       this.conditions.push(initialConditionFormGroup);
     } else {
+      // If there are existing conditions, add a new condition form group
       const conditionFormGroup = this.formBuilder.group({
         conditionType: [null, Validators.required],
         equal: [null, Validators.required],
@@ -58,15 +65,22 @@ export class CollectionTypeComponent implements OnInit {
   }
 
   removeCondition(index: number): void {
-    if (this.conditions.length > 1) this.conditions.removeAt(index);
-    else this.toast.error('Access control', 'You can`t remove last condition!');
+    // Remove a condition from the form array
+    if (this.conditions.length > 1) {
+      // If there are more than one conditions, remove the condition at the given index
+      this.conditions.removeAt(index);
+    } else {
+      // If there is only one condition, show an error message
+      this.toast.error('Access control', 'You can`t remove last condition!');
+    }
   }
 
   public getData(): CollectionTypeDto {
+    // Get the data from the form and return it as a CollectionTypeDto object
     const conditions: ConditionDto[] = this.conditions.value.map(
       (condition: any) => {
         const conditionDto: ConditionDto = {
-          conditionType: condition.conditionType.value,
+          conditionType: condition.conditionType.value, // Extract the value of the condition type
           equalType: condition.equalType,
           result: condition.result,
         };
