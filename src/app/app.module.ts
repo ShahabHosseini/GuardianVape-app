@@ -39,14 +39,22 @@ import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { GvDropdownComponent } from './components/form-component/gv-dropdown/gv-dropdown.component';
 import { SimbolTextboxComponent } from './components/form-component/simbol-textbox/simbol-textbox.component';
 import { DropdownModule } from 'primeng/dropdown';
-import { ImageLibraryComponent } from './components/form-component/image/image-library/image-library.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
+import {
+  ImageLibraryComponent,
+  TruncatePipe,
+} from './components/form-component/image/image-library/image-library.component';
 import { EditImageComponent } from './components/form-component/image/edit-image/edit-image.component';
+import { BsModalRef, BsModalService, ModalModule } from 'ngx-bootstrap/modal';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidebarComponent,
     OrderComponent,
+    TruncatePipe,
     SimbolTextboxComponent,
     CollectionComponent,
     ProductComponent,
@@ -71,20 +79,23 @@ import { EditImageComponent } from './components/form-component/image/edit-image
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     FormsModule,
+    MatDialogModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     DropdownModule,
+    NgxSpinnerModule,
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
-    ReactiveFormsModule,
     HttpClientModule,
     MatIconModule,
     DropdownListModule,
     MatDividerModule,
     SelectDropDownModule,
     CommonModule,
+    ModalModule.forRoot(),
     TooltipModule.forRoot(),
     AccordionModule.forRoot(),
     NgxEditorModule.forRoot({

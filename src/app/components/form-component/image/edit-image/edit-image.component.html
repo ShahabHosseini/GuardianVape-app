@@ -1,1 +1,30 @@
-<p>edit-image works!</p>
+<!-- edit-image.component.html -->
+<h2>Edit Image</h2>
+<form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="edit-form">
+  <div class="image-container">
+    <img [src]="editForm.get('imageUrl')?.value" alt="Image" />
+  </div>
+  <div class="image-info-container">
+    <label for="imageName"> Image Name:</label>
+    <input type="text" formControlName="imageName" readonly="true" class="image-name-input form-control" />
+    <label for="url"> URL:</label>
+    <input type="text" formControlName="imageUrl" readonly="true" class="image-name-input form-control" />
+    <label for="alt"> Alt:</label>
+    <input type="text" formControlName="alt" class="image-name-input form-control" />
+    <label for="caption"> Caption:</label>
+    <input type="text" formControlName="caption" class="image-name-input form-control" />
+    <label for="description"> Description:</label>
+    <textarea name="description" id="description" cols="10" rows="3" formControlName="description"
+      class="form-control image-name-input"></textarea>
+  </div>
+  <br>
+  <br>
+  <br>
+
+  <div class="button-container">
+    <div class="button-row">
+      <button type="submit" class="save-button">Save Changes</button>
+      <button type="button" class="cancel-button" (click)="close()">Close</button>
+    </div>
+  </div>
+</form>
