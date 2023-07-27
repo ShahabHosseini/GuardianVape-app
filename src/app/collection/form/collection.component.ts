@@ -82,6 +82,7 @@ export class CollectionComponent implements OnInit, AfterViewInit {
         titleDescription: titleDescriptionValue,
         collectionType: collectionTypeValue,
       };
+      this.saveImage();
       console.log('Data:', collection);
       this.service.save(collection).subscribe({
         next: (res) => {
@@ -96,7 +97,6 @@ export class CollectionComponent implements OnInit, AfterViewInit {
       // } else {
       //   this.toast.error('Not Complite Error', 'You should fill form frist!');
       // }
-      this.saveImage();
     } catch {
       this.toast.error('Error', 'Somthing wrong happend!');
     }
@@ -115,9 +115,13 @@ export class CollectionComponent implements OnInit, AfterViewInit {
         caption: '',
         description: '',
         file: imageInfo.file,
+        uploadDate: new Date(),
       };
+      let formdata = new FormData();
+      let imageName = 'Collection\\' + newImage.name;
+      formdata.append(newImage.guid, newImage.file, imageName);
       this.fileService
-        .uploadFile(newImage)
+        .uploadFile(formdata)
         .then((response) => {
           this.toast.success('Image saved successfully');
           // You can perform additional logic here, such as updating the collection with the saved image URL

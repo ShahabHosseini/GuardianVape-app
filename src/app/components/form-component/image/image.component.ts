@@ -107,6 +107,7 @@ export class ImageComponent {
       description: '',
       alt: '',
       guid: '',
+      uploadDate: new Date(),
     };
     return imagedto;
   }

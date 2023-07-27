@@ -15,7 +15,11 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'orders', component: OrderComponent, canActivate: [AuthGuard] },
-  { path: 'files', component: ImageLibraryComponent, canActivate: [AuthGuard] },
+  {
+    path: 'filelist',
+    component: ImageLibraryComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'reset', component: ResetPasswordComponent },
   {
     path: 'collection',

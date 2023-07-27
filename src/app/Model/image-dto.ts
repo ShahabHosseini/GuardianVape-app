@@ -6,4 +6,5 @@ export interface ImageDto {
   caption: string;
   guid: string;
   file: any;
+  uploadDate: Date;
 }

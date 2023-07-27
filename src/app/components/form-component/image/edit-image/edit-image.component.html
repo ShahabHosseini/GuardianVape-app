@@ -3,6 +3,7 @@
 <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="edit-form">
   <div class="image-container">
     <img [src]="editForm.get('imageUrl')?.value" alt="Image" />
+    <h6>Added: {{formattedUploadDate }}</h6>
   </div>
   <div class="image-info-container">
     <label for="imageName"> Image Name:</label>

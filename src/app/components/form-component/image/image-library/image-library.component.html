@@ -1,17 +1,9 @@
 <main class="row-md-12 ms-sm-auto col-lg-10 px-md-12 ImageLibraryComponent">
   <h2>Image Gallery</h2>
-  <!-- Add the search text box and the dropdown list for sorting -->
-
 
   <input #imageInput class="form-control" type="file" multiple (change)="onSelect($event)" />
-  <button class="btn btn-success" (click)="onUpload()"
-    [disabled]="selectedFiles.length === 0 || uploadingImages">Upload</button>
-  <!-- <div class="progress" *ngIf="uploadingImages"> -->
-  <!-- <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-      [style.width]="uploadProgress + '%'">
-      {{ uploadProgress }}%
-    </div> -->
-  <!-- </div> -->
+  <!-- <button class="btn btn-success" (click)="onUpload()"
+    [disabled]="selectedFiles.length === 0 || uploadingImages">Upload</button> -->
   <hr />
   <div class="d-flex justify-content-between align-items-center">
     <div class="form-group">
@@ -19,7 +11,6 @@
         <option value="name">Sort by name</option>
         <option value="date">Sort by date</option>
 
-        <!-- Add other sort criteria options here if needed -->
       </select>
     </div>
     <div class="form-group">
@@ -28,8 +19,9 @@
   </div>
   <hr>
   <button class="btn btn-danger" *ngIf="selectedImages.length>0" (click)="removeImages()">Remove images</button>
-  <div class="image-grid">
-    <div class="col col-md-2" *ngFor="let image of images">
+  <div class="image-grid" *ngIf="images.length > 0">
+    <div class="col col-md-2"
+      *ngFor="let image of images | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
       <div class="image-card" (mouseenter)="onMouseEnter(image)" (mouseleave)="onMouseLeave()">
 
 
@@ -38,11 +30,16 @@
             class="custom-checkbox" />
           <span class="custom-checkbox"></span>
         </label>
-        <img [src]="image.url" alt="Image" (click)="onMouseClick(image)" />
-        <!-- <p class="image-name">{{ image.name | truncate: 10 }}</p> -->
+        <img [src]="image.url" [tooltip]="image.name" containerClass="customClass" alt="Image.alt"
+          (click)="onMouseClick(image)" />
+
       </div>
     </div>
   </div>
+  <div class="pagination-container">
+    <pagination-controls (pageChange)="currentPage =$event"></pagination-controls>
+  </div>
+
   <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true">
     <p style="font-size: 20px; color: white">Loading...</p>
   </ngx-spinner>

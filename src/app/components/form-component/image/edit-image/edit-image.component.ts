@@ -3,6 +3,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ImageDto } from 'src/app/Model/image-dto';
 import { FileService } from 'src/app/api/Common/file.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-edit-image',
@@ -16,13 +17,16 @@ export class EditImageComponent implements OnInit {
   @Input() alt?: string;
   @Input() caption?: string;
   @Input() description?: string;
+  @Input() uploadDate?: Date;
+  formattedUploadDate: string | null = null;
 
   editForm!: FormGroup;
 
   constructor(
     public bsModalRef: BsModalRef,
     private formBuilder: FormBuilder,
-    private service: FileService
+    private service: FileService,
+    private datePipe: DatePipe // Inject the DatePipe module
   ) {}
 
   ngOnInit(): void {
@@ -34,6 +38,7 @@ export class EditImageComponent implements OnInit {
       description: [this.description],
       // Add other form controls for other image properties here if needed
     });
+    this.formatUploadDate();
   }
 
   close(): void {
@@ -41,9 +46,6 @@ export class EditImageComponent implements OnInit {
   }
 
   async onSubmit(): Promise<void> {
-    const formData = this.editForm.value;
-    console.log('Form data submitted:', formData);
-    // Handle form submission logic here (e.g., update the image properties)
     let image: ImageDto = {
       name: this.editForm.controls['imageName'].value,
       url: this.editForm.controls['imageUrl'].value,
@@ -52,8 +54,18 @@ export class EditImageComponent implements OnInit {
       alt: this.editForm.controls['alt'].value,
       file: null,
       guid: this.guid || '',
+      uploadDate: this.uploadDate || new Date(),
     };
     await this.service.updateEditedImage(image);
     this.close();
+  }
+  formatUploadDate(): void {
+    if (this.uploadDate) {
+      // Format the uploadDate using the DatePipe
+      this.formattedUploadDate = this.datePipe.transform(
+        this.uploadDate,
+        'dd-MM-yyyy hh:mm a'
+      );
+    }
   }
 }

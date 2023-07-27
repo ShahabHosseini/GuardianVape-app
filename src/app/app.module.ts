@@ -18,7 +18,7 @@ import { SignupComponent } from './User/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './User/login/login.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { CommonModule, APP_BASE_HREF } from '@angular/common';
+import { CommonModule, APP_BASE_HREF, DatePipe } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TokenInterceptor } from './api/interceptors/token.interceptor';
@@ -41,20 +41,17 @@ import { SimbolTextboxComponent } from './components/form-component/simbol-textb
 import { DropdownModule } from 'primeng/dropdown';
 import { MatDialogModule } from '@angular/material/dialog';
 
-import {
-  ImageLibraryComponent,
-  TruncatePipe,
-} from './components/form-component/image/image-library/image-library.component';
+import { ImageLibraryComponent } from './components/form-component/image/image-library/image-library.component';
 import { EditImageComponent } from './components/form-component/image/edit-image/edit-image.component';
 import { BsModalRef, BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidebarComponent,
     OrderComponent,
-    TruncatePipe,
     SimbolTextboxComponent,
     CollectionComponent,
     ProductComponent,
@@ -81,6 +78,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxPaginationModule,
     MatDialogModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -153,7 +151,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
       provide: APP_BASE_HREF,
       useValue: '/',
     },
+    [DatePipe],
   ],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}

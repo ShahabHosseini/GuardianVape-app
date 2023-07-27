@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Pipe,
-  PipeTransform,
-  ElementRef,
-} from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ImageDto } from 'src/app/Model/image-dto';
 import { FileService } from 'src/app/api/Common/file.service';
@@ -14,7 +8,7 @@ import { EditImageComponent } from '../edit-image/edit-image.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { ViewChild } from '@angular/core';
-import { image } from 'ngx-editor/schema/nodes';
+import { PaginationInstance } from 'ngx-pagination';
 
 @Component({
   selector: 'app-image-library',
@@ -44,16 +38,18 @@ export class ImageLibraryComponent implements OnInit {
     isHovered: boolean;
     isSelected: boolean;
     guid: string;
+    uploadDate: Date;
   }[] = [];
   canShow: boolean = true; // Property to control showing all images
   isFiltered: boolean = false; // Property to indicate if the images are filtered
   @ViewChild('imageInput') imageInput!: ElementRef<HTMLInputElement>;
 
   searchText: string = ''; // Property to store the search text
-  sortCriteria: string = ''; // Property to store the sort criteria
-
+  sortCriteria: string = 'date'; // Property to store the sort criteria
+  currentPage: number = 1;
+  itemsPerPage: number = 35; // Set the number of images per page
+  paginationId: string = 'imagePagination'; // Unique ID for pagination
   constructor(
-    private http: HttpClient,
     private fileService: FileService,
     private common: CommonService,
     private modalService: BsModalService, // Inject BsModalService
@@ -81,6 +77,7 @@ export class ImageLibraryComponent implements OnInit {
       caption: '',
       description: '',
       file: null,
+      uploadDate: new Date(),
     }));
 
     try {
@@ -97,12 +94,15 @@ export class ImageLibraryComponent implements OnInit {
   applySort(): void {
     if (this.sortCriteria === 'date') {
       // Sort images by date in ascending order
-      //  this.images.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+      this.images.sort(
+        (a, b) => a.uploadDate.getTime() - b.uploadDate.getTime()
+      );
     } else if (this.sortCriteria === 'name') {
       // Sort images by name in ascending order
       this.images.sort((a, b) => a.name.localeCompare(b.name));
     }
     // Add other sort criteria here if needed
+    // this.onPageChange(this.currentPage); // Update the paged images after sorting
   }
 
   onMouseClick(image: {
@@ -113,6 +113,7 @@ export class ImageLibraryComponent implements OnInit {
     alt: string;
     caption: string;
     description: string;
+    uploadDate: Date;
   }): void {
     image.isHovered = true;
 
@@ -124,6 +125,7 @@ export class ImageLibraryComponent implements OnInit {
       caption: image.caption,
       description: image.description,
       guid: image.guid,
+      uploadDate: image.uploadDate,
     };
     const modalOptions = {
       initialState,
@@ -145,11 +147,12 @@ export class ImageLibraryComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadImages();
+    this.applySort();
   }
 
   onSelect(event: any): void {
     this.selectedFiles = event.target.files;
-    this.loadImages();
+    this.onUpload(); // Call the onUpload method directly after selecting files
   }
 
   async onUpload(): Promise<void> {
@@ -167,6 +170,7 @@ export class ImageLibraryComponent implements OnInit {
         caption: '',
         description: '',
         file: file,
+        uploadDate: new Date(),
       };
 
       try {
@@ -175,19 +179,16 @@ export class ImageLibraryComponent implements OnInit {
       } catch (error) {
         this.toast.error('Upload failed!');
       } finally {
-        // Access the input element using the template reference variable
         const imageInput: HTMLInputElement | null =
           this.imageInput.nativeElement;
-        console.log('imageinput', imageInput);
         if (imageInput) {
           imageInput.value = ''; // Reset the input value to an empty string
         }
       }
     }
     this.selectedFiles = [];
-    this.loadImages();
+    this.loadImages(); // Call loadImages after uploading to refresh the image list
     setTimeout(() => {
-      /** spinner ends after 5 seconds */
       this.spinner.hide();
     }, 1000);
   }
@@ -195,7 +196,8 @@ export class ImageLibraryComponent implements OnInit {
   async uploadFile(image: ImageDto): Promise<void> {
     try {
       let formdata = new FormData();
-      formdata.append(image.guid, image.file, image.name);
+      let imageName = 'Share\\' + image.name;
+      formdata.append(image.guid, image.file, imageName);
 
       await this.fileService.uploadFile(formdata);
     } catch (error) {
@@ -214,19 +216,31 @@ export class ImageLibraryComponent implements OnInit {
           // Access the URL and Name from the ImageDto object
           const imageUrl = imageInfo.url;
           const imageName = imageInfo.name;
+          const uploadDate = new Date(imageInfo.uploadDate);
+
           return {
             url: imageUrl,
             name: imageName,
-            isHovered: false, // Initialize the isHovered property as false
+            isHovered: false,
             isSelected: false,
             guid: imageInfo.guid,
             caption: imageInfo.caption,
             description: imageInfo.description,
             alt: imageInfo.alt,
+            uploadDate: uploadDate,
           };
         });
 
         this.tempImages = this.images;
+        this.images.reverse(); // Reverse the order of images to show new images first
+        const paginationInstance: PaginationInstance = {
+          id: this.paginationId,
+          itemsPerPage: this.itemsPerPage,
+          currentPage: this.currentPage,
+          totalItems: this.images.length, // Set the total items for pagination
+        };
+        //   this.onPageChange(this.currentPage); // Call onPageChange after loading images
+        console.log('images :', this.images);
       },
       error: (error) => {
         console.error('Error fetching images!', error);
@@ -282,17 +296,5 @@ export class ImageLibraryComponent implements OnInit {
         );
       }
     }
-  }
-}
-@Pipe({
-  name: 'truncate',
-})
-export class TruncatePipe implements PipeTransform {
-  transform(value: string, maxLength: number): string {
-    if (!value || value.length <= maxLength) {
-      return value;
-    }
-
-    return value.substr(0, maxLength) + '...';
   }
 }

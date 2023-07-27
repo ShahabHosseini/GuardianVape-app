@@ -183,3 +183,72 @@ button {
 .d-flex.justify-content-between.align-items-center {
   margin-bottom: 10px;
 }
+/* Add this CSS to style the pagination controls */
+.pagination-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination-container ngx-pagination a,
+.pagination-container ngx-pagination li {
+  display: inline-block;
+  padding: 8px 12px;
+  margin: 2px;
+  color: #333;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.pagination-container ngx-pagination a:hover,
+.pagination-container ngx-pagination li.current {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+.pagination-container ngx-pagination li.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.pagination-container ngx-pagination li::after {
+  content: " ";
+  display: block;
+  clear: both;
+}
+/* ... (existing styles) */
+
+/* Style for the tooltip */
+::ng-deep .tooltip-inner {
+  background-color: #56a3f7; /* Blue background color */
+  color: #fff; /* White text color */
+  font-size: 14px; /* Font size for the tooltip text */
+  padding: 8px 12px; /* Add some padding for better appearance */
+  border-radius: 4px; /* Rounded corners for the tooltip */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  white-space: nowrap; /* Prevent the tooltip text from wrapping */
+  max-width: 200px; /* Limit the maximum width of the tooltip */
+}
+
+/* Style for the tooltip arrow */
+::ng-deep .tooltip .arrow::before {
+  border-top-color: #ff6600; /* Match the tooltip background color */
+}
+
+/* Position the tooltip above and centered on the image */
+::ng-deep .tooltip.bs-tooltip-top {
+  margin-top: -8px; /* Adjust the distance from the image */
+}
+
+/* Create space between the tooltip and the checkbox */
+::ng-deep .image-card .custom-checkbox {
+  margin-bottom: 22px; /* Adjust the spacing as needed */
+}
+
+/* Optional: Add a smooth transition for the tooltip visibility */
+::ng-deep .tooltip.bs-tooltip-top.show {
+  opacity: 1;
+}
