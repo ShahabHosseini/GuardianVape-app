@@ -108,6 +108,8 @@ export class ImageComponent {
       alt: '',
       guid: '',
       uploadDate: new Date(),
+      width: 0,
+      height: 0,
     };
     return imagedto;
   }

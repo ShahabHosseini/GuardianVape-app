@@ -252,3 +252,9 @@ button {
 ::ng-deep .tooltip.bs-tooltip-top.show {
   opacity: 1;
 }
+p {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333; /* You can change the color to your preferred one */
+  margin-bottom: 10px;
+}

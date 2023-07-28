@@ -116,6 +116,8 @@ export class CollectionComponent implements OnInit, AfterViewInit {
         description: '',
         file: imageInfo.file,
         uploadDate: new Date(),
+        width: 0,
+        height: 0,
       };
       let formdata = new FormData();
       let imageName = 'Collection\\' + newImage.name;

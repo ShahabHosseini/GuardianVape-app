@@ -25,7 +25,6 @@ export class ImageLibraryComponent implements OnInit {
   selectedImages: {
     url: string;
     name: string;
-
     isSelected: boolean;
     guid: string;
   }[] = [];
@@ -39,6 +38,8 @@ export class ImageLibraryComponent implements OnInit {
     isSelected: boolean;
     guid: string;
     uploadDate: Date;
+    width: number;
+    height: number;
   }[] = [];
   canShow: boolean = true; // Property to control showing all images
   isFiltered: boolean = false; // Property to indicate if the images are filtered
@@ -78,6 +79,8 @@ export class ImageLibraryComponent implements OnInit {
       description: '',
       file: null,
       uploadDate: new Date(),
+      width: 0,
+      height: 0,
     }));
 
     try {
@@ -163,34 +166,38 @@ export class ImageLibraryComponent implements OnInit {
 
     for (const file of this.selectedFiles) {
       const newImage: ImageDto = {
+        // Initialize the newImage object with file information
         name: file.name,
         guid: this.common.newGuid(),
         alt: '',
-        url: '',
+        url: '', // Assign an empty string for now
         caption: '',
         description: '',
         file: file,
         uploadDate: new Date(),
+        width: 0,
+        height: 0,
       };
 
+      // Create an object URL for the selected file
       try {
         await this.uploadFile(newImage);
         this.toast.success('Upload successful!');
       } catch (error) {
         this.toast.error('Upload failed!');
-      } finally {
-        const imageInput: HTMLInputElement | null =
-          this.imageInput.nativeElement;
-        if (imageInput) {
-          imageInput.value = ''; // Reset the input value to an empty string
-        }
+        this.spinner.hide();
+        return; // Return from the method if any upload fails
       }
     }
+
+    const imageInput: HTMLInputElement | null = this.imageInput.nativeElement;
+    if (imageInput) {
+      imageInput.value = ''; // Reset the input value to an empty string
+    }
+
     this.selectedFiles = [];
     this.loadImages(); // Call loadImages after uploading to refresh the image list
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 1000);
+    this.spinner.hide();
   }
 
   async uploadFile(image: ImageDto): Promise<void> {
@@ -228,6 +235,8 @@ export class ImageLibraryComponent implements OnInit {
             description: imageInfo.description,
             alt: imageInfo.alt,
             uploadDate: uploadDate,
+            width: imageInfo.width,
+            height: imageInfo.height,
           };
         });
 
@@ -277,9 +286,8 @@ export class ImageLibraryComponent implements OnInit {
     }
   ): void {
     if (!this.isFiltered) {
-      event.stopPropagation(); // Prevent the image click event from triggering
-
-      image.isSelected = !image.isSelected; // Toggle the selected state of the image
+      // Toggle the selected state of the image
+      image.isSelected = !image.isSelected;
 
       // If the image is now selected, add it to the selectedImages array
       if (image.isSelected) {

@@ -17,6 +17,7 @@
       <input class="form-control" type="text" placeholder="Search" [(ngModel)]="searchText" (keyup)="applyFilter()" />
     </div>
   </div>
+  <p>File count: {{images.length}}</p>
   <hr>
   <button class="btn btn-danger" *ngIf="selectedImages.length>0" (click)="removeImages()">Remove images</button>
   <div class="image-grid" *ngIf="images.length > 0">
@@ -30,8 +31,8 @@
             class="custom-checkbox" />
           <span class="custom-checkbox"></span>
         </label>
-        <img [src]="image.url" [tooltip]="image.name" containerClass="customClass" alt="Image.alt"
-          (click)="onMouseClick(image)" />
+        <img [src]="image.url" [tooltip]="image.name" containerClass="customClass" [alt]="image.alt"
+          [width]="image.width" [height]="image.height" [title]="image.name" (click)="onMouseClick(image)" />
 
       </div>
     </div>

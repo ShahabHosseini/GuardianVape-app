@@ -18,6 +18,9 @@ export class EditImageComponent implements OnInit {
   @Input() caption?: string;
   @Input() description?: string;
   @Input() uploadDate?: Date;
+  @Input() width?: number;
+  @Input() height?: number;
+
   formattedUploadDate: string | null = null;
 
   editForm!: FormGroup;
@@ -55,6 +58,8 @@ export class EditImageComponent implements OnInit {
       file: null,
       guid: this.guid || '',
       uploadDate: this.uploadDate || new Date(),
+      width: this.width || 0,
+      height: this.height || 0,
     };
     await this.service.updateEditedImage(image);
     this.close();

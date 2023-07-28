@@ -7,4 +7,6 @@ export interface ImageDto {
   guid: string;
   file: any;
   uploadDate: Date;
+  width: number;
+  height: number;
 }
