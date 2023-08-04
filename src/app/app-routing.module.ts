@@ -10,6 +10,7 @@ import { ResetPasswordComponent } from './User/reset-password/reset-password.com
 import { CollectionComponent } from './collection/form/collection.component';
 import { LayoutComponent } from './layout/layout.component';
 import { ImageLibraryComponent } from './components/form-component/image/image-library/image-library.component';
+import { CollectionListComponent } from './collection/list/collection-list.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -29,6 +30,11 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'collection-list',
+    component: CollectionListComponent,
     canActivate: [AuthGuard],
   },
 ];

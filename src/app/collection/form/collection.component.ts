@@ -14,6 +14,7 @@ import { CollectionDto } from 'src/app/Model/collection-dto';
 import { CollectionService } from '../collection.service';
 import { ImageDto } from 'src/app/Model/image-dto';
 import { CommonService } from 'src/app/api/Common/common.service';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-collection',
@@ -34,6 +35,7 @@ export class CollectionComponent implements OnInit, AfterViewInit {
   collectionTypeFormGroup!: FormGroup;
   searchEngineFormGroup!: FormGroup;
   imageFormGroup!: FormGroup;
+  imageGuid?: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -72,19 +74,22 @@ export class CollectionComponent implements OnInit, AfterViewInit {
     this.imageFormGroup = this.imageComponent.imageForm;
   }
 
-  saveCollection() {
+  async saveCollection() {
     try {
       // if (this.collectionForm.valid) {
       const titleDescriptionValue = this.titleDescriptionComponent.getData();
       const collectionTypeValue = this.collectionTypeComponent.getData();
       let image = this.imageComponent.getData();
+      await this.saveImage();
       let collection: CollectionDto = {
         titleDescription: titleDescriptionValue,
         collectionType: collectionTypeValue,
+        imageGuid: this.imageGuid || '',
       };
-      this.saveImage();
       console.log('Data:', collection);
-      this.service.save(collection).subscribe({
+
+      const observable = await this.service.save(collection);
+      observable.subscribe({
         next: (res) => {
           this.collectionForm.reset();
           this.toast.success('SUCCESS', res.message);
@@ -94,15 +99,16 @@ export class CollectionComponent implements OnInit, AfterViewInit {
           this.toast.error('ERROR', err.error);
         },
       });
-      // } else {
-      //   this.toast.error('Not Complite Error', 'You should fill form frist!');
-      // }
-    } catch {
-      this.toast.error('Error', 'Somthing wrong happend!');
+    } catch (err) {
+      this.toast.error('Error', 'Something wrong happened!');
     }
   }
 
-  saveImage() {
+  goToList() {
+    this.router.navigate(['collection-list']);
+  }
+
+  async saveImage() {
     const imageInfo: ImageDto = this.imageComponent.getData();
     console.log('Image : ', imageInfo.file);
     if (imageInfo.file) {
@@ -119,10 +125,11 @@ export class CollectionComponent implements OnInit, AfterViewInit {
         width: 0,
         height: 0,
       };
+      this.imageGuid = newImage.guid;
       let formdata = new FormData();
       let imageName = 'Collection\\' + newImage.name;
       formdata.append(newImage.guid, newImage.file, imageName);
-      this.fileService
+      await this.fileService
         .uploadFile(formdata)
         .then((response) => {
           this.toast.success('Image saved successfully');

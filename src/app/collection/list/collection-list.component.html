@@ -1,0 +1,48 @@
+<main class="row-md-12 ms-sm-auto col-lg-10 px-md-12 main">
+  <div class="card">
+    <p class="header-text">Collections</p>
+    <div class="table-caption">
+      <span class="p-input-icon-right">
+        <i class="pi pi-search"></i>
+        <input pInputText type="text" placeholder="Search keyword" />
+      </span>
+      <div>
+
+        <button *ngIf="selectedCollections.length>0" (click)="removeCollections()"
+          class=" p-button-outlined btn red-button">Remove Collections</button>
+        <button pButton type="button" (click)="navigateToCollection()" label="New Collection"
+          class="p-button-rounded p-button-outlined"></button>
+      </div>
+    </div>
+
+    <p-table [value]="collections" dataKey="title" [rows]="10" [showCurrentPageReport]="true" selectionMode="multiple"
+      (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)" [(selection)]="selectedCollections"
+      [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [tableStyle]="{'min-width': '50rem'}">
+      <!-- [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"> -->
+      <ng-template pTemplate="header">
+        <tr>
+          <th>
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </th>
+          <th pSortableColumn="title">Title <p-sortIcon field="title"></p-sortIcon></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-collection let-i="rowIndex">
+        <tr (click)="rowClicked($event)">
+          <td>
+            <p-tableCheckbox [value]="collection"></p-tableCheckbox>
+          </td>
+          <td>{{ collection.title }}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="paginatorleft">
+        <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+      </ng-template>
+      <ng-template pTemplate="paginatorright">
+        <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+      </ng-template>
+    </p-table>
+  </div>
+</main>

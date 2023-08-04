@@ -4,4 +4,5 @@ import { TitleDescriptionDto } from './title-description-dto';
 export interface CollectionDto {
   titleDescription: TitleDescriptionDto;
   collectionType: CollectionTypeDto;
+  imageGuid: string;
 }

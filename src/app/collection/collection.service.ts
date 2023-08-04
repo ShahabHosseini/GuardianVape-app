@@ -10,6 +10,11 @@ import { CollectionDto } from '../Model/collection-dto';
   providedIn: 'root',
 })
 export class CollectionService extends BaseService {
+  getCollections(): Observable<CollectionDto[]> {
+    return this.http.get<CollectionDto[]>(
+      `${this.collectionUrl}get-collections/`
+    );
+  }
   collectionUrl: string = this.baseUrl + 'Collection/';
 
   constructor(private http: HttpClient, private router: Router) {
@@ -20,7 +25,7 @@ export class CollectionService extends BaseService {
     return this.http.get<IdTitleDto[]>(`${this.collectionUrl}condition-type/`);
   }
 
-  save(data: CollectionDto): Observable<any> {
+  async save(data: CollectionDto): Promise<Observable<any>> {
     return this.http.post<CollectionDto>(
       `${this.collectionUrl}save-collection`,
       data

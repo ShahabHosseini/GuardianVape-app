@@ -40,12 +40,16 @@ import { GvDropdownComponent } from './components/form-component/gv-dropdown/gv-
 import { SimbolTextboxComponent } from './components/form-component/simbol-textbox/simbol-textbox.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { MatDialogModule } from '@angular/material/dialog';
-
 import { ImageLibraryComponent } from './components/form-component/image/image-library/image-library.component';
 import { EditImageComponent } from './components/form-component/image/edit-image/edit-image.component';
 import { BsModalRef, BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { CollectionListComponent } from './collection/list/collection-list.component';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
@@ -73,9 +77,14 @@ import { NgxPaginationModule } from 'ngx-pagination';
     GvDropdownComponent,
     ImageLibraryComponent,
     EditImageComponent,
+    CollectionListComponent,
   ],
   imports: [
     BrowserModule,
+    TableModule,
+    ButtonModule,
+    InputTextModule,
+    CheckboxModule,
     ReactiveFormsModule,
     FormsModule,
     NgxPaginationModule,

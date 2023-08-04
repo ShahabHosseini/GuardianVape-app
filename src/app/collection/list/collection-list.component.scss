@@ -1,0 +1,122 @@
+/* Add this CSS in your component's CSS file or in the global styles.scss file */
+.table-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.main {
+  margin-top: 15px;
+  margin-right: 15px;
+}
+
+.pi-search {
+  margin-right: 5px;
+}
+
+/* Style the input search box */
+span.p-input-icon-right {
+  position: relative;
+}
+
+.p-input-icon-right i {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+input[type="text"] {
+  width: 200px;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* Style the "New Collection" button */
+.p-button-rounded {
+  font-size: 14px;
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 6px;
+}
+.red-button {
+  font-size: 14px;
+  padding: 0.5rem 1rem;
+  background-color: #ff0000; /* Red color */
+  color: #fff; /* Text color */
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  padding: 0.5rem 1rem;
+  margin: 6px;
+}
+
+.red-button:hover {
+  background-color: #cc0000; /* Darker shade of red on hover */
+}
+.p-button-rounded:hover {
+  background-color: #0056b3;
+}
+
+/* Style the card */
+.card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  padding: 10px 0;
+}
+
+/* Style the table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+}
+
+/* Add some styling to the table header */
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  text-align: left;
+}
+
+/* Add some styling to the table rows */
+tr {
+  cursor: pointer;
+}
+
+tr:hover {
+  background-color: #f2f2f2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+// ::ng-deep .p-table th .p-checkbox .p-checkbox-box.p-highlight .p-checkbox-icon {
+//   background-color: #ff6600; /* Change the background color to your desired color */
+//   border-color: #ff6600; /* Change the border color to match the background color */
+// }
+
+// /* Style the table body checkboxes when checked */
+// ::ng-deep .p-table td .p-checkbox .p-checkbox-box.p-highlight .p-checkbox-icon {
+//   background-color: #ff6600; /* Change the background color to your desired color */
+//   border-color: #ff6600; /* Change the border color to match the background color */
+// }
