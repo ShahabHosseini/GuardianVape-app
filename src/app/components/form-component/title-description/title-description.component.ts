@@ -20,6 +20,10 @@ import { AfterViewInit } from '@angular/core';
 export class TitleDescriptionComponent
   implements OnInit, OnDestroy, AfterViewInit
 {
+  setData(titleDescription: TitleDescriptionDto) {
+    this.form.get('title')?.setValue(titleDescription.title);
+    this.form.get('description')?.setValue(titleDescription.description);
+  }
   @Input() parentForm!: FormGroup;
   @Output() formDataChanged: EventEmitter<any> = new EventEmitter<any>();
 

@@ -37,6 +37,7 @@ const routes: Routes = [
     component: CollectionListComponent,
     canActivate: [AuthGuard],
   },
+  { path: 'collection/edit/:guid', component: CollectionComponent }, // Edit route with a parameter 'title'
 ];
 
 @NgModule({

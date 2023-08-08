@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./collection-list.component.scss'],
 })
 export class CollectionListComponent implements OnInit {
-  collections: TitleDescriptionDto[] = [];
-  selectedCollections: TitleDescriptionDto[] = []; // Separate variable for the selection
+  collections: CollectionDto[] = [];
+  selectedCollections: CollectionDto[] = []; // Separate variable for the selection
   selectAllChecked = false;
   selectNext = true;
 
@@ -26,28 +26,25 @@ export class CollectionListComponent implements OnInit {
 
   ngOnInit() {
     this.fetchCollectionsData();
-    console.log('Collections : ', this.collections);
   }
 
   fetchCollectionsData() {
     this.collectionService.getCollections().subscribe(
       (data: CollectionDto[]) => {
         // Extract the titleDescription property from each CollectionDto element
-        this.collections = data.map(
-          (collection) => collection.titleDescription
-        );
+        this.collections = data.map((collection) => collection);
         this.collections.sort((a, b) => {
           // Compare the title properties of each object
           // The result of the comparison determines the order
-          if (a.title > b.title) {
+          if (a.titleDescription.title > b.titleDescription.title) {
             return -1; // Put 'a' before 'b' (sort in descending order)
-          } else if (a.title < b.title) {
+          } else if (a.titleDescription.title < b.titleDescription.title) {
             return 1; // Put 'b' before 'a'
           } else {
             return 0; // Keep the same order (for items with the same title)
           }
         });
-        console.log(this.collections);
+        console.log('this collections is :: ', this.collections);
       },
       (error) => {
         console.log('Error fetching collections data:', error);
@@ -58,18 +55,18 @@ export class CollectionListComponent implements OnInit {
   onRowSelect(event: any) {
     // Implement the edit logic here
     // You can access the selected row using the event argument
-    const selectedCollection: TitleDescriptionDto = event;
+    const selectedCollection: CollectionDto = event;
 
     // Example: Display the selected collection data in the console
-    console.log('Selected Collection:', this.selectedCollections);
+    console.log('Selected Collection:', event);
     this.selectNext = false;
   }
 
   onRowUnselect(event: any) {
-    const selectedCollection: TitleDescriptionDto = event;
+    const selectedCollection: CollectionDto = event;
 
     // Example: Display the selected collection data in the console
-    console.log('Selected Collection:', this.selectedCollections);
+    console.log('Selected Collection:', selectedCollection);
     this.selectNext = false;
   }
 
@@ -77,13 +74,22 @@ export class CollectionListComponent implements OnInit {
     // Implement the navigation logic here
     this.router.navigate(['/collection']);
   }
-  rowClicked(event: any) {
+  rowClicked(rowindex: any) {
     if (this.selectNext) {
-      console.log('im here');
+      console.log('event value', this.collections[rowindex]); // Check if event is undefined or not
+      //  console.log('2', event.someProperty); // Check if a specific property of the event is undefined or not
+
+      // Open the CollectionComponent for editing
+      this.router.navigate([
+        '/collection',
+        'edit',
+        this.collections[rowindex].guid,
+      ]);
     } else {
       this.selectNext = true;
     }
   }
+
   selectAllRows(event: any) {
     console.log(event);
     // this.selectedCollections = event.checked ? [...this.collections] : [];

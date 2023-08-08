@@ -25,9 +25,25 @@ export class CollectionService extends BaseService {
     return this.http.get<IdTitleDto[]>(`${this.collectionUrl}condition-type/`);
   }
 
+  getAllEqualType(): Observable<IdTitleDto[]> {
+    return this.http.get<IdTitleDto[]>(`${this.collectionUrl}equal-type/`);
+  }
+
+  getCollection(guid: string): Observable<CollectionDto> {
+    return this.http.post<CollectionDto>(
+      `${this.collectionUrl}get-collection/${guid}`,
+      {}
+    );
+  }
   async save(data: CollectionDto): Promise<Observable<any>> {
     return this.http.post<CollectionDto>(
       `${this.collectionUrl}save-collection`,
+      data
+    );
+  }
+  async update(data: CollectionDto): Promise<Observable<any>> {
+    return this.http.post<CollectionDto>(
+      `${this.collectionUrl}update-collection`,
       data
     );
   }

@@ -15,7 +15,7 @@
       </div>
     </div>
 
-    <p-table [value]="collections" dataKey="title" [rows]="10" [showCurrentPageReport]="true" selectionMode="multiple"
+    <p-table [value]="collections" dataKey="guid" [rows]="10" [showCurrentPageReport]="true" selectionMode="multiple"
       (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)" [(selection)]="selectedCollections"
       [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -26,15 +26,20 @@
           <th>
             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
           </th>
+          <th> </th>
           <th pSortableColumn="title">Title <p-sortIcon field="title"></p-sortIcon></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-collection let-i="rowIndex">
-        <tr (click)="rowClicked($event)">
+        <tr (click)="rowClicked(i)">
           <td>
             <p-tableCheckbox [value]="collection"></p-tableCheckbox>
           </td>
-          <td>{{ collection.title }}</td>
+          <td>
+            <img src="{{collection.image?.url}}" alt="{{collection.image?.alt}}">
+          </td>
+          <td>{{ collection.titleDescription.title }}</td>
+
         </tr>
       </ng-template>
       <ng-template pTemplate="paginatorleft">

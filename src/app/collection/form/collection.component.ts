@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { TransactionService } from 'src/app/base/transaction.service';
 import { TitleDescriptionComponent } from 'src/app/components/form-component/title-description/title-description.component';
@@ -15,13 +15,17 @@ import { CollectionService } from '../collection.service';
 import { ImageDto } from 'src/app/Model/image-dto';
 import { CommonService } from 'src/app/api/Common/common.service';
 import { interval } from 'rxjs';
+import { BaseFormComponent } from 'src/app/base/base-form.component';
 
 @Component({
   selector: 'app-collection',
   templateUrl: './collection.component.html',
   styleUrls: ['./collection.component.scss'],
 })
-export class CollectionComponent implements OnInit, AfterViewInit {
+export class CollectionComponent
+  extends BaseFormComponent
+  implements OnInit, AfterViewInit
+{
   collectionForm: FormGroup;
   selectAll: string = 'Deselect all';
   @ViewChild(TitleDescriptionComponent)
@@ -36,6 +40,8 @@ export class CollectionComponent implements OnInit, AfterViewInit {
   searchEngineFormGroup!: FormGroup;
   imageFormGroup!: FormGroup;
   imageGuid?: string;
+  collection?: CollectionDto;
+  guid: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -45,8 +51,11 @@ export class CollectionComponent implements OnInit, AfterViewInit {
     private http: HttpClient,
     private fileService: FileService,
     private service: CollectionService,
-    private common: CommonService
+    private common: CommonService,
+    private activatedRoute: ActivatedRoute
   ) {
+    super();
+
     this.collectionForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
@@ -65,6 +74,12 @@ export class CollectionComponent implements OnInit, AfterViewInit {
     this.transactionService.discardClicked$.subscribe(() => {
       this.resetForm();
     });
+    const param = this.activatedRoute.snapshot.paramMap.get('guid');
+    console.log('param:', param);
+    if (param) {
+      this.setMode('edit');
+      this.loadCollectionForEdit(param);
+    }
   }
   ngAfterViewInit() {
     // Accessing the child components after view initialization
@@ -73,34 +88,83 @@ export class CollectionComponent implements OnInit, AfterViewInit {
     this.searchEngineFormGroup = this.searchEngineComponent.form;
     this.imageFormGroup = this.imageComponent.imageForm;
   }
+  loadCollectionForEdit(guid: string) {
+    this.service.getCollection(guid).subscribe({
+      next: (res) => {
+        this.toast.success('Success', 'Data fetched successfully');
+        this.collection = res;
 
+        // Now 'this.collection' has the fetched data
+        this.titleDescriptionComponent.setData(
+          this.collection.titleDescription
+        );
+        this.collectionTypeComponent.setData(this.collection.collectionType);
+        // this.imageComponent.setImageData(this.collection.image);
+        console.log('this.collection', this.collection);
+      },
+      error: (err) => {
+        this.toast.error('Error', 'Something Happened');
+      },
+    });
+
+    // Code here will execute before the data is fetched, so 'this.collection' will be undefined
+  }
   async saveCollection() {
+    debugger;
     try {
       // if (this.collectionForm.valid) {
       const titleDescriptionValue = this.titleDescriptionComponent.getData();
       const collectionTypeValue = this.collectionTypeComponent.getData();
       let image = this.imageComponent.getData();
+      if (this.mode == 'edit') {
+        this.guid = this.activatedRoute.snapshot.paramMap.get('guid') || '';
+      } else {
+        this.guid = '';
+      }
       await this.saveImage();
       let collection: CollectionDto = {
+        guid: this.guid,
         titleDescription: titleDescriptionValue,
         collectionType: collectionTypeValue,
-        imageGuid: this.imageGuid || '',
+        image: undefined,
       };
       console.log('Data:', collection);
-
-      const observable = await this.service.save(collection);
-      observable.subscribe({
-        next: (res) => {
-          this.collectionForm.reset();
-          this.toast.success('SUCCESS', res.message);
-          this.router.navigate(['/']);
-        },
-        error: (err) => {
-          this.toast.error('ERROR', err.error);
-        },
-      });
+      if (this.mode == 'new') {
+        //do fo New mode
+        const observable = await this.service.save(collection);
+        observable.subscribe({
+          next: (res) => {
+            this.toast.success('SUCCESS', 'SUCCESS');
+            this.collectionForm.reset();
+            // this.titleDescriptionFormGroup.resetr('');
+            // this.collectionTypeFormGroup.resetr('');
+            this.collectionTypeComponent.resetR();
+            this.imageComponent.resetR();
+            //this.router.navigate(['/']);
+          },
+          error: (err) => {
+            this.toast.error('ERROR', err.error);
+          },
+        });
+      } else if (this.mode == 'edit') {
+        const observable = await this.service.update(collection);
+        observable.subscribe({
+          next: (res) => {
+            this.toast.success('SUCCESS', 'SUCCESS');
+            this.collectionForm.reset();
+            // this.titleDescriptionFormGroup.resetr('');
+            // this.collectionTypeFormGroup.resetr('');
+            this.collectionTypeComponent.resetR();
+            this.imageComponent.resetR();
+            //this.router.navigate(['/']);
+          },
+          error: (err) => {
+            this.toast.error('ERROR', err.error);
+          },
+        });
+      }
     } catch (err) {
-      this.toast.error('Error', 'Something wrong happened!');
+      this.toast.error('Error');
     }
   }
 

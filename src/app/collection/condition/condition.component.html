@@ -6,7 +6,9 @@
       </app-gv-dropdown>
     </div>
     <div class="col-md-3 combo">
-      <p-dropdown [style]="{ width: '100%' }" [options]="equals" formControlName="equal"></p-dropdown>
+      <app-gv-dropdown [style]="{ width: '100%' }" [options]="equals" formControlName="equal"
+        [(ngModel)]="selectedEqualType" (onChange)="onEqualTypeSelectionChange($event)"
+        class="custom-dropdown"></app-gv-dropdown>
     </div>
     <div class="col-md-3 combo">
       <div class="form-group">

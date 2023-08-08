@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CollectionTypeDto } from 'src/app/Model/collection-type-dto';
 import { ConditionDto } from 'src/app/Model/conditionDto';
+import { CommonService } from 'src/app/api/Common/common.service';
 
 @Component({
   selector: 'app-collection-type',
@@ -12,8 +13,12 @@ import { ConditionDto } from 'src/app/Model/conditionDto';
 export class CollectionTypeComponent implements OnInit {
   @Input() parentForm!: FormGroup;
   form: FormGroup;
-
-  constructor(private formBuilder: FormBuilder, private toast: ToastrService) {
+  guid: string = '';
+  constructor(
+    private formBuilder: FormBuilder,
+    private toast: ToastrService,
+    private commonService: CommonService
+  ) {
     // Initialize the form with default values
     this.form = this.formBuilder.group({
       collectionType: ['automated'], // Default value for radio button selection
@@ -24,6 +29,43 @@ export class CollectionTypeComponent implements OnInit {
 
   ngOnInit() {
     this.addCondition();
+  }
+  setData(collectionType: CollectionTypeDto) {
+    // Set the form values based on the given CollectionTypeDto object
+    this.form.patchValue({
+      // collectionType: collectionType.collectionType,
+      // conditionType: collectionType.conditionType,
+    });
+
+    // Clear existing conditions
+    this.conditions.clear();
+
+    console.log('collectionType', collectionType);
+    // Add new conditions based on the data in the CollectionTypeDto
+    if (collectionType.conditions && collectionType.conditions.length > 0) {
+      collectionType.conditions.forEach((condition: ConditionDto) => {
+        const conditionFormGroup = this.formBuilder.group({
+          conditionType: [condition.conditionType, Validators.required],
+          equal: [condition.equalType, Validators.required],
+          result: [condition.result],
+          selectedItem: [],
+          guid: [condition.guid],
+        });
+        this.conditions.push(conditionFormGroup);
+      });
+    } else {
+      // If there are no conditions, add an initial condition form group
+      const initialConditionFormGroup = this.formBuilder.group({
+        conditionType: [null, Validators.required],
+        equal: [null, Validators.required],
+        result: [null],
+        selectedItem: [],
+        guid: [],
+      });
+      this.conditions.push(initialConditionFormGroup);
+    }
+    this.guid = collectionType.guid;
+    console.log('my conditions here is :', this.conditions);
   }
 
   isAutomated(): boolean {
@@ -50,6 +92,7 @@ export class CollectionTypeComponent implements OnInit {
         equal: [null, Validators.required],
         result: [null],
         selectedItem: [],
+        guid: [this.commonService.newGuid()],
       });
       this.conditions.push(initialConditionFormGroup);
     } else {
@@ -59,9 +102,23 @@ export class CollectionTypeComponent implements OnInit {
         equal: [null, Validators.required],
         result: [null],
         selectedItem: [],
+        guid: [this.commonService.newGuid()],
       });
       this.conditions.push(conditionFormGroup);
     }
+  }
+  resetR() {
+    this.conditions.clear();
+    const conditionFormGroup = this.formBuilder.group({
+      conditionType: [null, Validators.required],
+      equal: [null, Validators.required],
+      result: [null],
+      selectedItem: [],
+      guid: [],
+    });
+    this.conditions.push(conditionFormGroup);
+    this.form.get('collectionType')?.setValue('automated');
+    this.form.get('conditionType')?.setValue('all');
   }
 
   removeCondition(index: number): void {
@@ -76,13 +133,15 @@ export class CollectionTypeComponent implements OnInit {
   }
 
   public getData(): CollectionTypeDto {
+    console.log(this.conditions.value);
     // Get the data from the form and return it as a CollectionTypeDto object
     const conditions: ConditionDto[] = this.conditions.value.map(
       (condition: any) => {
         const conditionDto: ConditionDto = {
           conditionType: condition.conditionType.value, // Extract the value of the condition type
-          equalType: condition.equalType,
+          equalType: condition.equal.value,
           result: condition.result,
+          guid: condition.guid,
         };
         return conditionDto;
       }
@@ -93,6 +152,7 @@ export class CollectionTypeComponent implements OnInit {
 
     const selectedItem: CollectionTypeDto = {
       conditions: conditions,
+      guid: this.guid,
       // collectionType: collectionType,
       // conditionType: conditionType,
     };

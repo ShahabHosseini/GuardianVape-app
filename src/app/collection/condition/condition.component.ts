@@ -23,11 +23,12 @@ export class ConditionComponent implements OnInit, AfterViewInit {
   @Input() index!: number;
   @Output() removeCondition = new EventEmitter<number>();
   selectedConditionType: any = null;
+  selectedEqualType: any = null;
 
   conditionTypes: SelectItem[] = [];
   equals: SelectItem[] = [];
   results: string[] = [];
-
+  guid: string = '';
   constructor(
     private formBuilder: FormBuilder,
     private service: CollectionService
@@ -37,6 +38,7 @@ export class ConditionComponent implements OnInit, AfterViewInit {
       equal: [null, Validators.required],
       result: [null, Validators.required],
       selectedItem: [],
+      guid: [],
     });
   }
   ngAfterViewInit(): void {
@@ -49,7 +51,7 @@ export class ConditionComponent implements OnInit, AfterViewInit {
 
     this.conditionForm
       .get('equal')
-      ?.valueChanges.pipe()
+      ?.valueChanges.pipe(pairwise())
       .subscribe(() => {
         this.updateSelectedItem();
       });
@@ -69,20 +71,13 @@ export class ConditionComponent implements OnInit, AfterViewInit {
         value: item,
       }));
     });
-
-    this.equals = [
-      'contains',
-      'is equal to',
-      'is not equal to',
-      'start with',
-      'end with',
-      'does not contain',
-      'is greater than',
-      'is less than',
-    ].map((item) => ({
-      label: item,
-      value: item,
-    }));
+    this.service.getAllEqualType().subscribe((res: IdTitleDto[]) => {
+      this.equals = res.map((item) => ({
+        label: item.title,
+        value: item,
+      }));
+    });
+    this.updateSelectedItem();
 
     // this.conditionForm.get('conditionType')?.valueChanges.subscribe((value) => {
     //   this.selectedConditionType = value; // Update the selectedConditionType variable
@@ -102,8 +97,9 @@ export class ConditionComponent implements OnInit, AfterViewInit {
       conditionType: conditionType,
       equalType: equal,
       result: result,
+      guid: this.guid,
     };
-    console.log('updateSelectedItem ', conditionType);
+    console.log('updateSelectedItem ', equal);
     this.conditionForm.patchValue({
       selectedItem: selectedItem,
     });
@@ -114,6 +110,15 @@ export class ConditionComponent implements OnInit, AfterViewInit {
     }, 0);
     console.log('metod 1 ', this.selectedConditionType);
   }
+  onEqualTypeSelectionChange(event: any) {
+    console.log('onEqualTypeSelectionChange event:', event);
+    setTimeout(() => {
+      this.selectedEqualType = event.value;
+      console.log('selectedEqualType:', this.selectedEqualType);
+    }, 0);
+  }
+
+  // Change CollectionTypeDto to ConditionDto
   public getData(): ConditionDto {
     const conditionType = this.conditionForm.get('conditionType')?.value;
     const equal = this.conditionForm.get('equal')?.value;
@@ -122,6 +127,7 @@ export class ConditionComponent implements OnInit, AfterViewInit {
       conditionType: conditionType,
       equalType: equal,
       result: result,
+      guid: this.guid,
     };
     console.log('condition : ', selectedItem);
     return selectedItem;

@@ -94,7 +94,9 @@ export class ImageComponent {
       this.isImageSelected = true;
     }
   }
-
+  resetR() {
+    this.removeImage();
+  }
   onDragOver(event: DragEvent): void {
     event.preventDefault();
   }
