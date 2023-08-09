@@ -1,14 +1,13 @@
 <form [formGroup]="conditionForm">
   <div class="row md-12;">
     <div class="col-md-3">
-      <app-gv-dropdown [style]="{ width: '100%' }" [options]="conditionTypes" formControlName="conditionType"
-        [(ngModel)]="selectedConditionType" (onChange)="onConditionTypeSelectionChange($event)" class="custom-dropdown">
-      </app-gv-dropdown>
+      <p-dropdown [style]="{ width: '100%' }" [options]="conditionTypes" formControlName="conditionType"
+        (onChange)="onConditionTypeSelectionChange($event)" class="custom-dropdown">
+      </p-dropdown>
     </div>
     <div class="col-md-3 combo">
-      <app-gv-dropdown [style]="{ width: '100%' }" [options]="equals" formControlName="equal"
-        [(ngModel)]="selectedEqualType" (onChange)="onEqualTypeSelectionChange($event)"
-        class="custom-dropdown"></app-gv-dropdown>
+      <p-dropdown [style]="{ width: '100%' }" [options]="equals" formControlName="equal"
+        (onChange)="onEqualTypeSelectionChange($event)" class="custom-dropdown"></p-dropdown>
     </div>
     <div class="col-md-3 combo">
       <div class="form-group">

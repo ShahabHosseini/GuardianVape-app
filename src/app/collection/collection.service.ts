@@ -36,6 +36,7 @@ export class CollectionService extends BaseService {
     );
   }
   async save(data: CollectionDto): Promise<Observable<any>> {
+    console.log('Data before Save:', data);
     return this.http.post<CollectionDto>(
       `${this.collectionUrl}save-collection`,
       data

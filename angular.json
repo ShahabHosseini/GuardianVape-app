@@ -36,7 +36,9 @@
               "node_modules/ngx-spinner/animations/square-jelly-box.css" ,
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/@costlydeveloper/ngx-awesome-popup/styles/theme.css"
+
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
@@ -108,7 +110,9 @@
              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
              "node_modules/ngx-spinner/animations/square-jelly-box.css",
              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
-             "node_modules/primeng/resources/primeng.min.css"
+             "node_modules/primeng/resources/primeng.min.css",
+             "node_modules/@costlydeveloper/ngx-awesome-popup/styles/theme.css"
+
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"

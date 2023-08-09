@@ -9,6 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { ViewChild } from '@angular/core';
 import { PaginationInstance } from 'ngx-pagination';
+import { ConfirmBoxEvokeService } from '@costlydeveloper/ngx-awesome-popup';
 
 @Component({
   selector: 'app-image-library',
@@ -55,7 +56,8 @@ export class ImageLibraryComponent implements OnInit {
     private common: CommonService,
     private modalService: BsModalService, // Inject BsModalService
     private spinner: NgxSpinnerService,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private confirmBoxEvokeService: ConfirmBoxEvokeService
   ) {}
 
   applyFilter(): void {
@@ -84,13 +86,23 @@ export class ImageLibraryComponent implements OnInit {
     }));
 
     try {
-      await this.fileService.remove(result);
-      this.loadImages(); // Refresh the image list after deleting
+      this.confirmBoxEvokeService
+        .danger(
+          'Confirmation',
+          'Are you sure you want to remove these images?',
+          'Yes',
+          'No'
+        )
+        .subscribe((resp) => {
+          if (resp.success) {
+            this.fileService.remove(result);
+            this.loadImages(); // Refresh the image list after deleting
+            this.selectedImages = []; // Reset the selectedImages array
+          }
+        });
     } catch (error) {
       // Handle the error, if needed
       console.error('Error removing images', error);
-    } finally {
-      this.selectedImages = []; // Reset the selectedImages array
     }
   }
 

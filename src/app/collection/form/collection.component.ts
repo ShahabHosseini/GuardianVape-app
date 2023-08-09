@@ -42,6 +42,7 @@ export class CollectionComponent
   imageGuid?: string;
   collection?: CollectionDto;
   guid: string = '';
+  title: string = 'Create collection';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -67,8 +68,8 @@ export class CollectionComponent
   }
 
   ngOnInit() {
-    this.transactionService.saveClicked$.subscribe(() => {
-      this.saveCollection();
+    this.transactionService.saveClicked$.subscribe(async () => {
+      await this.saveCollection();
     });
 
     this.transactionService.discardClicked$.subscribe(() => {
@@ -80,6 +81,7 @@ export class CollectionComponent
       this.setMode('edit');
       this.loadCollectionForEdit(param);
     }
+    console.log('mode', this.mode);
   }
   ngAfterViewInit() {
     // Accessing the child components after view initialization
@@ -98,6 +100,7 @@ export class CollectionComponent
         this.titleDescriptionComponent.setData(
           this.collection.titleDescription
         );
+        this.title = this.collection.titleDescription.title;
         this.collectionTypeComponent.setData(this.collection.collectionType);
         // this.imageComponent.setImageData(this.collection.image);
         console.log('this.collection', this.collection);
@@ -119,14 +122,15 @@ export class CollectionComponent
       if (this.mode == 'edit') {
         this.guid = this.activatedRoute.snapshot.paramMap.get('guid') || '';
       } else {
-        this.guid = '';
+        this.guid = this.common.newGuid();
+        collectionTypeValue.guid = this.common.newGuid();
       }
       await this.saveImage();
       let collection: CollectionDto = {
         guid: this.guid,
         titleDescription: titleDescriptionValue,
         collectionType: collectionTypeValue,
-        image: undefined,
+        image: image,
       };
       console.log('Data:', collection);
       if (this.mode == 'new') {
@@ -140,7 +144,7 @@ export class CollectionComponent
             // this.collectionTypeFormGroup.resetr('');
             this.collectionTypeComponent.resetR();
             this.imageComponent.resetR();
-            //this.router.navigate(['/']);
+            this.router.navigate(['collection-list']);
           },
           error: (err) => {
             this.toast.error('ERROR', err.error);
@@ -151,12 +155,6 @@ export class CollectionComponent
         observable.subscribe({
           next: (res) => {
             this.toast.success('SUCCESS', 'SUCCESS');
-            this.collectionForm.reset();
-            // this.titleDescriptionFormGroup.resetr('');
-            // this.collectionTypeFormGroup.resetr('');
-            this.collectionTypeComponent.resetR();
-            this.imageComponent.resetR();
-            //this.router.navigate(['/']);
           },
           error: (err) => {
             this.toast.error('ERROR', err.error);

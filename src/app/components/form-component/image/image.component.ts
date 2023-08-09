@@ -104,7 +104,7 @@ export class ImageComponent {
     const imagedto: ImageDto = {
       file: this.image, // Use the stored image directly
       name: this.fileName,
-      url: '', // You can remove this line as it's not needed
+      url: this.imageUrl || '', // You can remove this line as it's not needed
       caption: '',
       description: '',
       alt: '',

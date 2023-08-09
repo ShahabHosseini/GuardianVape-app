@@ -14,6 +14,7 @@ export class CollectionTypeComponent implements OnInit {
   @Input() parentForm!: FormGroup;
   form: FormGroup;
   guid: string = '';
+
   constructor(
     private formBuilder: FormBuilder,
     private toast: ToastrService,
@@ -48,8 +49,16 @@ export class CollectionTypeComponent implements OnInit {
           conditionType: [condition.conditionType, Validators.required],
           equal: [condition.equalType, Validators.required],
           result: [condition.result],
-          selectedItem: [],
+          selectedItem: condition as ConditionDto, // You don't need to set selectedItem here
           guid: [condition.guid],
+        });
+        conditionFormGroup
+          .get('conditionType')
+          ?.setValue(condition.conditionType);
+        conditionFormGroup.get('equal')?.setValue(condition.equalType);
+
+        conditionFormGroup.patchValue({
+          selectedItem: condition,
         });
         this.conditions.push(conditionFormGroup);
       });
@@ -59,7 +68,7 @@ export class CollectionTypeComponent implements OnInit {
         conditionType: [null, Validators.required],
         equal: [null, Validators.required],
         result: [null],
-        selectedItem: [],
+        selectedItem: null,
         guid: [],
       });
       this.conditions.push(initialConditionFormGroup);
@@ -133,15 +142,16 @@ export class CollectionTypeComponent implements OnInit {
   }
 
   public getData(): CollectionTypeDto {
+    debugger;
     console.log(this.conditions.value);
     // Get the data from the form and return it as a CollectionTypeDto object
     const conditions: ConditionDto[] = this.conditions.value.map(
       (condition: any) => {
         const conditionDto: ConditionDto = {
-          conditionType: condition.conditionType.value, // Extract the value of the condition type
-          equalType: condition.equal.value,
+          conditionType: condition.conditionType, // Extract the value of the condition type
+          equalType: condition.equal,
           result: condition.result,
-          guid: condition.guid,
+          guid: condition.guid || '',
         };
         return conditionDto;
       }

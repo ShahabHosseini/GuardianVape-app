@@ -42,6 +42,19 @@ export class ConditionComponent implements OnInit, AfterViewInit {
     });
   }
   ngAfterViewInit(): void {
+    this.service.getAllConditionType().subscribe((res: IdTitleDto[]) => {
+      this.conditionTypes = res.map((item) => ({
+        label: item.title,
+        value: item,
+      }));
+    });
+    this.service.getAllEqualType().subscribe((res: IdTitleDto[]) => {
+      this.equals = res.map((item) => ({
+        label: item.title,
+        value: item,
+      }));
+    });
+
     this.conditionForm
       .get('conditionType')
       ?.valueChanges.pipe(pairwise())
@@ -65,18 +78,6 @@ export class ConditionComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.service.getAllConditionType().subscribe((res: IdTitleDto[]) => {
-      this.conditionTypes = res.map((item) => ({
-        label: item.title,
-        value: item,
-      }));
-    });
-    this.service.getAllEqualType().subscribe((res: IdTitleDto[]) => {
-      this.equals = res.map((item) => ({
-        label: item.title,
-        value: item,
-      }));
-    });
     this.updateSelectedItem();
 
     // this.conditionForm.get('conditionType')?.valueChanges.subscribe((value) => {
@@ -105,17 +106,10 @@ export class ConditionComponent implements OnInit, AfterViewInit {
     });
   }
   onConditionTypeSelectionChange(event: any) {
-    setTimeout(() => {
-      this.selectedConditionType = event.value;
-    }, 0);
-    console.log('metod 1 ', this.selectedConditionType);
+    this.updateSelectedItem();
   }
   onEqualTypeSelectionChange(event: any) {
-    console.log('onEqualTypeSelectionChange event:', event);
-    setTimeout(() => {
-      this.selectedEqualType = event.value;
-      console.log('selectedEqualType:', this.selectedEqualType);
-    }, 0);
+    this.updateSelectedItem();
   }
 
   // Change CollectionTypeDto to ConditionDto
