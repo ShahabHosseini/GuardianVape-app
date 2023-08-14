@@ -36,7 +36,9 @@
             (removeCondition)="removeCondition(i)"></app-condition>
         </div>
       </div>
-      <button class="col-md-3 btn btn-secondary" (click)="addCondition()">Add another condition</button>
+      <button class="col-md-3 btn btn-secondary" (click)="addCondition()" [@openClose]>
+        Add another condition
+      </button>
     </ng-container>
   </div>
 </form>

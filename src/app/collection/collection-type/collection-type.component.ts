@@ -4,11 +4,25 @@ import { ToastrService } from 'ngx-toastr';
 import { CollectionTypeDto } from 'src/app/Model/collection-type-dto';
 import { ConditionDto } from 'src/app/Model/conditionDto';
 import { CommonService } from 'src/app/api/Common/common.service';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-collection-type',
   templateUrl: './collection-type.component.html',
   styleUrls: ['./collection-type.component.scss'],
+  animations: [
+    trigger('fadeInOut', [
+      state('in', style({ opacity: 1 })),
+      transition(':enter', [style({ opacity: 0 }), animate('300ms ease-out')]),
+      transition(':leave', animate('300ms ease-in', style({ opacity: 0 }))),
+    ]),
+  ],
 })
 export class CollectionTypeComponent implements OnInit {
   @Input() parentForm!: FormGroup;

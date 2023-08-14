@@ -7,9 +7,8 @@
         <input pInputText type="text" placeholder="Search keyword" />
       </span>
       <div>
-
-        <button *ngIf="selectedCollections.length>0" (click)="removeCollections()"
-          class=" p-button-outlined btn red-button">Remove Collections</button>
+        <button *ngIf="selectedCollections.length > 0" (click)="removeCollections()"
+          class="p-button-outlined btn red-button">Remove Collections</button>
         <button pButton type="button" (click)="navigateToCollection()" label="New Collection"
           class="p-button-rounded p-button-outlined"></button>
       </div>
@@ -23,23 +22,22 @@
       <!-- [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"> -->
       <ng-template pTemplate="header">
         <tr>
-          <th>
+          <th style="width: 3rem;">
             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
           </th>
-          <th> </th>
+          <th style="width: 3rem;"></th>
           <th pSortableColumn="title">Title <p-sortIcon field="title"></p-sortIcon></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-collection let-i="rowIndex">
         <tr (click)="rowClicked(i)">
-          <td>
+          <td style="width: 3rem;">
             <p-tableCheckbox [value]="collection"></p-tableCheckbox>
           </td>
-          <td>
+          <td style="width: 3rem;">
             <img src="{{collection.image?.url}}" alt="{{collection.image?.alt}}">
           </td>
           <td>{{ collection.titleDescription.title }}</td>
-
         </tr>
       </ng-template>
       <ng-template pTemplate="paginatorleft">

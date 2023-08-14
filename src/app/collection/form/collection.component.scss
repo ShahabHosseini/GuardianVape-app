@@ -50,3 +50,12 @@
 }
 
 /* Rest of the CSS... */
+::ng-deep p-multiselect .p-multiselect-label {
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 6%;
+}
+
+::ng-deep p-multiselect .p-multiselect-token {
+  margin-bottom: 0.5rem;
+}

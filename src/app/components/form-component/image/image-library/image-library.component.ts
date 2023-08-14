@@ -157,6 +157,7 @@ export class ImageLibraryComponent implements OnInit {
       // Handle the result here if needed
       console.log('The dialog was closed', result);
       this.loadImages();
+      this.selectedImages = []; // Reset the selectedImages array
     });
   }
 

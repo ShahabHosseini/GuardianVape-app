@@ -22,7 +22,9 @@ export class TitleDescriptionComponent
 {
   setData(titleDescription: TitleDescriptionDto) {
     this.form.get('title')?.setValue(titleDescription.title);
-    this.form.get('description')?.setValue(titleDescription.description);
+    this.richTextbox.form
+      .get('editorContent')
+      ?.setValue(titleDescription.description);
   }
   @Input() parentForm!: FormGroup;
   @Output() formDataChanged: EventEmitter<any> = new EventEmitter<any>();
@@ -59,7 +61,7 @@ export class TitleDescriptionComponent
       description: '',
       title: '',
     };
-
+    debugger;
     if (this.richTextbox && this.richTextbox.form) {
       data.description =
         this.richTextbox.form.get('editorContent')?.value || '';

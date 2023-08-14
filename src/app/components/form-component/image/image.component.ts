@@ -17,6 +17,7 @@ export class ImageComponent {
   imageForm: FormGroup;
   isImageSelected: boolean = false;
   fileName: string = '';
+  guid: string = '';
   image: File | null = null; // Update the type to allow null values
   textFile?: string;
   constructor(
@@ -65,6 +66,7 @@ export class ImageComponent {
     };
     this.fileName = file.name;
     reader.readAsDataURL(file);
+    this.guid = this.common.newGuid();
   }
 
   removeImage(): void {
@@ -73,6 +75,7 @@ export class ImageComponent {
     this.imageRemoved.emit();
     this.isImageSelected = false;
     this.image = null;
+    this.guid = '';
   }
 
   showInputFile(): void {
@@ -108,11 +111,27 @@ export class ImageComponent {
       caption: '',
       description: '',
       alt: '',
-      guid: '',
+      guid: this.guid,
       uploadDate: new Date(),
       width: 0,
       height: 0,
     };
     return imagedto;
+  }
+  setData(image: ImageDto | undefined) {
+    debugger;
+    if (image) {
+      this.fileName = image.name;
+      this.imageUrl = image.url;
+      this.image = image.file; // Store the image file
+      this.isImageSelected = true;
+    } else {
+      // Clear the image details
+      this.fileName = '';
+      this.imageUrl = null;
+      this.image = null;
+      this.isImageSelected = false;
+    }
+    console.log('image:', image);
   }
 }

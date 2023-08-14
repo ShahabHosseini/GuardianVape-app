@@ -10,6 +10,13 @@
       <div class="rows">
         <app-title-description [parentForm]="collectionForm"></app-title-description>
       </div>
+      <div [formGroup]="collectionForm"> <!-- Add this formGroup directive -->
+        <div class="rows">
+          <label>Parent collection:</label>
+          <p-multiSelect formControlName="parents" display="chip" [filter]="true" [style]="{ width: '100%' }"
+            [options]="parents"></p-multiSelect>
+        </div>
+      </div>
       <div class="rows">
         <app-collection-type [parentForm]="collectionForm"></app-collection-type>
       </div>
@@ -18,6 +25,7 @@
       </div>
     </div>
     <div class="col-4">
+
       <div class="rows">
         <h6>Publishing</h6>
         <p>Will be included in 3 sales channels</p>

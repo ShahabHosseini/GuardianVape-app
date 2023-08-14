@@ -10,6 +10,9 @@ import { CollectionDto } from '../Model/collection-dto';
   providedIn: 'root',
 })
 export class CollectionService extends BaseService {
+  getParents(): Observable<CollectionDto[]> {
+    return this.http.get<CollectionDto[]>(`${this.collectionUrl}get-parents/`);
+  }
   getCollections(): Observable<CollectionDto[]> {
     return this.http.get<CollectionDto[]>(
       `${this.collectionUrl}get-collections/`

@@ -9,13 +9,14 @@ import { SearchEngineComponent } from 'src/app/components/search-engine/search-e
 import { ImageComponent } from 'src/app/components/form-component/image/image.component';
 import { HttpClient } from '@angular/common/http';
 import { FileService } from 'src/app/api/Common/file.service';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, pairwise } from 'rxjs';
 import { CollectionDto } from 'src/app/Model/collection-dto';
 import { CollectionService } from '../collection.service';
 import { ImageDto } from 'src/app/Model/image-dto';
 import { CommonService } from 'src/app/api/Common/common.service';
 import { interval } from 'rxjs';
 import { BaseFormComponent } from 'src/app/base/base-form.component';
+import { SelectItem } from 'primeng/api';
 
 @Component({
   selector: 'app-collection',
@@ -43,6 +44,7 @@ export class CollectionComponent
   collection?: CollectionDto;
   guid: string = '';
   title: string = 'Create collection';
+  parents: SelectItem[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -64,6 +66,7 @@ export class CollectionComponent
       clickAndDrop: ['true', Validators.required],
       inbox: ['true', Validators.required],
       conditionType: ['', Validators.required],
+      parents: [null],
     });
   }
 
@@ -89,7 +92,33 @@ export class CollectionComponent
     this.collectionTypeFormGroup = this.collectionTypeComponent.parentForm;
     this.searchEngineFormGroup = this.searchEngineComponent.form;
     this.imageFormGroup = this.imageComponent.imageForm;
+
+    this.service.getParents().subscribe((res: CollectionDto[]) => {
+      this.parents = res.map((item) => ({
+        label: item.titleDescription.title,
+        value: item,
+      }));
+    });
+    this.collectionForm
+      .get('parents')
+      ?.valueChanges.pipe(pairwise())
+      .subscribe(() => {
+        this.updateSelectedItem();
+      });
   }
+
+  updateSelectedItem() {
+    const conditionType = this.collectionForm.get('parents')
+      ?.value as CollectionDto;
+
+    // Create the selected item object
+
+    console.log('updateSelectedItem ', conditionType);
+    this.collectionForm.patchValue({
+      parent: conditionType,
+    });
+  }
+
   loadCollectionForEdit(guid: string) {
     this.service.getCollection(guid).subscribe({
       next: (res) => {
@@ -100,8 +129,10 @@ export class CollectionComponent
         this.titleDescriptionComponent.setData(
           this.collection.titleDescription
         );
+        debugger;
         this.title = this.collection.titleDescription.title;
         this.collectionTypeComponent.setData(this.collection.collectionType);
+        this.imageComponent.setData(this.collection.image);
         // this.imageComponent.setImageData(this.collection.image);
         console.log('this.collection', this.collection);
       },
@@ -177,7 +208,7 @@ export class CollectionComponent
       const fileName = imageInfo.name || 'default.jpg';
       const newImage: ImageDto = {
         name: fileName,
-        guid: this.common.newGuid(),
+        guid: imageInfo.guid,
         alt: '',
         url: '',
         caption: '',

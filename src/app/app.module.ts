@@ -50,6 +50,8 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
+import { MultiSelectModule } from 'primeng/multiselect';
+
 import {
   ConfirmBoxConfigModule,
   DialogConfigModule,
@@ -90,6 +92,7 @@ import {
     TableModule,
     ButtonModule,
     InputTextModule,
+    MultiSelectModule,
     CheckboxModule,
     ReactiveFormsModule,
     FormsModule,
