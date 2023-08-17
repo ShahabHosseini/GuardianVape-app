@@ -5,3 +5,7 @@ button {
 .custom-dropdown ::ng-deep .p-dropdown-panel .p-dropdown-item {
   background-color: #ffffff; /* Set the desired background color */
 }
+.remove-button {
+  --bs-btn-color: #f78994;
+  --bs-btn-hover-color: red;
+}

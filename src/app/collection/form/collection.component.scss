@@ -59,3 +59,9 @@
 ::ng-deep p-multiselect .p-multiselect-token {
   margin-bottom: 0.5rem;
 }
+button {
+  width: fit-content;
+  height: fit-content;
+  padding: 4px 4px;
+  margin-top: 3px;
+}

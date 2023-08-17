@@ -129,7 +129,6 @@ export class CollectionComponent
         this.titleDescriptionComponent.setData(
           this.collection.titleDescription
         );
-        debugger;
         this.title = this.collection.titleDescription.title;
         this.collectionTypeComponent.setData(this.collection.collectionType);
         this.imageComponent.setData(this.collection.image);
@@ -144,7 +143,6 @@ export class CollectionComponent
     // Code here will execute before the data is fetched, so 'this.collection' will be undefined
   }
   async saveCollection() {
-    debugger;
     try {
       // if (this.collectionForm.valid) {
       const titleDescriptionValue = this.titleDescriptionComponent.getData();

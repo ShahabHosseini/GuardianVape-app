@@ -1,7 +1,7 @@
 <main class="row-md-12 ms-sm-auto col-lg-10 px-md-12">
   <div class="header">
     <a class="back-button" (click)="goToList()">
-      <i class="bi bi bi-arrow-left-circle"></i>
+      <i class="bi bi-arrow-left-circle"></i>
     </a>
     <span class="header-text">{{title}}</span>
   </div>
@@ -10,11 +10,15 @@
       <div class="rows">
         <app-title-description [parentForm]="collectionForm"></app-title-description>
       </div>
-      <div [formGroup]="collectionForm"> <!-- Add this formGroup directive -->
-        <div class="rows">
+      <div [formGroup]="collectionForm">
+        <div class="rows row lg-12 md-12">
           <label>Parent collection:</label>
-          <p-multiSelect formControlName="parents" display="chip" [filter]="true" [style]="{ width: '100%' }"
-            [options]="parents"></p-multiSelect>
+          <div class="col-11 md-11">
+            <p-multiSelect [style]="{ width: '100%' }" formControlName="parents" display="chip" [filter]="true"
+              [options]="parents"></p-multiSelect>
+          </div>
+          <button class="col-md-1 btn bi bi-plus-square" lsm-tooltip="Add Parent"></button>
+
         </div>
       </div>
       <div class="rows">
@@ -25,7 +29,6 @@
       </div>
     </div>
     <div class="col-4">
-
       <div class="rows">
         <h6>Publishing</h6>
         <p>Will be included in 3 sales channels</p>

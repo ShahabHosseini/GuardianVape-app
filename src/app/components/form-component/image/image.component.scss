@@ -43,10 +43,12 @@
 }
 .remove-button {
   position: absolute;
-  bottom: 10px;
+  bottom: 5px;
   right: 10px;
   border-radius: 50%;
   padding: 5px;
+  --bs-btn-color: red;
+  --bs-btn-hover-color: #bb0113;
 }
 .select-image-link {
   cursor: pointer;

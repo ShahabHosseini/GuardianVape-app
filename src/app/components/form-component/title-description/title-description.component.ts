@@ -61,7 +61,6 @@ export class TitleDescriptionComponent
       description: '',
       title: '',
     };
-    debugger;
     if (this.richTextbox && this.richTextbox.form) {
       data.description =
         this.richTextbox.form.get('editorContent')?.value || '';

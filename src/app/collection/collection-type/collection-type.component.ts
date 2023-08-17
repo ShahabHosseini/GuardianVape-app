@@ -1,4 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  Input,
+  HostBinding,
+} from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CollectionTypeDto } from 'src/app/Model/collection-type-dto';
@@ -10,6 +17,8 @@ import {
   style,
   animate,
   transition,
+  query,
+  stagger,
 } from '@angular/animations';
 
 @Component({
@@ -17,18 +26,26 @@ import {
   templateUrl: './collection-type.component.html',
   styleUrls: ['./collection-type.component.scss'],
   animations: [
-    trigger('fadeInOut', [
-      state('in', style({ opacity: 1 })),
-      transition(':enter', [style({ opacity: 0 }), animate('300ms ease-out')]),
-      transition(':leave', animate('300ms ease-in', style({ opacity: 0 }))),
+    trigger('flyIn', [
+      // state('in', style({ transform: 'translateX(0)' })),
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)' }),
+        animate(200),
+      ]),
+    ]),
+    trigger('flyOut', [
+      transition('* => void', [
+        animate(200, style({ transform: 'translateX(100%)' })),
+      ]),
     ]),
   ],
 })
 export class CollectionTypeComponent implements OnInit {
-  @Input() parentForm!: FormGroup;
+  @Input()
+  parentForm!: FormGroup;
   form: FormGroup;
   guid: string = '';
-
+  isAdd = false;
   constructor(
     private formBuilder: FormBuilder,
     private toast: ToastrService,
@@ -44,6 +61,9 @@ export class CollectionTypeComponent implements OnInit {
 
   ngOnInit() {
     this.addCondition();
+  }
+  newMethod(event: any) {
+    console.log(event);
   }
   setData(collectionType: CollectionTypeDto) {
     // Set the form values based on the given CollectionTypeDto object
@@ -129,6 +149,7 @@ export class CollectionTypeComponent implements OnInit {
       });
       this.conditions.push(conditionFormGroup);
     }
+    this.isAdd = true;
   }
   resetR() {
     this.conditions.clear();
@@ -153,10 +174,10 @@ export class CollectionTypeComponent implements OnInit {
       // If there is only one condition, show an error message
       this.toast.error('Access control', 'You can`t remove last condition!');
     }
+    this.isAdd = false;
   }
 
   public getData(): CollectionTypeDto {
-    debugger;
     console.log(this.conditions.value);
     // Get the data from the form and return it as a CollectionTypeDto object
     const conditions: ConditionDto[] = this.conditions.value.map(

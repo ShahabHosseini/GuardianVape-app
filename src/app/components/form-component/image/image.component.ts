@@ -119,18 +119,19 @@ export class ImageComponent {
     return imagedto;
   }
   setData(image: ImageDto | undefined) {
-    debugger;
     if (image) {
       this.fileName = image.name;
       this.imageUrl = image.url;
       this.image = image.file; // Store the image file
       this.isImageSelected = true;
+      this.guid = image.guid;
     } else {
       // Clear the image details
       this.fileName = '';
       this.imageUrl = null;
       this.image = null;
       this.isImageSelected = false;
+      this.guid = '';
     }
     console.log('image:', image);
   }

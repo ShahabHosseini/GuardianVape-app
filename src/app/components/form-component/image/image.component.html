@@ -14,8 +14,7 @@
     <div *ngIf="!imageUrl && !isImageSelected" class="no-image-placeholder">
       <label for="imageFile" class="centered-link">Select Image</label>
     </div>
-    <button *ngIf="imageUrl && showImageEdge" type="button" class="btn btn-danger remove-button"
-      (click)="removeImage()">
+    <button *ngIf="imageUrl && showImageEdge" type="button" class="btn  remove-button" (click)="removeImage()">
       <i class="bi bi-trash-fill"></i>
     </button>
   </div>

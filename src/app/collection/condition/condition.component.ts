@@ -24,6 +24,7 @@ export class ConditionComponent implements OnInit, AfterViewInit {
   @Output() removeCondition = new EventEmitter<number>();
   selectedConditionType: any = null;
   selectedEqualType: any = null;
+  isRemoving = false;
 
   conditionTypes: SelectItem[] = [];
   equals: SelectItem[] = [];
@@ -79,13 +80,17 @@ export class ConditionComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.updateSelectedItem();
-
+    console.log('index:  ', this.index);
     // this.conditionForm.get('conditionType')?.valueChanges.subscribe((value) => {
     //   this.selectedConditionType = value; // Update the selectedConditionType variable
     // });
   }
   onRemoveCondition(): void {
-    this.removeCondition.emit(this.index);
+    this.isRemoving = true;
+
+    setTimeout(() => {
+      this.removeCondition.emit(this.index);
+    }, 10); // Assuming 500ms is the duration of your "flyOut" animation
   }
 
   updateSelectedItem() {
