@@ -3,7 +3,7 @@ import { ImageDto } from './image-dto';
 import { TitleDescriptionDto } from './title-description-dto';
 
 export interface CollectionDto {
-  parentid?: number;
+  parents?: CollectionDto[];
   guid: string;
   titleDescription: TitleDescriptionDto;
   collectionType: CollectionTypeDto;

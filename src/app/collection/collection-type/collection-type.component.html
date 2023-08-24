@@ -31,8 +31,7 @@
         </span>
       </p>
       <div formArrayName="conditions" class="form-group">
-        <div *ngFor="let condition of conditions.controls; let i = index" [@flyIn]
-          [@flyOut]="getConditionFormGroup(i).get('isRemoving')?.value">
+        <div *ngFor="let condition of conditions.controls; let i = index" [@flyIn] [@flyOut]>
           <app-condition [conditionForm]="getConditionFormGroup(i)"
             (removeCondition)="removeCondition(i)"></app-condition>
         </div>

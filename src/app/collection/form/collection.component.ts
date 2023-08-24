@@ -79,12 +79,10 @@ export class CollectionComponent
       this.resetForm();
     });
     const param = this.activatedRoute.snapshot.paramMap.get('guid');
-    console.log('param:', param);
     if (param) {
       this.setMode('edit');
       this.loadCollectionForEdit(param);
     }
-    console.log('mode', this.mode);
   }
   ngAfterViewInit() {
     // Accessing the child components after view initialization
@@ -113,7 +111,6 @@ export class CollectionComponent
 
     // Create the selected item object
 
-    console.log('updateSelectedItem ', conditionType);
     this.collectionForm.patchValue({
       parent: conditionType,
     });
@@ -133,7 +130,6 @@ export class CollectionComponent
         this.collectionTypeComponent.setData(this.collection.collectionType);
         this.imageComponent.setData(this.collection.image);
         // this.imageComponent.setImageData(this.collection.image);
-        console.log('this.collection', this.collection);
       },
       error: (err) => {
         this.toast.error('Error', 'Something Happened');
@@ -148,6 +144,8 @@ export class CollectionComponent
       const titleDescriptionValue = this.titleDescriptionComponent.getData();
       const collectionTypeValue = this.collectionTypeComponent.getData();
       let image = this.imageComponent.getData();
+      const selectedParent: CollectionDto =
+        this.collectionForm.get('parents')?.value;
       if (this.mode == 'edit') {
         this.guid = this.activatedRoute.snapshot.paramMap.get('guid') || '';
       } else {
@@ -160,8 +158,8 @@ export class CollectionComponent
         titleDescription: titleDescriptionValue,
         collectionType: collectionTypeValue,
         image: image,
+        parents: [selectedParent],
       };
-      console.log('Data:', collection);
       if (this.mode == 'new') {
         //do fo New mode
         const observable = await this.service.save(collection);
@@ -201,7 +199,6 @@ export class CollectionComponent
 
   async saveImage() {
     const imageInfo: ImageDto = this.imageComponent.getData();
-    console.log('Image : ', imageInfo.file);
     if (imageInfo.file) {
       const fileName = imageInfo.name || 'default.jpg';
       const newImage: ImageDto = {
