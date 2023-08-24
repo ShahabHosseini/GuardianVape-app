@@ -27,6 +27,7 @@
           </th>
           <th style="width: 3rem;"></th>
           <th pSortableColumn="title">Title <p-sortIcon field="title"></p-sortIcon></th>
+          <th>Product conditions</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-collection let-i="rowIndex">
@@ -38,13 +39,12 @@
             <img src="{{collection.image?.url}}" alt="{{collection.image?.alt}}">
           </td>
           <td>{{ collection.titleDescription.title }}</td>
+          <td>
+            <div *ngFor="let condition of collection.collectionType.conditions">
+              <span>{{condition?.conditionType?.title}} {{condition?.equalType?.title}} {{condition?.result}} </span>
+            </div>
+          </td>
         </tr>
-      </ng-template>
-      <ng-template pTemplate="paginatorleft">
-        <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
-      </ng-template>
-      <ng-template pTemplate="paginatorright">
-        <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
       </ng-template>
     </p-table>
   </div>
