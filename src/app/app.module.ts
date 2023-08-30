@@ -11,7 +11,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { SidebarComponent } from './home-page/side-nav/side-nav/side-nav.component';
 import { OrderComponent } from './order/order.component';
 import { CollectionComponent } from './collection/form/collection.component';
-import { ProductComponent } from './product/product.component';
+import { ProductComponent } from './product/form/product.component';
 import { TagComponent } from './tag/tag.component';
 import { NavbarComponent } from './home-page/navbar/navbar.component';
 import { SignupComponent } from './User/signup/signup.component';
@@ -58,6 +58,15 @@ import {
   NgxAwesomePopupModule,
   ToastNotificationConfigModule,
 } from '@costlydeveloper/ngx-awesome-popup';
+import { MultiImageComponent } from './components/form-component/image/multi-image/multi-image.component';
+import { PricingComponent } from './product/pricing/pricing.component';
+import {
+  NgxCurrencyDirective,
+  NgxCurrencyInputMode,
+  provideEnvironmentNgxCurrency,
+} from 'ngx-currency';
+import { InventoryComponent } from './product/inventory/inventory.component';
+import { ShippingComponent } from './product/shipping/shipping.component';
 
 @NgModule({
   declarations: [
@@ -86,9 +95,14 @@ import {
     ImageLibraryComponent,
     EditImageComponent,
     CollectionListComponent,
+    MultiImageComponent,
+    PricingComponent,
+    InventoryComponent,
+    ShippingComponent,
   ],
   imports: [
     BrowserModule,
+    NgxCurrencyDirective,
     TableModule,
     ButtonModule,
     InputTextModule,
@@ -174,6 +188,20 @@ import {
       useValue: '/',
     },
     [DatePipe],
+    provideEnvironmentNgxCurrency({
+      align: 'left',
+      allowNegative: false,
+      allowZero: true,
+      decimal: ',',
+      precision: 2,
+      prefix: '£ ',
+      suffix: '',
+      thousands: '.',
+      nullable: true,
+      min: null,
+      max: null,
+      inputMode: NgxCurrencyInputMode.Financial,
+    }),
   ],
 
   bootstrap: [AppComponent],

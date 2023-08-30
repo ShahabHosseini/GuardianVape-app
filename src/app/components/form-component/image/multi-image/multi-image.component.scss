@@ -1,0 +1,71 @@
+.image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.remove-all-button {
+  margin-left: auto;
+}
+
+.centered-link-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border: 2px dashed #ccc;
+  min-height: 120px;
+  cursor: pointer;
+}
+
+.multi-image-frame {
+  border: 2px dashed #ccc;
+  border-radius: 6px;
+  padding: 1rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  overflow-y: auto;
+  text-align: center;
+}
+
+.multi-image-frame.has-images {
+  min-height: 200px;
+}
+
+.multi-image-preview {
+  position: relative;
+  width: 100%;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+
+  /* Flexbox to center the image */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.multi-image-preview img {
+  max-width: 100%;
+  max-height: 100%;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+}
+
+.remove-button {
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  border-radius: 50%;
+  padding: 5px;
+  background: transparent;
+  color: red;
+  transition: background-color 0.3s;
+}
+
+.remove-button:hover {
+  color: #bb0113;
+}

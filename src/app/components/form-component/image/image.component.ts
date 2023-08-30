@@ -10,7 +10,7 @@ import { CommonService } from 'src/app/api/Common/common.service';
   styleUrls: ['./image.component.scss'],
 })
 export class ImageComponent {
-  @Output() imageSelected: EventEmitter<File> = new EventEmitter<File>();
+  @Output() imageSelected: EventEmitter<File[]> = new EventEmitter<File[]>();
   @Output() imageRemoved: EventEmitter<void> = new EventEmitter<void>();
   @Input() showImageEdge: boolean = true;
   @Input() imageUrl: string | null = null;
@@ -39,8 +39,8 @@ export class ImageComponent {
 
       this.displayImage(file);
 
-      // Emit the selected image to the parent component
-      this.imageSelected.emit(file);
+      // Emit the selected image as an array to the parent component
+      this.imageSelected.emit([file]);
 
       // Set the value of the form control to an empty string
       this.imageForm.get('imageFile')?.setValue('');

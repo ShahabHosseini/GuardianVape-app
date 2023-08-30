@@ -1,0 +1,45 @@
+<main class="row-md-12 ms-sm-auto col-lg-10 px-md-12">
+  <div class="header">
+    <a class="back-button" (click)="goToList()">
+      <i class="bi bi-arrow-left-circle"></i>
+    </a>
+    <span class="header-text">{{title}}</span>
+  </div>
+  <div class="row lg-12 md-12 background-color:red;">
+    <div class="col-8">
+      <form [formGroup]="productForm"> <!-- Make sure you have a formGroup directive -->
+        <div class="rows">
+          <app-title-description [parentForm]="productForm"></app-title-description>
+        </div>
+        <div class="rows">
+          <p>Images</p>
+          <app-multi-image></app-multi-image>
+        </div>
+        <div class="rows">
+          <p>Pricing</p>
+          <app-pricing></app-pricing>
+        </div>
+        <div class="rows">
+          <p>Inventory</p>
+          <app-inventory></app-inventory>
+        </div>
+        <div class="rows">
+          <p>Shipping</p>
+          <app-shipping></app-shipping>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-4">
+      <div class="rows">
+        <h6>Status</h6>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" checked="true" id="active" (ngModelChange)="onValueChange()">
+          <label class="form-check-label" for="active">
+            Active/Draft
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

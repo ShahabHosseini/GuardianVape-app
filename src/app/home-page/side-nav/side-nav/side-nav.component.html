@@ -39,7 +39,7 @@
         </a>
         <ul class="item-show-2" [ngClass]="{'show': isSubMenuOpen('products')}">
           <li [class.active]="isActiveSubMenu('products')">
-            <a [routerLink]="'/products'" (click)="setActiveSubMenu('products')">Products</a>
+            <a [routerLink]="'/product'" (click)="setActiveSubMenu('products')">Products</a>
           </li>
           <li [class.active]="isActiveSubMenu('collection')">
             <a [routerLink]="'/collection-list'" (click)="setActiveSubMenu('collection')">Collections</a>

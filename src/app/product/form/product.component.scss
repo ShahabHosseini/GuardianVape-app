@@ -1,0 +1,67 @@
+.rows {
+  margin: 10pt;
+  border: 0.2pt;
+  border-radius: 0.2;
+  border-color: rgb(239, 241, 248);
+  background-color: rgb(242, 242, 243);
+  box-shadow: 20px 20px 80px rgb(218, 218, 218);
+  border-radius: 5pt;
+  width: 90%;
+  padding: 5pt;
+  text-align: left;
+}
+.header {
+  text-align: left;
+}
+/* Style for the header container */
+.header {
+  display: flex;
+  align-items: center;
+}
+
+/* Style for the back button */
+.back-button {
+  background-color: transparent;
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 2px 4px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none; /* Remove underline for the anchor tag */
+}
+
+.back-button i {
+  margin-right: 2px;
+}
+
+.back-button:hover {
+  color: rgb(90, 90, 90);
+}
+
+/* Style for the header text */
+.header-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-left: 10px; /* Add some left margin to separate the button from the text */
+}
+
+/* Rest of the CSS... */
+::ng-deep p-multiselect .p-multiselect-label {
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 6%;
+}
+
+::ng-deep p-multiselect .p-multiselect-token {
+  margin-bottom: 0.5rem;
+}
+button {
+  width: fit-content;
+  height: fit-content;
+  padding: 4px 4px;
+  margin-top: 3px;
+}

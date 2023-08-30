@@ -1,0 +1,25 @@
+<div class="image-container">
+  <div class="remove-all-button">
+    <button *ngIf="imageUrls.length > 1" class="btn btn-danger" (click)="removeAllImages()">Remove All</button>
+  </div>
+
+  <div class="multi-image-frame" [style.height.px]="calculateFrameHeight()" (drop)="onFrameDrop($event)"
+    (dragover)="onFrameDragOver($event)">
+    <ng-container *ngFor="let imageUrl of imageUrls; let i = index">
+      <div class="multi-image-preview">
+        <div class="framed-image-container">
+          <img class="framed-image" [src]="imageUrl" alt="Image">
+          <button class="btn remove-button" (click)="removeImage(i)">
+            <i class="bi bi-trash-fill"></i>
+          </button>
+        </div>
+      </div>
+    </ng-container>
+    <div class="centered-link-container" (click)="showInputFile($event)">
+      <a href="#" class="centered-link">Select Images</a>
+    </div>
+  </div>
+
+  <input type="file" id="multiImageFile" accept="image/*" multiple (change)="onFilesChange($event)"
+    style="display: none">
+</div>
