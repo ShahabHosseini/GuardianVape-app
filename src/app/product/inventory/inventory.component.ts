@@ -13,6 +13,7 @@ export class InventoryComponent {
   inventoryForm: FormGroup;
   constructor(private formBuilder: FormBuilder) {
     this.inventoryForm = this.formBuilder.group({
+      trackQuantity: [true, Validators.required],
       outOfStock: [true, Validators.required],
       skuShows: [false, Validators.required],
       shopLocation: [0, Validators.required],

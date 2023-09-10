@@ -1,0 +1,39 @@
+.hr {
+  margin: 10pt;
+}
+/* Style for the input element */
+.weight-input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 16px;
+  outline: none;
+}
+
+/* Style for the dropdown */
+.custom-dropdown {
+  width: 100%;
+  border-radius: 4px;
+  // padding: 8px;
+  font-size: 16px;
+}
+
+/* Style for dropdown options (if needed) */
+.custom-dropdown .ui-dropdown-item {
+  // padding: 8px;
+  font-size: 16px;
+}
+
+/* Style for the selected option in the dropdown (if needed) */
+.custom-dropdown .ui-dropdown-label {
+  font-size: 16px;
+}
+
+/* Style for the dropdown arrow (if needed) */
+.custom-dropdown .ui-dropdown-trigger-icon {
+  font-size: 16px;
+}
+.row {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

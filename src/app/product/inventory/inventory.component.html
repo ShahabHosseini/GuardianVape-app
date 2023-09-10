@@ -2,7 +2,7 @@
   <div class="row">
     <div class="form-check">
       <input class="form-check-input" type="checkbox" checked="true" id="active" (ngModelChange)="onValueChange()"
-        formControlName="taxCharge">
+        formControlName="trackQuantity">
       <label class="form-check-label" for="active">
         Track quantity
       </label>
@@ -11,7 +11,7 @@
     <hr>
     <div class="row shop-location-container">
       <div class="col col-2">
-        <p>Shop location</p>
+        <h6 class="noselect">Shop location</h6>
       </div>
       <div class="col col-8"></div>
       <div class="col col-2">
@@ -22,14 +22,14 @@
         <input class="form-check-input" type="checkbox" checked="true" id="outOfStock"
           (ngModelChange)="onValueChange()">
         <label class="form-check-label" for="outOfStock">
-
           Continue selling when out of stock
         </label>
       </div>
       <br><br>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="sku" (change)="onSkuValueChange()">
-        <label class="form-check-label" for="sku" formControlName="skuShows">
+        <input class="form-check-input" type="checkbox" id="sku" (change)="onSkuValueChange()"
+          formControlName="skuShows">
+        <label class="form-check-label" for="sku">
           This product has a SKU or barcode
         </label>
       </div>

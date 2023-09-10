@@ -217,16 +217,14 @@ export class CollectionComponent
       let formdata = new FormData();
       let imageName = 'Collection\\' + newImage.name;
       formdata.append(newImage.guid, newImage.file, imageName);
-      await this.fileService
-        .uploadFile(formdata)
-        .then((response) => {
-          this.toast.success('Image saved successfully');
-          // You can perform additional logic here, such as updating the collection with the saved image URL
-        })
-        .catch((error) => {
-          console.log('Error saving image:', error);
-          // Handle the error appropriately
-        });
+      try {
+        let res = await this.fileService.uploadFile(formdata).toPromise();
+        this.toast.success('Image saved successfully');
+        // Additional logic here, such as updating the collection with the saved image URL
+      } catch (error) {
+        console.log('Error saving image:', error);
+        // Handle the error appropriately
+      }
     } else {
       this.toast.error('No image selected');
     }

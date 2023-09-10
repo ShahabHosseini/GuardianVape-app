@@ -218,8 +218,7 @@ export class ImageLibraryComponent implements OnInit {
       let formdata = new FormData();
       let imageName = 'Share\\' + image.name;
       formdata.append(image.guid, image.file, imageName);
-
-      await this.fileService.uploadFile(formdata);
+      let data = await this.fileService.uploadFile(formdata).toPromise();
     } catch (error) {
       this.toast.error('Upload failed!');
       throw error;

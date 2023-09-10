@@ -1,1 +1,44 @@
-<p>shipping works!</p>
+<form [formGroup]="shippingForm">
+  <div class="row">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" checked="true" id="active" (ngModelChange)="onValueChange()"
+        formControlName="trackQuantity" />
+      <label class="form-check-label" for="active">
+        This product requires shipping
+      </label>
+    </div>
+    <p>Weight</p>
+    <div class="col col-3">
+      <input class="form-control weight-input" type="number" formControlName="weight" />
+    </div>
+    <div class="col col-2">
+      <p-dropdown [style]="{ width: '100%' }" [options]="unit" formControlName="unit"
+        (onChange)="onUnitSelectionChange($event)" class="custom-dropdown"></p-dropdown>
+    </div>
+    <div class="hr">
+      <h6 class="noselect">Customs information</h6>
+      <p>Printed on customs forms or shipping labels for international orders.</p>
+      <hr />
+    </div>
+    <div class="row">
+      <div class="col col-4">
+
+        <label for="regionDropdown">Country/Region of origin</label>
+        <p-dropdown [style]="{ width: '100%' }" [options]="regions" formControlName="region"
+          (onChange)="onRegionSelectionChange($event)" class="custom-dropdown" [filter]="true"
+          [filterPlaceholder]="filterPlaceholderText" (onFilter)="onFilter($event)" filterBy="label"
+          id="regionDropdown">
+        </p-dropdown>
+
+      </div>
+      <div class="row">
+        <label for="">HS (Harmonized System) code
+        </label>
+        <div class="col col-12">
+
+          <input type="text" name="" id="" placeholder="Search by product or code" class="form-control">
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -43,17 +43,13 @@ export class FileService extends BaseService {
       throw error;
     }
   }
-  async uploadFile(data: any): Promise<string | never> {
-    try {
-      const response = await this.http
-        .post<SaveImageResponse>(this.fileUrl + 'upload-image', data)
-        .toPromise();
-
-      return response?.Message ?? '';
-    } catch (error) {
-      console.error('Error saving image', error);
-      throw error;
-    }
+  uploadFile(data: any): Observable<ImageDto[]> {
+    return this.http.post<ImageDto[]>(this.fileUrl + 'upload-image', data).pipe(
+      catchError((error: any) => {
+        console.error('Upload failed:', error);
+        return [];
+      })
+    );
   }
 }
 
