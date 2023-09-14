@@ -67,6 +67,8 @@ import {
 } from 'ngx-currency';
 import { InventoryComponent } from './product/inventory/inventory.component';
 import { ShippingComponent } from './product/shipping/shipping.component';
+import { VariantsComponent } from './product/variants/variants.component';
+import { VariantItemComponent } from './product/variantItem/variantItem.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +101,8 @@ import { ShippingComponent } from './product/shipping/shipping.component';
     PricingComponent,
     InventoryComponent,
     ShippingComponent,
+    VariantsComponent,
+    VariantItemComponent,
   ],
   imports: [
     BrowserModule,

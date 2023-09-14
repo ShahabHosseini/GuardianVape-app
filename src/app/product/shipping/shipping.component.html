@@ -24,7 +24,7 @@
       <div class="col col-4">
 
         <label for="regionDropdown">Country/Region of origin</label>
-        <p-dropdown [style]="{ width: '100%' }" [options]="regions" formControlName="region"
+        <p-dropdown   [style]="{ width: '100%' }" [options]="regions" formControlName="region" optionValue="value"
           (onChange)="onRegionSelectionChange($event)" class="custom-dropdown" [filter]="true"
           [filterPlaceholder]="filterPlaceholderText" (onFilter)="onFilter($event)" filterBy="label"
           id="regionDropdown">

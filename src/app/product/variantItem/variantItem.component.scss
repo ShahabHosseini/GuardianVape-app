@@ -1,0 +1,55 @@
+/* Style the form container */
+.form-container {
+  max-width: 800px;
+  margin: 5px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+/* Style the form labels */
+.form-group label {
+  font-weight: bold;
+}
+
+/* Style the input fields */
+.form-control {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Style the "Remove" button */
+.remove-button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #ff4444; /* Default icon color */
+}
+
+/* Adjust the icon size and center it vertically */
+.remove-button i {
+  font-size: 24px; /* Adjust the size as needed */
+  vertical-align: middle;
+}
+
+/* Add a bit of margin to the button */
+.remove-button {
+  margin-top: 5px;
+}
+
+/* Change icon color on hover */
+.remove-button:hover i {
+  color: #cc0000; /* Red color on hover */
+}
+.drag-icon {
+  font-size: 24px; /* Adjust the size as needed */
+  vertical-align: right;
+  margin: 0%;
+  cursor: grab; /* Change cursor to indicate it's draggable */
+  margin-right: 10px; /* Adjust spacing between icon and input */
+}

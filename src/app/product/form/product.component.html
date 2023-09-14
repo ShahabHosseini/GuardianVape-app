@@ -27,6 +27,13 @@
           <p>Shipping</p>
           <app-shipping></app-shipping>
         </div>
+        <div class="rows">
+          <p>Variants</p>
+          <app-variants></app-variants>
+        </div>
+        <div class="rows">
+          <app-search-engine [parentForm]="productForm"></app-search-engine>
+        </div>
       </form>
     </div>
 
@@ -40,6 +47,7 @@
           </label>
         </div>
       </div>
+
     </div>
   </div>
 </main>

@@ -1,0 +1,35 @@
+/* Style the "Remove" button */
+.remove-button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #ff4444; /* Default icon color */
+}
+
+/* Adjust the icon size and center it vertically */
+.remove-button i {
+  font-size: 24px; /* Adjust the size as needed */
+  vertical-align: middle;
+}
+
+/* Position the button to the right bottom corner */
+.relative-container {
+  position: relative;
+}
+
+.remove-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 5px; /* Adjust margin as needed */
+}
+
+/* Style the variant item container */
+.variant-item-container {
+  margin-bottom: 10px; /* Adjust the spacing between variant items */
+}
+.add-btn{
+  color: blue;
+  border: none;
+}

@@ -41,23 +41,13 @@ export class ShippingComponent implements AfterViewInit {
     this.commonService.getAllCountry().subscribe((res: CountryDto[]) => {
       this.regions = res.map((item) => ({
         label: item.nicename,
-        value: item, // You can change this to the property you want to use as the value
+        value: item.id, // You can change this to the property you want to use as the value
       }));
-      let unitedKindom: CountryDto = {
-        id: 225,
-        iso: 'GB',
-        iso3: 'GBR',
-        nicename: 'United Kingdom',
-        numcode: 826,
-        phonecode: 44,
-        title: 'UNITED KINGDOM',
-      };
 
-      this.shippingForm.get('region')?.setValue(unitedKindom);
+      this.shippingForm.get('region')?.setValue(225);
       console.log('OutPut:', this.shippingForm.get('region')?.value);
     });
   }
-
   onValueChange() {
     // Handle checkbox value change if needed
   }
