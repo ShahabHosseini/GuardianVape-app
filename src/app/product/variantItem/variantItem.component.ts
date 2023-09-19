@@ -11,6 +11,7 @@ export class VariantItemComponent {
   private draggedIndex: number | null = null;
   suggestedOptionNames: string[] = ['Color', 'Size', 'Style', 'Material'];
   datalistOptions: string[] = [];
+  @Output() remove: EventEmitter<void> = new EventEmitter<void>();
 
   variantItemForm: FormGroup;
 
@@ -107,6 +108,10 @@ export class VariantItemComponent {
       option.value = suggestion;
       this.datalistOptions.push(suggestion);
     });
+  }
+  removeItem() {
+    // Emit the remove event when the "Remove" button is clicked
+    this.remove.emit();
   }
 
 }

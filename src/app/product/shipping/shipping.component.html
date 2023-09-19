@@ -1,9 +1,9 @@
 <form [formGroup]="shippingForm">
   <div class="row">
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" checked="true" id="active" (ngModelChange)="onValueChange()"
+      <input class="form-check-input" type="checkbox" checked="true" id="shipping" (ngModelChange)="onValueChange()"
         formControlName="trackQuantity" />
-      <label class="form-check-label" for="active">
+      <label class="form-check-label" for="shipping">
         This product requires shipping
       </label>
     </div>

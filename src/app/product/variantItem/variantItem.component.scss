@@ -23,6 +23,31 @@
 }
 
 /* Style the "Remove" button */
+.remOption {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #ff4444; /* Default icon color */
+}
+
+/* Adjust the icon size and center it vertically */
+.remOption i {
+  font-size: 24px; /* Adjust the size as needed */
+  vertical-align: middle;
+}
+
+/* Add a bit of margin to the button */
+.remOption {
+  margin-top: 5px;
+}
+
+/* Change icon color on hover */
+.remOption:hover i {
+  color: #cc0000; /* Red color on hover */
+}
+
+
 .remove-button {
   background-color: transparent;
   border: none;
@@ -35,21 +60,28 @@
 .remove-button i {
   font-size: 24px; /* Adjust the size as needed */
   vertical-align: middle;
+  margin-top: -25px; /* Adjust the value as needed */
+
 }
 
 /* Add a bit of margin to the button */
-.remove-button {
-  margin-top: 5px;
+.remove-button-item {
+  margin-top: -25px; /* Adjust the value as needed */
 }
 
 /* Change icon color on hover */
 .remove-button:hover i {
   color: #cc0000; /* Red color on hover */
 }
+
 .drag-icon {
   font-size: 24px; /* Adjust the size as needed */
-  vertical-align: right;
+  vertical-align: center;
   margin: 0%;
   cursor: grab; /* Change cursor to indicate it's draggable */
   margin-right: 10px; /* Adjust spacing between icon and input */
 }
+.option-values{
+  margin-bottom: 10pt;
+}
+

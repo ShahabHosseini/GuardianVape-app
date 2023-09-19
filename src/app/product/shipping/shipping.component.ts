@@ -45,7 +45,6 @@ export class ShippingComponent implements AfterViewInit {
       }));
 
       this.shippingForm.get('region')?.setValue(225);
-      console.log('OutPut:', this.shippingForm.get('region')?.value);
     });
   }
   onValueChange() {

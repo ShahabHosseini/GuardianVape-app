@@ -7,10 +7,10 @@
   <div formArrayName="variantItems" class="form-group">
     <div *ngFor="let item of variantItems.controls; let i = index" class="variant-item-container">
       <div class="relative-container">
-        <app-variantItem [parentForm]="getItemFormGroup(i)"></app-variantItem>
-        <button type="button" class="btn btn-danger remove-button" (click)="removeItem(i)">
+        <app-variantItem [parentForm]="getItemFormGroup(i)" (remove)="removeItem(i)"></app-variantItem>
+        <!-- <button type="button" class="btn btn-danger remove-button" (click)="removeItem(i)">
           <i class="bi bi-trash"></i>
-        </button>
+        </button> -->
       </div>
     </div>
     <hr>
