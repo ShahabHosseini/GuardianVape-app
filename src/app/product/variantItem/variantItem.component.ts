@@ -46,14 +46,6 @@ export class VariantItemComponent {
       })
     );
 
-    // Set autofocus on the new input field
-    // setTimeout(() => {
-    //   const inputElements = document.querySelectorAll('.form-control');
-    //   const lastInputElement = inputElements[inputElements.length - 1] as HTMLElement;
-    //   if (lastInputElement) {
-    //     this.renderer.selectRootElement(lastInputElement).focus();
-    //   }
-    // });
   }
 
   removeOptionValue(index: number) {

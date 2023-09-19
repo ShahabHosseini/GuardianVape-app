@@ -8,6 +8,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class VariantsComponent implements OnInit {
   variantForm: FormGroup;
+  private draggedVariantIndex: number | null = null;
 
   constructor(private formBuilder: FormBuilder) {
     this.variantForm = this.formBuilder.group({
@@ -45,5 +46,31 @@ export class VariantsComponent implements OnInit {
 
   removeItem(index: number): void {
     this.variantItems.removeAt(index);
+  }
+
+  onDragStartVariant(event: DragEvent, index: number) {
+    // Store the index of the dragged item.
+    this.draggedVariantIndex = index;
+  }
+
+  onDragEndVariant(event: DragEvent) {
+    // Reset the dragged item index.
+    this.draggedVariantIndex = null;
+  }
+
+  onDragOverVariant(event: DragEvent) {
+    event.preventDefault();
+  }
+
+  onDropVariant(event: DragEvent, targetIndex: number) {
+    event.preventDefault();
+    if (this.draggedVariantIndex !== null) {
+      // Reorder the variants array based on the drag-and-drop
+      const variant = this.variantItems.at(this.draggedVariantIndex);
+      this.variantItems.removeAt(this.draggedVariantIndex);
+      this.variantItems.insert(targetIndex, variant);
+
+      this.draggedVariantIndex = null; // Reset the dragged variant index
+    }
   }
 }

@@ -1,3 +1,4 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgModule, APP_INITIALIZER, InjectionToken } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -109,6 +110,7 @@ import { VariantItemComponent } from './product/variantItem/variantItem.componen
     NgxCurrencyDirective,
     TableModule,
     ButtonModule,
+    DragDropModule,
     InputTextModule,
     MultiSelectModule,
     CheckboxModule,
