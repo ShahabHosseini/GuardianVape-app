@@ -27,3 +27,6 @@
 /* Importing Bootstrap SCSS file. */
 @import "./node_modules/bootstrap/scss/bootstrap";
 @import "node_modules/@costlydeveloper/ngx-awesome-popup/styles/theme";
+
+  @import 'ag-grid-community/styles/ag-grid.css';
+  @import 'ag-grid-community/styles/ag-theme-alpine.css';

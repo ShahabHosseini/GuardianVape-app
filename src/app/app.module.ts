@@ -70,6 +70,8 @@ import { InventoryComponent } from './product/inventory/inventory.component';
 import { ShippingComponent } from './product/shipping/shipping.component';
 import { VariantsComponent } from './product/variants/variants.component';
 import { VariantItemComponent } from './product/variantItem/variantItem.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { AllCommunityModules } from '@ag-grid-community/all-modules';
 
 @NgModule({
   declarations: [
@@ -131,6 +133,7 @@ import { VariantItemComponent } from './product/variantItem/variantItem.componen
     MatDividerModule,
     SelectDropDownModule,
     CommonModule,
+    AgGridModule,
     NgxAwesomePopupModule.forRoot(), // Essential, mandatory main module.
     DialogConfigModule.forRoot(), // Needed for instantiating dynamic components.
     ConfirmBoxConfigModule.forRoot(), // Needed for instantiating confirm boxes.

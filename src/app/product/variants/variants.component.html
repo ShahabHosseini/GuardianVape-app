@@ -17,5 +17,19 @@
     <hr>
     <button class="add-btn" *ngIf="variantItems.length > 0" (click)="addVariantItem()">+ Add another option</button>
     <button class="add-btn" *ngIf="variantItems.length == 0" (click)="addVariantItem()">+ Add options like size or color</button>
+
+  <hr>
+  <div style="height: 200px;">
+    <ag-grid-angular
+      style="width: 100%; height: 100%;"
+      [rowData]="variantList"
+      [columnDefs]="columnDefs"
+      class="ag-theme-alpine"
+      [defaultColDef]="defaultColDef"
+      [singleClickEdit]="true"
+      (cellValueChanged)="onCellValueChanged($event)"
+    ></ag-grid-angular>
   </div>
+</div>
+
 </form>
