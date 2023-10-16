@@ -7,19 +7,19 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./variantitem.component.scss']
 })
 export class VariantItemComponent {
-  @Input() parentForm!: FormGroup;
+  @Input() variantItemForm!: FormGroup;
   private draggedIndex: number | null = null;
   suggestedOptionNames: string[] = ['Color', 'Size', 'Style', 'Material'];
   datalistOptions: string[] = [];
   @Output() remove: EventEmitter<void> = new EventEmitter<void>();
 
-  variantItemForm: FormGroup;
+  //variantItemForm: FormGroup;
 
   private typingTimer: any;
   private doneTypingInterval = 400; // 400 milliseconds
 
   constructor(
-    private formBuilder: FormBuilder,
+        private formBuilder: FormBuilder,
     private renderer: Renderer2 // Inject Renderer2
   ) {
     this.variantItemForm = this.formBuilder.group({

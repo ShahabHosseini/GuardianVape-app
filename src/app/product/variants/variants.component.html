@@ -5,18 +5,22 @@
     </div>
   </div>
   <div formArrayName="variantItems" class="form-group">
-    <div *ngFor="let item of variantItems.controls; let i = index" class="variant-item-container"
+    <div *ngFor="let item of variantItemFormArray.controls; let i = index" class="variant-item-container"
       (dragstart)="onDragStartVariant($event, i)"
       (dragend)="onDragEndVariant($event)"
       (dragover)="onDragOverVariant($event)"
       (drop)="onDropVariant($event, i)"
       draggable="true"
     >
-      <app-variantItem [parentForm]="getItemFormGroup(i)" (remove)="removeItem(i)"></app-variantItem>
+    <app-variantItem [variantItemForm]="variantItemForm" (remove)="removeItem(i)"></app-variantItem>
+    <button class="btn btn-success" (click)="onSubmit(i)">Done</button>
+    <pre>Option Name: {{ getItemFormGroup(i).get('optionName')?.value | json }}</pre>
+    <pre>Option Values: {{ getItemFormGroup(i).get('optionValues')?.value | json }}</pre>
+
     </div>
     <hr>
-    <button class="add-btn" *ngIf="variantItems.length > 0" (click)="addVariantItem()">+ Add another option</button>
-    <button class="add-btn" *ngIf="variantItems.length == 0" (click)="addVariantItem()">+ Add options like size or color</button>
+    <button class="add-btn" *ngIf="variantItemFormArray.length > 0" (click)="addVariantItem()">+ Add another option</button>
+    <button class="add-btn" *ngIf="variantItemFormArray.length == 0" (click)="addVariantItem()">+ Add options like size or color</button>
 
   <hr>
   <div style="height: 200px;">

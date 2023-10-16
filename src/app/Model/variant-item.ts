@@ -1,6 +1,6 @@
 import { ImageDto } from "./image-dto";
 
-export interface VariantItemDto{
+export interface TableVariantItemDto{
 id?: string;
 image?: ImageDto;
 variant:string;
